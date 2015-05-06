@@ -6,7 +6,7 @@ There will be major changes coming up (ToDo list will follow).
 Feedback, ideas, PRs, etc. very welcome!
 
 ## Documentation
-[See here](http://bgrsquared.com/#dr2)
+[--> See here](http://bgrsquared.com/#dr2)
 
 This documentation is still very basic and gives you mostly an idea on how to use the
 existing charts (pie, bar). We try to find some time to write something about 
@@ -51,7 +51,7 @@ This is too keep this thing as small as possible but give d3-beginners a chance 
 In our daily work, we have to create many prototypes, for dashboard-like solutions. 
 It is very helpful to us to have a way to load basic charts without effort and use the very same framework to implement more complicated solutions too.
 
-We will provide some details of the results later.
+[See also here](http://bgrsquared.com/#dr2)
  
 # Thanks
 Huge thanks to all the people involved in providing awesome tools such as:
