@@ -5,6 +5,23 @@ ALPHA VERSION.
 There will be major changes coming up (ToDo list will follow).
 Feedback, ideas, PRs, etc. very welcome!
 
+## Documentation
+[See here](http://bgrsquared.com/#dr2)
+
+This documentation is still very basic and gives you mostly an idea on how to use the
+existing charts (pie, bar). We try to find some time to write something about 
+the layout of the charts (so that you can create your own charts.
+
+For that we clean up the API a bit first. (wanna help?)
+
+## Requirements
+We designed this component to be **very lightweight**. All you need to do is include it in your existing [React.JS](https://facebook.github.io/react/) app.
+
+Only additional requirement:
+* [BabelJS](https://babeljs.io)
+
+Note: we run it in a webpack setup.
+
 ## Why yet another d3-react component?
 There are already some great solutions out there, combining React and D3, e.g.:
 - [react-d3-components](https://github.com/codesuki/react-d3-components)
@@ -35,18 +52,7 @@ In our daily work, we have to create many prototypes, for dashboard-like solutio
 It is very helpful to us to have a way to load basic charts without effort and use the very same framework to implement more complicated solutions too.
 
 We will provide some details of the results later.
-
-## Requirements
-We designed this component to be **very lightweight**. All you need to do is include it in your existing [React.JS](https://facebook.github.io/react/) app.
-
-Only additional requirement:
-* [BabelJS](https://babeljs.io)
-
-Note: we run it in a webpack setup.
-
-## Documentation / API
-Will follow soon (external link).   
-
+ 
 # Thanks
 Huge thanks to all the people involved in providing awesome tools such as:
 * [ReactJS](https://facebook.github.io/react/)
