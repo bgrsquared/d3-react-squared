@@ -1,0 +1,75 @@
+# --------------------
+# OSX Files
+# --------------------
+.DS_Store
+.AppleDouble
+.LSOverride
+Icon
+._*
+.Spotlight-V100
+.Trashes
+
+# --------------------
+# IntelliJ Files
+# --------------------
+*.iml
+*.ipr
+*.iws
+.idea/
+
+# --------------------
+# Netbeans Files
+# --------------------
+nbproject/private/
+#build/
+nbbuild/
+#dist/
+nbdist/
+nbactions.xml
+nb-configuration.xml
+
+# --------------------
+# Node Files
+# --------------------
+.nodemonignore
+npm-debug.log
+node_modules/
+
+# --------------------
+# SASS Files
+# --------------------
+.sass-cache/
+
+# --------------------
+# Bower Files
+# --------------------
+.bower-*/
+bower_components
+
+# --------------------
+# Build Files
+# --------------------
+build/*
+!build/index.html
+!build/img
+
+# --------------------
+# Public Files
+# --------------------
+dist/*
+!dist/index.html
+!dist/img
+dist_bgr2/*
+!dist_bgr2/index.html
+!dist_bgr2/img
+dist_qacube/*
+!dist_qacube/index.html
+!dist_qacube/img
+dist_SC/*
+!dist_SC/index.html
+!dist_SC/img
+!dist_SC/mock_SC
+
+# --------------------
+# Other
+# --------------------

@@ -1,0 +1,29 @@
+{
+  "name": "d3-react-squared",
+  "version": "0.0.1",
+  "description": "Load basic or customized D3 charts in React.js.",
+  "main": "./apps/d3component.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bgrsquared/d3-react-squared.git"
+  },
+  "keywords": [
+    "react",
+    "d3",
+    "react-component",
+    "charts"
+  ],
+  "author": "christian.roth@bgrsquared.com",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/bgrsquared/d3-react-squared/issues"
+  },
+  "homepage": "https://github.com/bgrsquared/d3-react-squared#readme",
+  "devDependencies": {
+    "d3": "^3.5.5",
+    "react": "^0.13.2"
+  }
+}
