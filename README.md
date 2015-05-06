@@ -1,5 +1,5 @@
 # d3-react-squared
-[![npm version](https://badge.fury.io/js/d3-react-squared.svg)](http://badge.fury.io/js/d3-react-squared)
+[![npm version](https://badge.fury.io/js/d3-react-squared@2x.png)](http://badge.fury.io/js/d3-react-squared)
 
 ALPHA VERSION. 
 There will be major changes coming up (ToDo list will follow).
