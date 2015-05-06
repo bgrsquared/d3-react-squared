@@ -1,5 +1,5 @@
 # d3-react-squared
-[![npm version](https://badge.fury.io/js/d3-react-squared@2x.png)](http://badge.fury.io/js/d3-react-squared)
+[![npm version](https://badge.fury.io/js/d3-react-squared.png)](http://badge.fury.io/js/d3-react-squared)
 
 ALPHA VERSION. 
 There will be major changes coming up (ToDo list will follow).
@@ -7,7 +7,7 @@ Feedback, ideas, PRs, etc. very welcome!
 
 ## Why yet another d3-react component?
 There are already some great solutions out there, combining React and D3, e.g.:
-- [react-d3-components](]https://github.com/codesuki/react-d3-components)
+- [react-d3-components](https://github.com/codesuki/react-d3-components)
 - [react-d3](https://github.com/esbullington/react-d3)
 
 They aim to use React have control over the DOM and use D3 for scales, layouts, etc.
