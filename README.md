@@ -20,8 +20,16 @@ We designed this component to be **very lightweight**. All you need to do is inc
 Only additional requirement:
 * [BabelJS](https://babeljs.io)
 
-Note: we run it in a webpack setup.
+Note: we run it in a webpack setup. If you are too, you might need something along those lines:
+```
+{
+  test: /\.js$/,
+  include: [app_dir, path.join(node_modules_dir, 'd3-react-squared')],
+  loader: "babel-loader"
+},
+```
 Also: we have bootstrap, no other css/sass/...
+(Note: you could, if you wanted, to use SASS to style your graphs, must require the files where and when needed).
 
 ## Why yet another d3-react component?
 There are already some great solutions out there, combining React and D3, e.g.:
