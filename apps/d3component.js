@@ -50,11 +50,10 @@ class D3Component extends React.Component {
         chartObject = new pieD3;
         paddingBottom = '100%';
         break;
-      case 'customType':
+      case 'custom':
         //can't use 'let' here... why?
-        var customChart = require('./charts/barChart'); //TODO
-        chartObject = new customChart;
-        paddingBottom = '100%';//this.props.paddingBottom || '100%';
+        chartObject = new this.props.chartGenerator;
+        paddingBottom = this.props.paddingBottom;
         break;
       default:
         chartObject = new barD3;
@@ -85,7 +84,9 @@ class D3Component extends React.Component {
 
 D3Component.defaultProps = {
   params: {},
-  chartType: 'bar'
+  chartType: 'bar',
+  paddingBottom: '100%',
+  chartGenerator: require('./charts/barChart')
 };
 
 module.exports = D3Component;
