@@ -5,6 +5,9 @@ ALPHA VERSION.
 There will be major changes coming up (ToDo list will follow).
 Feedback, ideas, PRs, etc. very welcome!
 
+Version Updates:
+0.0.3: add custom chart loader function
+
 ## Documentation
 [--> See here](http://bgrsquared.com/#dr2)
 
