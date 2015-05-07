@@ -21,6 +21,7 @@ Only additional requirement:
 * [BabelJS](https://babeljs.io)
 
 Note: we run it in a webpack setup.
+Also: we have bootstrap, no other css/sass/...
 
 ## Why yet another d3-react component?
 There are already some great solutions out there, combining React and D3, e.g.:
