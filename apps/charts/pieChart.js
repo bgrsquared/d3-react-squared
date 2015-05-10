@@ -9,7 +9,7 @@ export let pieChart = {
     defaultDuration: 500
   },
 
-  mainFunction: function(loc, data, params, reactComp) {
+  mainFunction(loc, data, params, reactComp) {
     let self = this;
     this.reactComp = reactComp;
 
@@ -45,7 +45,7 @@ export let pieChart = {
     this.updateFunction(data, params);
   },
 
-  tweenFunc: function arcTween(a, context) {
+  tweenFunc(a, context) {
     let i = d3.interpolate(this._current, a);
     this._current = i(0);
     return function(t) {
@@ -54,7 +54,7 @@ export let pieChart = {
     };
   },
 
-  updateFunction: function(data, params) {
+  updateFunction(data, params) {
     let self = this;
     let par = Object.assign({}, this.defaultParams, params);
     this.join = this.svg.selectAll(".pie")
@@ -102,12 +102,12 @@ export let pieChart = {
     this.join.exit().remove();
   },
 
-  mouseoverSector: function(d, me) {
+  mouseoverSector(d, me) {
     // phone mommy
     this.reactComp.handleChartEvent(d.data, 'over');
   },
 
-  mouseleaveSector: function(d, me) {
+  mouseleaveSector(d, me) {
     // phone mommy
     this.reactComp.handleChartEvent(d.data, 'leave');
   }

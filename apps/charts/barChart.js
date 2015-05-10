@@ -178,12 +178,12 @@ export let barChart = {
       .remove();
   },
 
-  mouseoverBar: function(d, me) {
+  mouseoverBar(d, me) {
     // phone mommy
     this.reactComp.handleChartEvent(d, 'over');
   },
 
-  mouseleaveBar: function(d, me) {
+  mouseleaveBar(d, me) {
     // phone mommy
     this.reactComp.handleChartEvent(d, 'leave');
   }
