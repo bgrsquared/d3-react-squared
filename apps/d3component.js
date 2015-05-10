@@ -3,7 +3,7 @@
 let React = require('react');
 
 //some examples
-let barD3 = require('./charts/barChart');
+import {barChart} from './charts/barChart';
 let pieD3 = require('./charts/pieChart');
 
 class D3Component extends React.Component {
@@ -43,7 +43,7 @@ class D3Component extends React.Component {
     let chartObject, paddingBottom;
     switch (chartPrototype) {
       case 'bar':
-        chartObject = new barD3;
+        chartObject = Object.create(barChart);
         paddingBottom = '100%';
         break;
       case 'pie':
@@ -51,12 +51,11 @@ class D3Component extends React.Component {
         paddingBottom = '100%';
         break;
       case 'custom':
-        //can't use 'let' here... why?
         chartObject = new this.props.chartGenerator;
         paddingBottom = this.props.paddingBottom;
         break;
       default:
-        chartObject = new barD3;
+        chartObject = Object.create(barChart);
         paddingBottom = '100%';
     }
 
