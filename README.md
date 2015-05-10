@@ -5,8 +5,7 @@ ALPHA VERSION.
 There will be major changes coming up (ToDo list will follow).
 Feedback, ideas, PRs, etc. very welcome!
 
-Version Updates:
-0.0.3: add custom chart loader function
+Version Update log at the bottom.
 
 ## Documentation
 [--> See here](http://bgrsquared.com/#dr2)
@@ -71,5 +70,14 @@ Huge thanks to all the people involved in providing awesome tools such as:
 * [D3](http://d3js.org)
 * [webpack](http://webpack.github.io)
 * [BabelJS](https://babeljs.io)
+
+# Version Updates:
+
+0.0.3: 
+- add custom chart loader function
+0.0.4: 
+- update charts to use ES6 modules and use Object.create() syntax to load (instead of `new`)
+- rename `chartGenerator` prop of custom charts to `chartModule`
+
 
 
