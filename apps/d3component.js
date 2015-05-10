@@ -4,7 +4,7 @@ let React = require('react');
 
 //some examples
 import {barChart} from './charts/barChart';
-let pieD3 = require('./charts/pieChart');
+import {pieChart} from './charts/pieChart';
 
 class D3Component extends React.Component {
   constructor() {
@@ -47,7 +47,7 @@ class D3Component extends React.Component {
         paddingBottom = '100%';
         break;
       case 'pie':
-        chartObject = new pieD3;
+        chartObject = Object.create(pieChart);
         paddingBottom = '100%';
         break;
       case 'custom':
