@@ -51,7 +51,7 @@ class D3Component extends React.Component {
         paddingBottom = '100%';
         break;
       case 'custom':
-        chartObject = new this.props.chartGenerator;
+        chartObject = Object.create(props.chartModule);
         paddingBottom = this.props.paddingBottom;
         break;
       default:
@@ -85,7 +85,7 @@ D3Component.defaultProps = {
   params: {},
   chartType: 'bar',
   paddingBottom: '100%',
-  chartGenerator: require('./charts/barChart')
+  chartModule: barChart
 };
 
 module.exports = D3Component;
