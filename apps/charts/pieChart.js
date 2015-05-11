@@ -59,7 +59,6 @@ export let pieChart = {
     let self = this;
     let par = Object.assign({}, this.defaultParams, params);
 
-    console.log(par)
     this.arc
       .innerRadius(par.innerRadius)
       .cornerRadius(par.cornerRadius);
