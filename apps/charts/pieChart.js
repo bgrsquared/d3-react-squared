@@ -8,7 +8,9 @@ export let pieChart = {
     col2: 'red',
     defaultDuration: 500,
     innerRadius: 0,
-    cornerRadius: 5
+    cornerRadius: 5,
+    colorType: 'gradient',
+    colorArray: d3.scale.category20().range()
   },
 
   mainFunction(loc, data, params, reactComp) {
@@ -55,9 +57,29 @@ export let pieChart = {
     };
   },
 
+  colorFunction(par) {
+    let self = this;
+    if (par.colorType === 'gradient') {
+      return (
+        (d) => {
+          return d3.interpolateHsl(par.col1, par.col2)
+          ((d.endAngle - d.startAngle) / self.angMax)
+        })
+    } else if (par.colorType === 'category') {
+      let cols = par.colorArray;
+      return ((d, i) => {
+        return cols[i];
+      })
+    } else {
+      return () => 'gray';
+    }
+  },
+
   updateFunction(data, params) {
     let self = this;
     let par = Object.assign({}, this.defaultParams, params);
+
+    let colFunc = this.colorFunction(par);
 
     this.arc
       .innerRadius(par.innerRadius)
@@ -67,7 +89,7 @@ export let pieChart = {
       .data(this.pie(data), function(d) {
         return d.data.id
       });
-    let angMax = d3.max(this.pie(data).map(function(d) {
+    this.angMax = d3.max(this.pie(data).map(function(d) {
       return d.endAngle - d.startAngle
     }));
 
@@ -77,10 +99,7 @@ export let pieChart = {
       .attrTween('d', function(d) {
         return self.tweenFunc.apply(this, [d, self])
       })
-      .style('fill', function(d) {
-        return d3.interpolateHsl(par.col1, par.col2)
-        ((d.endAngle - d.startAngle) / angMax)
-      });
+      .style('fill', (d, i) => colFunc(d, i));
 
     //ENTER
     this.join.enter().append("path")
@@ -94,9 +113,7 @@ export let pieChart = {
       .each(function(d) {
         this._current = d;
       })
-      .style('fill', function(d) {
-        return d3.interpolateHsl(par.col1, par.col2)((d.endAngle - d.startAngle) / angMax)
-      })
+      .style('fill', (d, i) => colFunc(d, i))
       .on('mouseover', function(d) {
         self.mouseoverSector.call(self, d, this)
       })
