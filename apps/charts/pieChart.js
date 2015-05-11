@@ -6,7 +6,9 @@ export let pieChart = {
   defaultParams: {
     col1: 'green',
     col2: 'red',
-    defaultDuration: 500
+    defaultDuration: 500,
+    innerRadius: 0,
+    cornerRadius: 5
   },
 
   mainFunction(loc, data, params, reactComp) {
@@ -24,8 +26,7 @@ export let pieChart = {
     let fullHeight = size;
 
     this.arc = d3.svg.arc()
-      .outerRadius(radius - 10)
-      .innerRadius(0);
+      .outerRadius(radius - 10);
 
     this.pie = d3.layout.pie()
       .sort(null)
@@ -57,6 +58,12 @@ export let pieChart = {
   updateFunction(data, params) {
     let self = this;
     let par = Object.assign({}, this.defaultParams, params);
+
+    console.log(par)
+    this.arc
+      .innerRadius(par.innerRadius)
+      .cornerRadius(par.cornerRadius);
+
     this.join = this.svg.selectAll(".pie")
       .data(this.pie(data), function(d) {
         return d.data.id
