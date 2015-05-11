@@ -9,7 +9,9 @@ export let barChart = {
     defaultDuration: 500,
     rx: 5,
     ry: 5,
-    yLabel: 'Value'
+    yLabel: 'Value',
+    colorType: 'gradient',
+    colorArray: d3.scale.category20().range()
   },
 
   mainFunction(loc, data, params, reactComp) {
@@ -82,6 +84,8 @@ export let barChart = {
     let self = this;
     let par = Object.assign({}, this.defaultParams, params);
 
+    let colFunc = this.colorFunction(par);
+
     this.x.domain(data.map(function(d) {
       return d.id;
     }));
@@ -132,9 +136,7 @@ export let barChart = {
       .attr("x", function(d) {
         return self.x(d.id);
       })
-      .style('fill', function(d) {
-        return d3.interpolateHsl(par.col1, par.col2)(d.value / self.yMax)
-      });
+      .style('fill', (d, i) => colFunc(d, i));
 
     //ENTER
     this.join.enter().append("rect")
@@ -165,9 +167,7 @@ export let barChart = {
       .attr("height", function(d) {
         return self.height - self.y(d.value);
       })
-      .style('fill', function(d) {
-        return d3.interpolateHsl(par.col1, par.col2)(d.value / self.yMax)
-      });
+      .style('fill', (d, i) => colFunc(d, i));
 
     //EXIT
     this.join.exit()
@@ -176,6 +176,24 @@ export let barChart = {
       .attr('width', 0)
       .attr('height', 0)
       .remove();
+  },
+
+  colorFunction(par) {
+    let self = this;
+    if (par.colorType === 'gradient') {
+      return (
+        (d) => {
+          return d3.interpolateHsl(par.col1, par.col2)
+          (d.value / self.yMax)
+        })
+    } else if (par.colorType === 'category') {
+      let cols = par.colorArray;
+      return ((d, i) => {
+        return cols[i];
+      })
+    } else {
+      return () => 'gray';
+    }
   },
 
   mouseoverBar(d, me) {
