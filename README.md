@@ -77,9 +77,11 @@ Huge thanks to all the people involved in providing awesome tools such as:
 
 0.0.3: 
 - add custom chart loader function
+
 0.0.4: 
 - update charts to use ES6 modules and use Object.create() syntax to load (instead of `new`)
 - rename `chartGenerator` prop of custom charts to `chartModule`
+
 0.0.5:
 - add more parameters to pieChart and barChart (colors etc.)
 
