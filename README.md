@@ -1,3 +1,5 @@
+![Example](https://github.com/bgrsquared/d3-react-squared/blob/master/img/explPieBar.png)
+
 # d3-react-squared
 [![npm version](https://badge.fury.io/js/d3-react-squared.png)](http://badge.fury.io/js/d3-react-squared)
 
