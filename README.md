@@ -4,7 +4,8 @@
 [![npm version](https://badge.fury.io/js/d3-react-squared.png)](http://badge.fury.io/js/d3-react-squared)
 
 ALPHA VERSION. 
-There will be major changes coming up (ToDo list will follow).
+There will be major changes coming up (ToDo list: 
+see [wiki](https://github.com/bgrsquared/d3-react-squared/wiki) on github).
 Feedback, ideas, PRs, etc. very welcome!
 
 Version Update log at the bottom.
@@ -72,6 +73,10 @@ Huge thanks to all the people involved in providing awesome tools such as:
 * [D3](http://d3js.org)
 * [webpack](http://webpack.github.io)
 * [BabelJS](https://babeljs.io)
+
+# ToDos
+See [wiki](https://github.com/bgrsquared/d3-react-squared/wiki)
+
 
 # Version Updates:
 
