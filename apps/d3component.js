@@ -1,10 +1,12 @@
 'use strict';
 
-let React = require('react');
+import React from 'react';
 
 //some examples
 import {barChart} from './charts/barChart';
 import {pieChart} from './charts/pieChart';
+import D3Store from './stores/D3stores.js';
+import D3Actions from './actions/D3actions.js';
 
 class D3Component extends React.Component {
   constructor() {
@@ -22,7 +24,14 @@ class D3Component extends React.Component {
     }
   }
 
+  componentWillUnmount() {
+    this.unsubscribe();
+  }
+
   componentDidMount() {
+    //load reflux store
+    this.unsubscribe = D3Store.listen(this.onStatusChange.bind(this));
+    //create new chart
     this.createNewChart(this.props.chartType, this.props);
   }
 
@@ -33,6 +42,12 @@ class D3Component extends React.Component {
       this.createNewChart(newProps.chartType, newProps);
     } else {
       this.state.chartObject.updateFunction(newProps.data, newProps.params);
+    }
+  }
+
+  onStatusChange(obj) {
+    if (this.state.chartObject.onEvent) {
+      this.state.chartObject.onEvent(obj);
     }
   }
 
@@ -65,13 +80,13 @@ class D3Component extends React.Component {
     });
 
     //and create it:
-    chartObject.mainFunction(d3.select(React.findDOMNode(this)), props.data, props.params, this);
+    chartObject.mainFunction(d3.select(React.findDOMNode(this)),
+      props.data, props.params, this);
   }
 
   handleChartEvent(d, event) {
-    if (this.props.onChartEvent) {
-      this.props.onChartEvent(d, event)
-    }
+    //call action
+    D3Actions.D3Event(d, event);
   }
 
   render() {
