@@ -73,6 +73,7 @@ Huge thanks to all the people involved in providing awesome tools such as:
 * [D3](http://d3js.org)
 * [webpack](http://webpack.github.io)
 * [BabelJS](https://babeljs.io)
+* [Reflux](https://github.com/spoike/refluxjs)
 
 # ToDos
 See [wiki](https://github.com/bgrsquared/d3-react-squared/wiki)
@@ -89,6 +90,11 @@ See [wiki](https://github.com/bgrsquared/d3-react-squared/wiki)
 
 0.0.5:
 - add more parameters to pieChart and barChart (colors etc.)
+
+0.0.6: 
+- add cross-highlight capabilities (based on id of element)
+(use of Reflux motivated by [@pbeshai 's linked-highlighting-react-d3-reflux](https://github.com/pbeshai/linked-highlighting-react-d3-reflux)  -
+big thanks!)
 
 
 
