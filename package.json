@@ -24,6 +24,7 @@
   "homepage": "https://github.com/bgrsquared/d3-react-squared#readme",
   "devDependencies": {
     "d3": "^3.5.5",
-    "react": "^0.13.2"
+    "react": "^0.13.2",
+    "reflux": "^0.2.7"
   }
 }
