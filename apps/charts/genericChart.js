@@ -59,6 +59,22 @@ export let genericChart = {
     //  })
   },
 
+  onEvent(obj) {
+    //this function is called when this or another component fires
+    //an event (an action) to the reflux store
+    //d is the data object of the item that triggered the event
+    //e is the event name
+    let {d, e} = obj;
+    switch (e) {
+      case 'mouseover':
+        //do something... if you want
+        break;
+      case 'mouseleave':
+        //do something else... if you want
+        break;
+    }
+  },
+
   genericEvent(d, otherArguments) {
     // send an event to the parent reactComp.
     this.reactComp.handleChartEvent(d.data, 'eventName');

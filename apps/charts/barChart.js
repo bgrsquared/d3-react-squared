@@ -198,7 +198,6 @@ export let barChart = {
           .style('opacity', 1);
         break;
     }
-
   },
 
   colorFunction(par) {
