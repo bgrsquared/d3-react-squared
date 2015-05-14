@@ -85,7 +85,8 @@ D3Component.defaultProps = {
   params: {},
   chartType: 'bar',
   paddingBottom: '100%',
-  chartModule: barChart
+  chartModule: barChart,
+  data: []
 };
 
 module.exports = D3Component;
