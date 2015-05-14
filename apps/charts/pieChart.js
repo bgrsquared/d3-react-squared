@@ -57,24 +57,6 @@ export let pieChart = {
     };
   },
 
-  colorFunction(par) {
-    let self = this;
-    if (par.colorType === 'gradient') {
-      return (
-        (d) => {
-          return d3.interpolateHsl(par.col1, par.col2)
-          ((d.endAngle - d.startAngle) / self.angMax)
-        })
-    } else if (par.colorType === 'category') {
-      let cols = par.colorArray;
-      return ((d, i) => {
-        return cols[i];
-      })
-    } else {
-      return () => 'gray';
-    }
-  },
-
   updateFunction(data, params) {
     let self = this;
     let par = Object.assign({}, this.defaultParams, params);
@@ -103,9 +85,9 @@ export let pieChart = {
 
     //ENTER
     this.join.enter().append("path")
-      .attr('class', 'pie cross-highlight-pie')
+      .attr('class', 'pie pie-sector')
       .attr('id', function(d) {
-        return 'cross-highlight-pie-sector-' + d.data.id
+        return 'pie-sector-' + d.data.id
       })
       .style('stroke', 'white')
       .style('stroke-width', '2px')
@@ -125,13 +107,53 @@ export let pieChart = {
     this.join.exit().remove();
   },
 
+  colorFunction(par) {
+    let self = this;
+    if (par.colorType === 'gradient') {
+      return (
+        (d) => {
+          return d3.interpolateHsl(par.col1, par.col2)
+          ((d.endAngle - d.startAngle) / self.angMax)
+        })
+    } else if (par.colorType === 'category') {
+      let cols = par.colorArray;
+      return ((d, i) => {
+        return cols[i];
+      })
+    } else {
+      return () => 'gray';
+    }
+  },
+
+  onEvent(obj) {
+    let {d, e} = obj;
+    switch (e) {
+      case 'mouseover':
+        this.svg.selectAll('.pie-sector')
+          .transition()
+          .duration(100)
+          .style('opacity', 0.25);
+        this.svg.selectAll('#pie-sector-' + d.id)
+          .transition()
+          .duration(100)
+          .style('opacity', 1);
+        break;
+      case 'mouseleave':
+        this.svg.selectAll('.pie-sector')
+          .transition()
+          .duration(100)
+          .style('opacity', 1);
+        break;
+    }
+  },
+
   mouseoverSector(d, me) {
-    // phone mommy
-    this.reactComp.handleChartEvent(d.data, 'over');
+    //pass the event to the partent component
+    this.reactComp.handleChartEvent(d.data, 'mouseover');
   },
 
   mouseleaveSector(d, me) {
-    // phone mommy
-    this.reactComp.handleChartEvent(d.data, 'leave');
+    //pass the event to the partent component
+    this.reactComp.handleChartEvent(d.data, 'mouseleave');
   }
 };
