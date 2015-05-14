@@ -46,7 +46,7 @@ class D3Component extends React.Component {
   }
 
   onStatusChange(obj) {
-    if (this.state.chartObject.onEvent) {
+    if (this.props.highlight && this.state.chartObject.onEvent) {
       this.state.chartObject.onEvent(obj);
     }
   }
@@ -101,7 +101,8 @@ D3Component.defaultProps = {
   chartType: 'bar',
   paddingBottom: '100%',
   chartModule: barChart,
-  data: []
+  data: [],
+  highlight: true
 };
 
 module.exports = D3Component;
