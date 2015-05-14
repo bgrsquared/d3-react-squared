@@ -153,9 +153,9 @@ export let barChart = {
       })
       .transition()
       .duration(par.defaultDuration)
-      .attr("class", "bar cross-highlight-bar")
+      .attr("class", "bar bar")
       .attr('id', function(d) {
-        return 'cross-highlight-bar-bar-' + d.id
+        return 'bar-' + d.id
       })
       .attr("x", function(d) {
         return self.x(d.id);
@@ -178,6 +178,29 @@ export let barChart = {
       .remove();
   },
 
+  onEvent(obj) {
+    let {d, e} = obj;
+    switch (e) {
+      case 'mouseover':
+        this.svg.selectAll('.bar')
+          .transition()
+          .duration(100)
+          .style('opacity', 0.25);
+        this.svg.selectAll('#bar-' + d.id)
+          .transition()
+          .duration(100)
+          .style('opacity', 1);
+        break;
+      case 'mouseleave':
+        this.svg.selectAll('.bar')
+          .transition()
+          .duration(100)
+          .style('opacity', 1);
+        break;
+    }
+
+  },
+
   colorFunction(par) {
     let self = this;
     if (par.colorType === 'gradient') {
@@ -197,12 +220,12 @@ export let barChart = {
   },
 
   mouseoverBar(d, me) {
-    // phone mommy
-    this.reactComp.handleChartEvent(d, 'over');
+    //pass the event to the partent component
+    this.reactComp.handleChartEvent(d, 'mouseover');
   },
 
   mouseleaveBar(d, me) {
-    // phone mommy
-    this.reactComp.handleChartEvent(d, 'leave');
+    //pass the event to the partent component
+    this.reactComp.handleChartEvent(d, 'mouseleave');
   }
 };
