@@ -1,4 +1,5 @@
 ![Example](https://github.com/bgrsquared/d3-react-squared/blob/master/img/explPieBar.png)
+![Example](https://github.com/bgrsquared/d3-react-squared/blob/master/img/explPieBar2.png)
 
 # d3-react-squared
 [![npm version](https://badge.fury.io/js/d3-react-squared.png)](http://badge.fury.io/js/d3-react-squared)
@@ -80,21 +81,24 @@ See [wiki](https://github.com/bgrsquared/d3-react-squared/wiki)
 
 
 # Version Updates:
-
-0.0.3: 
-- add custom chart loader function
-
-0.0.4: 
-- update charts to use ES6 modules and use Object.create() syntax to load (instead of `new`)
-- rename `chartGenerator` prop of custom charts to `chartModule`
-
-0.0.5:
-- add more parameters to pieChart and barChart (colors etc.)
+0.0.7:
+- Add tooltips to bar and pie charts
+- Improve highlighting styles
 
 0.0.6: 
 - add cross-highlight capabilities (based on id of element)
 (use of Reflux motivated by [@pbeshai 's linked-highlighting-react-d3-reflux](https://github.com/pbeshai/linked-highlighting-react-d3-reflux)  -
 big thanks!)
+
+0.0.5:
+- add more parameters to pieChart and barChart (colors etc.)
+
+0.0.4: 
+- update charts to use ES6 modules and use Object.create() syntax to load (instead of `new`)
+- rename `chartGenerator` prop of custom charts to `chartModule`
+
+0.0.3: 
+- add custom chart loader function
 
 
 
