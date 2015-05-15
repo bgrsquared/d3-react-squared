@@ -11,7 +11,10 @@ export let barChart = {
     ry: 5,
     yLabel: 'Value',
     colorType: 'gradient',
-    colorArray: d3.scale.category20().range()
+    colorArray: d3.scale.category20().range(),
+    tooltip: (d) => {
+      return ('<div>ID: ' + d.id + '<br/>Value: ' + d.value + '</div>')
+    }
   },
 
   mainFunction(loc, data, params, reactComp) {
@@ -76,6 +79,19 @@ export let barChart = {
       .attr("dy", ".71em")
       .style("text-anchor", "end")
       .text(self.par.yLabel);
+
+    this.tooltip = d3.select('body')
+      .append("div")
+      .style('background', 'rgba(238, 238, 238, 0.85)')
+      .style('padding', '5px')
+      .style('border-radius', '5px')
+      .style('border-color', '#999')
+      .style('border-width', '2px')
+      .style('border-style', 'solid')
+      .style('pointer-events', 'none')
+      .style("position", "absolute")
+      .style("z-index", "10")
+      .style("opacity", 0);
 
     this.updateFunction(data, params);
   },
@@ -145,13 +161,16 @@ export let barChart = {
       .attr('y', 0)
       .attr('rx', self.par.rx)
       .attr('ry', self.par.ry)
-      .style('stroke', 'white')
+      .style('stroke', 'transparent')
       .style('stroke-width', '2px')
       .on('mouseover', function(d) {
         self.mouseoverBar.call(self, d, this)
       })
       .on('mouseleave', function(d) {
         self.mouseleaveBar.call(self, d, this);
+      })
+      .on('mousemove', (d) => {
+        self.mousemoveBar.call(self, d, this);
       })
       .transition()
       .duration(self.par.defaultDuration)
@@ -197,7 +216,7 @@ export let barChart = {
       case 'mouseleave':
         this.svg.selectAll('.bar')
           .style('fill-opacity', 1)
-          .style('stroke', 'white')
+          .style('stroke', 'transparent')
           .style('stroke-width', '2px')
           .style('stroke-opacity', 1);
         break;
@@ -225,10 +244,28 @@ export let barChart = {
   mouseoverBar(d, me) {
     //pass the event to the partent component
     this.reactComp.handleChartEvent(d, 'mouseover');
+
+    //show tooltip
+    this.tooltip.html(this.par.tooltip(d))
+      .style('opacity', 1)
+      .style('top', (d3.event.pageY - 10) + "px")
+      .style('left', (d3.event.pageX + 10) + "px")
   },
 
   mouseleaveBar(d, me) {
     //pass the event to the partent component
     this.reactComp.handleChartEvent(d, 'mouseleave');
+
+    //hide tooltip
+    this.tooltip.style('opacity', 0);
+  },
+
+  mousemoveBar(d, me) {
+    //note: we do not pass that event to parent component
+
+    //move tooltip
+    this.tooltip
+      .style('top', (d3.event.pageY) + "px")
+      .style('left', (d3.event.pageX + 10) + "px")
   }
 };

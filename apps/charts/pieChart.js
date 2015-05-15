@@ -10,7 +10,10 @@ export let pieChart = {
     innerRadius: 0,
     cornerRadius: 5,
     colorType: 'gradient',
-    colorArray: d3.scale.category20().range()
+    colorArray: d3.scale.category20().range(),
+    tooltip: (d) => {
+      return ('<div>ID: ' + d.id + '<br/>Value: ' + d.value + '</div>')
+    }
   },
 
   mainFunction(loc, data, params, reactComp) {
@@ -44,6 +47,19 @@ export let pieChart = {
       .attr('viewBox', '0 0 ' + fullWidth + ' ' + fullHeight)
       .append("g")
       .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
+
+    this.tooltip = d3.select('body')
+      .append("div")
+      .style('background', 'rgba(238, 238, 238, 0.85)')
+      .style('padding', '5px')
+      .style('border-radius', '5px')
+      .style('border-color', '#999')
+      .style('border-width', '2px')
+      .style('border-style', 'solid')
+      .style('pointer-events', 'none')
+      .style("position", "absolute")
+      .style("z-index", "10")
+      .style("opacity", 0);
 
     this.updateFunction(data, params);
   },
@@ -101,6 +117,9 @@ export let pieChart = {
       })
       .on('mouseleave', function(d) {
         self.mouseleaveSector.call(self, d, this);
+      })
+      .on('mousemove', function(d) {
+        self.mousemoveSector.call(self, d, this);
       });
 
     //EXIT
@@ -152,10 +171,28 @@ export let pieChart = {
   mouseoverSector(d, me) {
     //pass the event to the partent component
     this.reactComp.handleChartEvent(d.data, 'mouseover');
+
+    //show tooltip
+    this.tooltip.html(this.par.tooltip(d.data))
+      .style('opacity', 1)
+      .style('top', (d3.event.pageY - 10) + "px")
+      .style('left', (d3.event.pageX + 10) + "px")
   },
 
   mouseleaveSector(d, me) {
     //pass the event to the partent component
     this.reactComp.handleChartEvent(d.data, 'mouseleave');
+
+    //hide tooltip
+    this.tooltip.style('opacity', 0);
+  },
+
+  mousemoveSector(d, me) {
+    //note: we do not pass that event to parent component
+
+    //move tooltip
+    this.tooltip
+      .style('top', (d3.event.pageY) + "px")
+      .style('left', (d3.event.pageX + 10) + "px")
   }
 };

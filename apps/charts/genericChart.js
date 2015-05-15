@@ -77,7 +77,10 @@ export let genericChart = {
   },
 
   genericEvent(d, otherArguments) {
-    // send an event to the parent reactComp.
+    // do stuff that is for this chart only...
+    // like tooltips...
+
+    // send an event to the parent reactComp (to trigger actions and send to other charts)
     this.reactComp.handleChartEvent(d.data, 'eventName');
   }
 };
