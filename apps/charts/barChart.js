@@ -18,7 +18,7 @@ export let barChart = {
     let self = this;
     this.reactComp = reactComp;
 
-    let par = Object.assign({}, this.defaultParams, params);
+    self.par = Object.assign({}, this.defaultParams, params);
 
     let size = 250;
 
@@ -75,16 +75,16 @@ export let barChart = {
       .attr("y", 6)
       .attr("dy", ".71em")
       .style("text-anchor", "end")
-      .text(par.yLabel);
+      .text(self.par.yLabel);
 
     this.updateFunction(data, params);
   },
 
   updateFunction(data, params) {
     let self = this;
-    let par = Object.assign({}, this.defaultParams, params);
+    self.par = Object.assign({}, this.defaultParams, params);
 
-    let colFunc = this.colorFunction(par);
+    self.colFunc = this.colorFunction(self.par);
 
     this.x.domain(data.map(function(d) {
       return d.id;
@@ -98,14 +98,14 @@ export let barChart = {
       .style('font-size', '10px')
       .style('font-family', 'sans-serif')
       .transition()
-      .duration(par.defaultDuration)
+      .duration(self.par.defaultDuration)
       .call(this.yAxis);
 
     this.svg.select('.x.axis')
       .style('font-size', '10px')
       .style('font-family', 'sans-serif')
       .transition()
-      .duration(par.defaultDuration)
+      .duration(self.par.defaultDuration)
       .call(this.xAxis);
 
     this.svg.selectAll('.axis line')
@@ -125,7 +125,7 @@ export let barChart = {
 
     this.join
       .transition()
-      .duration(par.defaultDuration)
+      .duration(self.par.defaultDuration)
       .attr("y", function(d) {
         return self.y(d.value);
       })
@@ -136,15 +136,17 @@ export let barChart = {
       .attr("x", function(d) {
         return self.x(d.id);
       })
-      .style('fill', (d, i) => colFunc(d, i));
+      .style('fill', (d, i) => self.colFunc(d, i));
 
     //ENTER
     this.join.enter().append("rect")
       .attr('width', 0)
       .attr('height', 0)
       .attr('y', 0)
-      .attr('rx', par.rx)
-      .attr('ry', par.ry)
+      .attr('rx', self.par.rx)
+      .attr('ry', self.par.ry)
+      .style('stroke', 'white')
+      .style('stroke-width', '2px')
       .on('mouseover', function(d) {
         self.mouseoverBar.call(self, d, this)
       })
@@ -152,7 +154,7 @@ export let barChart = {
         self.mouseleaveBar.call(self, d, this);
       })
       .transition()
-      .duration(par.defaultDuration)
+      .duration(self.par.defaultDuration)
       .attr("class", "bar bar")
       .attr('id', function(d) {
         return 'bar-' + d.id
@@ -167,35 +169,37 @@ export let barChart = {
       .attr("height", function(d) {
         return self.height - self.y(d.value);
       })
-      .style('fill', (d, i) => colFunc(d, i));
+      .style('fill', (d, i) => self.colFunc(d, i));
 
     //EXIT
     this.join.exit()
       .transition()
-      .duration(par.defaultDuration)
+      .duration(self.par.defaultDuration)
       .attr('width', 0)
       .attr('height', 0)
       .remove();
   },
 
   onEvent(obj) {
+    let self = this;
     let {d, e} = obj;
     switch (e) {
       case 'mouseover':
         this.svg.selectAll('.bar')
-          .transition()
-          .duration(100)
-          .style('opacity', 0.25);
+          .style('fill-opacity', 0.15)
+          .style('stroke-opacity', 0)
+          .style('stroke-width', '5px')
+          .style('stroke', (d, i) => self.colFunc(d, i));
         this.svg.selectAll('#bar-' + d.id)
-          .transition()
-          .duration(100)
-          .style('opacity', 1);
+          .style('fill-opacity', 0.5)
+          .style('stroke-opacity', 1);
         break;
       case 'mouseleave':
         this.svg.selectAll('.bar')
-          .transition()
-          .duration(100)
-          .style('opacity', 1);
+          .style('fill-opacity', 1)
+          .style('stroke', 'white')
+          .style('stroke-width', '2px')
+          .style('stroke-opacity', 1);
         break;
     }
   },

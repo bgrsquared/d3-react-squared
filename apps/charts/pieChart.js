@@ -17,7 +17,7 @@ export let pieChart = {
     let self = this;
     this.reactComp = reactComp;
 
-    let par = Object.assign({}, this.defaultParams, params);
+    this.par = Object.assign({}, this.defaultParams, params);
 
     let size = 250;
 
@@ -59,13 +59,13 @@ export let pieChart = {
 
   updateFunction(data, params) {
     let self = this;
-    let par = Object.assign({}, this.defaultParams, params);
+    this.par = Object.assign({}, this.defaultParams, params);
 
-    let colFunc = this.colorFunction(par);
+    this.colFunc = this.colorFunction(this.par);
 
     this.arc
-      .innerRadius(par.innerRadius)
-      .cornerRadius(par.cornerRadius);
+      .innerRadius(this.par.innerRadius)
+      .cornerRadius(this.par.cornerRadius);
 
     this.join = this.svg.selectAll(".pie")
       .data(this.pie(data), function(d) {
@@ -81,7 +81,7 @@ export let pieChart = {
       .attrTween('d', function(d) {
         return self.tweenFunc.apply(this, [d, self])
       })
-      .style('fill', (d, i) => colFunc(d, i));
+      .style('fill', (d, i) => self.colFunc(d, i));
 
     //ENTER
     this.join.enter().append("path")
@@ -95,7 +95,7 @@ export let pieChart = {
       .each(function(d) {
         this._current = d;
       })
-      .style('fill', (d, i) => colFunc(d, i))
+      .style('fill', (d, i) => self.colFunc(d, i))
       .on('mouseover', function(d) {
         self.mouseoverSector.call(self, d, this)
       })
@@ -109,14 +109,14 @@ export let pieChart = {
 
   colorFunction(par) {
     let self = this;
-    if (par.colorType === 'gradient') {
+    if (this.par.colorType === 'gradient') {
       return (
         (d) => {
-          return d3.interpolateHsl(par.col1, par.col2)
+          return d3.interpolateHsl(self.par.col1, self.par.col2)
           ((d.endAngle - d.startAngle) / self.angMax)
         })
-    } else if (par.colorType === 'category') {
-      let cols = par.colorArray;
+    } else if (self.par.colorType === 'category') {
+      let cols = self.par.colorArray;
       return ((d, i) => {
         return cols[i];
       })
@@ -126,23 +126,25 @@ export let pieChart = {
   },
 
   onEvent(obj) {
+    let self = this;
     let {d, e} = obj;
     switch (e) {
       case 'mouseover':
         this.svg.selectAll('.pie-sector')
-          .transition()
-          .duration(100)
-          .style('opacity', 0.25);
+          .style('fill-opacity', 0.15)
+          .style('stroke-opacity', 0)
+          .style('stroke-width', '5px')
+          .style('stroke', (d, i) => self.colFunc(d, i));
         this.svg.selectAll('#pie-sector-' + d.id)
-          .transition()
-          .duration(100)
-          .style('opacity', 1);
+          .style('fill-opacity', 0.5)
+          .style('stroke-opacity', 1);
         break;
       case 'mouseleave':
         this.svg.selectAll('.pie-sector')
-          .transition()
-          .duration(100)
-          .style('opacity', 1);
+          .style('fill-opacity', 1)
+          .style('stroke', 'white')
+          .style('stroke-width', '2px')
+          .style('stroke-opacity', 1);
         break;
     }
   },

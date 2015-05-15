@@ -15,7 +15,7 @@ export let genericChart = {
     this.reactComp = reactComp;
 
     //set parameters (explicit overrides default)
-    let par = Object.assign({}, this.defaultParams, params);
+    self.par = Object.assign({}, this.defaultParams, params);
 
     //size (absolute!) of the chart (will be scaled in viewbox!
     let size = 250;
@@ -46,7 +46,7 @@ export let genericChart = {
   updateFunction(data, params) {
 
     let self = this;
-    let par = Object.assign({}, this.defaultParams, params);
+    self.par = Object.assign({}, this.defaultParams, params);
 
     // here is where you do some D3 magic...
     // (see the examples) (for code, not magic)
@@ -65,6 +65,7 @@ export let genericChart = {
     //d is the data object of the item that triggered the event
     //e is the event name
     let {d, e} = obj;
+    let self = this;
     switch (e) {
       case 'mouseover':
         //do something... if you want
