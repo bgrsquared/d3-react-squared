@@ -81,6 +81,10 @@ See [wiki](https://github.com/bgrsquared/d3-react-squared/wiki)
 
 
 # Version Updates:
+0.0.8:
+- Add destroyFunction to charts (essentially to get rid of tooltips on unload)
+- Added playground to docu! [--> See here](http://bgrsquared.com/#dr2)
+
 0.0.7:
 - Add tooltips to bar and pie charts
 - Improve highlighting styles
