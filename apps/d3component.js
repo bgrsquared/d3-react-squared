@@ -25,6 +25,9 @@ class D3Component extends React.Component {
   }
 
   componentWillUnmount() {
+    if (this.state.chartObject.destroyFunction) {
+      this.state.chartObject.destroyFunction()
+    }
     this.unsubscribe();
   }
 

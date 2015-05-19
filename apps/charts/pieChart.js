@@ -64,6 +64,10 @@ export let pieChart = {
     this.updateFunction(data, params);
   },
 
+  destroyFunction() {
+    this.tooltip.remove();
+  },
+
   tweenFunc(a, context) {
     let i = d3.interpolate(this._current, a);
     this._current = i(0);

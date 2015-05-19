@@ -96,6 +96,10 @@ export let barChart = {
     this.updateFunction(data, params);
   },
 
+  destroyFunction() {
+    this.tooltip.remove();
+  },
+
   updateFunction(data, params) {
     let self = this;
     self.par = Object.assign({}, this.defaultParams, params);

@@ -41,6 +41,12 @@ export let genericChart = {
     this.updateFunction(data, params);
   },
 
+  destroyFunction() {
+    //do whatever necessary, such as
+    //this.tooltip.remove();
+    //(because it is appended to body)
+  },
+
   // updateFunction routine (mandatory), will be called on new data
   // (and usually after mainFunction)
   updateFunction(data, params) {
