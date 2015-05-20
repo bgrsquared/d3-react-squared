@@ -102,7 +102,7 @@ See [wiki](https://github.com/bgrsquared/d3-react-squared/wiki)
 
 
 # Version Updates:
-0.0.9: 
+0.1: 
 - added standalone example
 
 0.0.8:
