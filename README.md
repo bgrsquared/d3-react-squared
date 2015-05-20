@@ -23,10 +23,28 @@ the layout of the charts (so that you can create your own charts.
 
 For that we clean up the API a bit first. (wanna help?)
 
-## Requirements
-We designed this component to be **very lightweight**. All you need to do is include it in your existing [React.JS](https://facebook.github.io/react/) app.
+## Stand-alone example
+This repo now includes a stand-alone example. Simply:
 
-Only additional requirement:
+```
+npm install
+```
+
+and then 
+
+```
+npm run dev
+```
+
+and it should be running on `localhost:8080`.
+
+### Requirements
+Please use above example as reference.
+
+We designed this component to be **very lightweight**. 
+All you need to do is include it in your existing [React.JS](https://facebook.github.io/react/) app.
+
+Only additional (?) requirement:
 * [BabelJS](https://babeljs.io)
 
 Note: we run it in a webpack setup. If you are too, you might need something along those lines:
@@ -84,6 +102,9 @@ See [wiki](https://github.com/bgrsquared/d3-react-squared/wiki)
 
 
 # Version Updates:
+0.0.9: 
+- added standalone example
+
 0.0.8:
 - Add destroyFunction to charts (essentially to get rid of tooltips on unload)
 - Added playground to docu! [--> See here](http://bgrsquared.com/#dr2)
