@@ -1,5 +1,8 @@
+### Some screenshots
+(the third is from the playground on the docu page)
 ![Example](https://github.com/bgrsquared/d3-react-squared/blob/master/img/explPieBar.png)
 ![Example](https://github.com/bgrsquared/d3-react-squared/blob/master/img/explPieBar2.png)
+![Playground](https://github.com/bgrsquared/d3-react-squared/blob/master/img/explPlayground.png)
 
 # d3-react-squared
 [![npm version](https://badge.fury.io/js/d3-react-squared.png)](http://badge.fury.io/js/d3-react-squared)
