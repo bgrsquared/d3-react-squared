@@ -1,9 +1,9 @@
 import Reflux from 'reflux';
 
-const D3Actions = Reflux.createActions([
-  'D3Event',
+const d3Actions = Reflux.createActions([
+  'd3Event',
   'mouseoverD3',
   'mouseleaveD3'
 ]);
 
-export default D3Actions;
+export default d3Actions;

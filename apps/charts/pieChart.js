@@ -12,12 +12,11 @@ export let pieChart = {
     colorType: 'gradient',
     colorArray: d3.scale.category20().range(),
     tooltip: (d) => {
-      return ('<div>ID: ' + d.id + '<br/>Value: ' + d.value + '</div>')
+      return ('<div>ID: ' + d.id + '<br/>Value: ' + d.value + '</div>');
     }
   },
 
   mainFunction(loc, data, params, reactComp) {
-    let self = this;
     this.reactComp = reactComp;
 
     this.par = Object.assign({}, this.defaultParams, params);
@@ -39,17 +38,17 @@ export let pieChart = {
         return d.value;
       });
 
-    this.svg = loc.append("svg")
+    this.svg = loc.append('svg')
       .attr('id', 'd3graphSVG')
       .style('display', 'inline-block')
       .style('position', 'absolute')
       .attr('preserveAspectRatio', 'xMinYMin slice')
       .attr('viewBox', '0 0 ' + fullWidth + ' ' + fullHeight)
-      .append("g")
-      .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
+      .append('g')
+      .attr('transform', 'translate(' + width / 2 + ',' + height / 2 + ')');
 
     this.tooltip = d3.select('body')
-      .append("div")
+      .append('div')
       .style('background', 'rgba(238, 238, 238, 0.85)')
       .style('padding', '5px')
       .style('border-radius', '5px')
@@ -57,9 +56,9 @@ export let pieChart = {
       .style('border-width', '2px')
       .style('border-style', 'solid')
       .style('pointer-events', 'none')
-      .style("position", "absolute")
-      .style("z-index", "10")
-      .style("opacity", 0);
+      .style('position', 'absolute')
+      .style('z-index', '10')
+      .style('opacity', 0);
 
     this.updateFunction(data, params);
   },
@@ -87,42 +86,42 @@ export let pieChart = {
       .innerRadius(this.par.innerRadius)
       .cornerRadius(this.par.cornerRadius);
 
-    this.join = this.svg.selectAll(".pie")
-      .data(this.pie(data), function(d) {
-        return d.data.id
+    this.join = this.svg.selectAll('.pie')
+      .data(this.pie(data), (d) => {
+        return d.data.id;
       });
-    this.angMax = d3.max(this.pie(data).map(function(d) {
-      return d.endAngle - d.startAngle
+    this.angMax = d3.max(this.pie(data).map((d) => {
+      return d.endAngle - d.startAngle;
     }));
 
     this.join
       .transition()
       .duration(500)
       .attrTween('d', function(d) {
-        return self.tweenFunc.apply(this, [d, self])
+        return self.tweenFunc.apply(this, [d, self]);
       })
       .style('fill', (d, i) => self.colFunc(d, i));
 
     //ENTER
-    this.join.enter().append("path")
+    this.join.enter().append('path')
       .attr('class', 'pie pie-sector')
       .attr('id', function(d) {
-        return 'pie-sector-' + d.data.id
+        return 'pie-sector-' + d.data.id;
       })
       .style('stroke', 'white')
       .style('stroke-width', '2px')
-      .attr("d", this.arc)
-      .each(function(d) {
+      .attr('d', this.arc)
+      .each((d) => {
         this._current = d;
       })
       .style('fill', (d, i) => self.colFunc(d, i))
-      .on('mouseover', function(d) {
-        self.mouseoverSector.call(self, d, this)
+      .on('mouseover', (d) => {
+        self.mouseoverSector.call(self, d, this);
       })
-      .on('mouseleave', function(d) {
+      .on('mouseleave', (d) => {
         self.mouseleaveSector.call(self, d, this);
       })
-      .on('mousemove', function(d) {
+      .on('mousemove', (d) => {
         self.mousemoveSector.call(self, d, this);
       });
 
@@ -130,19 +129,17 @@ export let pieChart = {
     this.join.exit().remove();
   },
 
-  colorFunction(par) {
+  colorFunction() {
     let self = this;
     if (this.par.colorType === 'gradient') {
-      return (
-        (d) => {
-          return d3.interpolateHsl(self.par.col1, self.par.col2)
-          ((d.endAngle - d.startAngle) / self.angMax)
-        })
+      return (d) => {
+          return d3.interpolateHsl(self.par.col1, self.par.col2)((d.endAngle - d.startAngle) / self.angMax);
+        };
     } else if (self.par.colorType === 'category') {
       let cols = self.par.colorArray;
-      return ((d, i) => {
+      return (d, i) => {
         return cols[i];
-      })
+      };
     } else {
       return () => 'gray';
     }
@@ -157,7 +154,7 @@ export let pieChart = {
           .style('fill-opacity', 0.15)
           .style('stroke-opacity', 0)
           .style('stroke-width', '5px')
-          .style('stroke', (d, i) => self.colFunc(d, i));
+          .style('stroke', (dd, i) => self.colFunc(dd, i));
         this.svg.selectAll('#pie-sector-' + d.id)
           .style('fill-opacity', 0.5)
           .style('stroke-opacity', 1);
@@ -172,18 +169,18 @@ export let pieChart = {
     }
   },
 
-  mouseoverSector(d, me) {
+  mouseoverSector(d) {
     //pass the event to the partent component
     this.reactComp.handleChartEvent(d.data, 'mouseover');
 
     //show tooltip
     this.tooltip.html(this.par.tooltip(d.data))
       .style('opacity', 1)
-      .style('top', (d3.event.pageY - 10) + "px")
-      .style('left', (d3.event.pageX + 10) + "px")
+      .style('top', (d3.event.pageY - 10) + 'px')
+      .style('left', (d3.event.pageX + 10) + 'px');
   },
 
-  mouseleaveSector(d, me) {
+  mouseleaveSector(d) {
     //pass the event to the partent component
     this.reactComp.handleChartEvent(d.data, 'mouseleave');
 
@@ -191,12 +188,12 @@ export let pieChart = {
     this.tooltip.style('opacity', 0);
   },
 
-  mousemoveSector(d, me) {
+  mousemoveSector() {
     //note: we do not pass that event to parent component
 
     //move tooltip
     this.tooltip
-      .style('top', (d3.event.pageY) + "px")
-      .style('left', (d3.event.pageX + 10) + "px")
+      .style('top', (d3.event.pageY) + 'px')
+      .style('left', (d3.event.pageX + 10) + 'px');
   }
 };

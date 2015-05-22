@@ -13,7 +13,7 @@ export let barChart = {
     colorType: 'gradient',
     colorArray: d3.scale.category20().range(),
     tooltip: (d) => {
-      return ('<div>ID: ' + d.id + '<br/>Value: ' + d.value + '</div>')
+      return ('<div>ID: ' + d.id + '<br/>Value: ' + d.value + '</div>');
     }
   },
 
@@ -39,21 +39,21 @@ export let barChart = {
 
     this.xAxis = d3.svg.axis()
       .scale(this.x)
-      .orient("bottom");
+      .orient('bottom');
 
     this.yAxis = d3.svg.axis()
       .scale(this.y)
       .tickFormat(d3.format('s'))
-      .orient("left");
+      .orient('left');
 
-    this.svg = loc.append("svg")
+    this.svg = loc.append('svg')
       .attr('id', 'd3graphSVG')
       .style('display', 'inline-block')
       .style('position', 'absolute')
       .attr('preserveAspectRatio', 'xMinYMin slice')
       .attr('viewBox', '0 0 ' + fullWidth + ' ' + fullHeight)
-      .append("g")
-      .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+      .append('g')
+      .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')');
 
 
     this.x.domain(data.map(function(d) {
@@ -65,23 +65,23 @@ export let barChart = {
     this.y.domain([0, this.yMax]);
 
 
-    this.svg.append("g")
-      .attr("class", "x axis")
-      .attr("transform", "translate(0," + this.height + ")")
+    this.svg.append('g')
+      .attr('class', 'x axis')
+      .attr('transform', 'translate(0,' + this.height + ')')
       .call(this.xAxis);
 
-    this.svg.append("g")
-      .attr("class", "y axis")
+    this.svg.append('g')
+      .attr('class', 'y axis')
       .call(this.yAxis)
-      .append("text")
-      .attr("transform", "rotate(-90)")
-      .attr("y", 6)
-      .attr("dy", ".71em")
-      .style("text-anchor", "end")
+      .append('text')
+      .attr('transform', 'rotate(-90)')
+      .attr('y', 6)
+      .attr('dy', '.71em')
+      .style('text-anchor', 'end')
       .text(self.par.yLabel);
 
     this.tooltip = d3.select('body')
-      .append("div")
+      .append('div')
       .style('background', 'rgba(238, 238, 238, 0.85)')
       .style('padding', '5px')
       .style('border-radius', '5px')
@@ -89,9 +89,9 @@ export let barChart = {
       .style('border-width', '2px')
       .style('border-style', 'solid')
       .style('pointer-events', 'none')
-      .style("position", "absolute")
-      .style("z-index", "10")
-      .style("opacity", 0);
+      .style('position', 'absolute')
+      .style('z-index', '10')
+      .style('opacity', 0);
 
     this.updateFunction(data, params);
   },
@@ -138,28 +138,28 @@ export let barChart = {
       .style('stroke', '#000')
       .style('shape-rendering', 'crispEdges');
 
-    this.join = this.svg.selectAll(".bar")
+    this.join = this.svg.selectAll('.bar')
       .data(data, function(d) {
-        return d.id
+        return d.id;
       });
 
     this.join
       .transition()
       .duration(self.par.defaultDuration)
-      .attr("y", function(d) {
+      .attr('y', function(d) {
         return self.y(d.value);
       })
-      .attr("height", function(d) {
+      .attr('height', function(d) {
         return self.height - self.y(d.value);
       })
-      .attr("width", self.x.rangeBand())
-      .attr("x", function(d) {
+      .attr('width', self.x.rangeBand())
+      .attr('x', function(d) {
         return self.x(d.id);
       })
       .style('fill', (d, i) => self.colFunc(d, i));
 
     //ENTER
-    this.join.enter().append("rect")
+    this.join.enter().append('rect')
       .attr('width', 0)
       .attr('height', 0)
       .attr('y', 0)
@@ -167,10 +167,10 @@ export let barChart = {
       .attr('ry', self.par.ry)
       .style('stroke', 'transparent')
       .style('stroke-width', '2px')
-      .on('mouseover', function(d) {
-        self.mouseoverBar.call(self, d, this)
+      .on('mouseover', (d) => {
+        self.mouseoverBar.call(self, d, this);
       })
-      .on('mouseleave', function(d) {
+      .on('mouseleave', (d) => {
         self.mouseleaveBar.call(self, d, this);
       })
       .on('mousemove', (d) => {
@@ -178,18 +178,18 @@ export let barChart = {
       })
       .transition()
       .duration(self.par.defaultDuration)
-      .attr("class", "bar bar")
-      .attr('id', function(d) {
-        return 'bar-' + d.id
+      .attr('class', 'bar bar')
+      .attr('id', (d) => {
+        return 'bar-' + d.id;
       })
-      .attr("x", function(d) {
+      .attr('x', (d) => {
         return self.x(d.id);
       })
-      .attr("width", self.x.rangeBand())
-      .attr("y", function(d) {
+      .attr('width', self.x.rangeBand())
+      .attr('y', function(d) {
         return self.y(d.value);
       })
-      .attr("height", function(d) {
+      .attr('height', function(d) {
         return self.height - self.y(d.value);
       })
       .style('fill', (d, i) => self.colFunc(d, i));
@@ -212,7 +212,7 @@ export let barChart = {
           .style('fill-opacity', 0.15)
           .style('stroke-opacity', 0)
           .style('stroke-width', '5px')
-          .style('stroke', (d, i) => self.colFunc(d, i));
+          .style('stroke', (dd, i) => self.colFunc(dd, i));
         this.svg.selectAll('#bar-' + d.id)
           .style('fill-opacity', 0.5)
           .style('stroke-opacity', 1);
@@ -230,33 +230,31 @@ export let barChart = {
   colorFunction(par) {
     let self = this;
     if (par.colorType === 'gradient') {
-      return (
-        (d) => {
-          return d3.interpolateHsl(par.col1, par.col2)
-          (d.value / self.yMax)
-        })
+      return d => {
+          return d3.interpolateHsl(par.col1, par.col2)(d.value / self.yMax);
+        };
     } else if (par.colorType === 'category') {
       let cols = par.colorArray;
-      return ((d, i) => {
+      return (d, i) => {
         return cols[i];
-      })
+      };
     } else {
       return () => 'gray';
     }
   },
 
-  mouseoverBar(d, me) {
+  mouseoverBar(d) {
     //pass the event to the partent component
     this.reactComp.handleChartEvent(d, 'mouseover');
 
     //show tooltip
     this.tooltip.html(this.par.tooltip(d))
       .style('opacity', 1)
-      .style('top', (d3.event.pageY - 10) + "px")
-      .style('left', (d3.event.pageX + 10) + "px")
+      .style('top', (d3.event.pageY - 10) + 'px')
+      .style('left', (d3.event.pageX + 10) + 'px');
   },
 
-  mouseleaveBar(d, me) {
+  mouseleaveBar(d) {
     //pass the event to the partent component
     this.reactComp.handleChartEvent(d, 'mouseleave');
 
@@ -264,12 +262,12 @@ export let barChart = {
     this.tooltip.style('opacity', 0);
   },
 
-  mousemoveBar(d, me) {
+  mousemoveBar() {
     //note: we do not pass that event to parent component
 
     //move tooltip
     this.tooltip
-      .style('top', (d3.event.pageY) + "px")
-      .style('left', (d3.event.pageX + 10) + "px")
+      .style('top', (d3.event.pageY) + 'px')
+      .style('left', (d3.event.pageX + 10) + 'px');
   }
 };

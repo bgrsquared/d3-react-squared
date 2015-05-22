@@ -1,17 +1,15 @@
+'use strict';
+
 import Reflux from 'reflux';
-import D3Actions from '../actions/D3actions.js';
+import d3Actions from '../actions/D3actions.js';
 
-const D3Store = Reflux.createStore({
+const d3Store = Reflux.createStore({
   //link actions
-  listenables: D3Actions,
-
-  init() {
-
-  },
+  listenables: d3Actions,
 
   //define actions
   onD3Event(data, event) {
-    this.update(data, event)
+    this.update(data, event);
   },
 
   //publish
@@ -22,4 +20,4 @@ const D3Store = Reflux.createStore({
   }
 });
 
-export default D3Store;
+export default d3Store;

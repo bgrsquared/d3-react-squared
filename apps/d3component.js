@@ -1,12 +1,13 @@
 'use strict';
 
 import React from 'react';
+import d3 from 'd3';
 
 //some examples
 import {barChart} from './charts/barChart';
 import {pieChart} from './charts/pieChart';
-import D3Store from './stores/D3stores.js';
-import D3Actions from './actions/D3actions.js';
+import d3Store from './stores/D3stores.js';
+import d3Actions from './actions/D3actions.js';
 
 class D3Component extends React.Component {
   constructor() {
@@ -21,19 +22,19 @@ class D3Component extends React.Component {
         'verticalAlign': 'middle',
         overflow: 'hidden'
       }
-    }
+    };
   }
 
   componentWillUnmount() {
     if (this.state.chartObject.destroyFunction) {
-      this.state.chartObject.destroyFunction()
+      this.state.chartObject.destroyFunction();
     }
     this.unsubscribe();
   }
 
   componentDidMount() {
     //load reflux store
-    this.unsubscribe = D3Store.listen(this.onStatusChange.bind(this));
+    this.unsubscribe = d3Store.listen(this.onStatusChange.bind(this));
     //create new chart
     this.createNewChart(this.props.chartType, this.props);
   }
@@ -89,13 +90,13 @@ class D3Component extends React.Component {
 
   handleChartEvent(d, event) {
     //call action
-    D3Actions.D3Event(d, event);
+    d3Actions.d3Event(d, event);
   }
 
   render() {
     return (<div
       style={this.state.chartStyle}
-      />)
+      />);
   }
 }
 

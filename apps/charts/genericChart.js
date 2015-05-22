@@ -28,14 +28,14 @@ export let genericChart = {
     let fullHeight = size;
 
     //svg setup
-    this.svg = loc.append("svg")
+    this.svg = loc.append('svg')
       .attr('id', 'd3graphSVG')
       .style('display', 'inline-block')
       .style('position', 'absolute')
       .attr('preserveAspectRatio', 'xMinYMin slice')
       .attr('viewBox', '0 0 ' + fullWidth + ' ' + fullHeight)
-      .append("g")
-      .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
+      .append('g')
+      .attr('transform', 'translate(' + width / 2 + ',' + height / 2 + ')');
 
     //call updateFunction
     this.updateFunction(data, params);
@@ -58,6 +58,7 @@ export let genericChart = {
     // (see the examples) (for code, not magic)
     // make sure to use D3's enter/update/exit pattern with proper joins, to
     // get the full power of data updates.
+    d3.select('something');
 
     // if you want to pass events to the parent reactComponent, you could do something like:
     // .on('mouseover', (d) => {
