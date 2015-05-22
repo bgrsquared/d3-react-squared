@@ -102,7 +102,11 @@ See [wiki](https://github.com/bgrsquared/d3-react-squared/wiki)
 
 
 # Version Updates:
-0.1: 
+0.1.1:
+- add eslint and clean up code (lint and other stuff)
+- add propTypes.
+
+0.1.0: 
 - added standalone example
 
 0.0.8:
