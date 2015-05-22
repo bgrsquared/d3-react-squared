@@ -109,4 +109,13 @@ D3Component.defaultProps = {
   highlight: true
 };
 
+D3Component.propTypes = {
+  params: React.PropTypes.object,
+  chartType: React.PropTypes.string,
+  paddingBottom: React.PropTypes.string,
+  chartModule: React.PropTypes.object,
+  data: React.PropTypes.array,
+  highlight: React.PropTypes.bool
+};
+
 module.exports = D3Component;
