@@ -1,3 +1,5 @@
+[--> Demos, Examples, Playground, Docu](http://bgrsquared.com/#dr2)
+
 ### Some screenshots
 (the third is from the playground on the docu page)
 ![Example](https://github.com/bgrsquared/d3-react-squared/blob/master/img/explPieBar.png)
