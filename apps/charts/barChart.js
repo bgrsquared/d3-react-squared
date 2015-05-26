@@ -170,8 +170,8 @@ export let barChart = {
       .on('mouseover', (d) => {
         self.mouseoverBar.call(self, d, this);
       })
-      .on('mouseleave', (d) => {
-        self.mouseleaveBar.call(self, d, this);
+      .on('mouseout', (d) => {
+        self.mouseoutBar.call(self, d, this);
       })
       .on('mousemove', (d) => {
         self.mousemoveBar.call(self, d, this);
@@ -217,7 +217,7 @@ export let barChart = {
           .style('fill-opacity', 0.5)
           .style('stroke-opacity', 1);
         break;
-      case 'mouseleave':
+      case 'mouseout':
         this.svg.selectAll('.bar')
           .style('fill-opacity', 1)
           .style('stroke', 'transparent')
@@ -254,9 +254,9 @@ export let barChart = {
       .style('left', (d3.event.pageX + 10) + 'px');
   },
 
-  mouseleaveBar(d) {
+  mouseoutBar(d) {
     //pass the event to the partent component
-    this.reactComp.handleChartEvent(d, 'mouseleave');
+    this.reactComp.handleChartEvent(d, 'mouseout');
 
     //hide tooltip
     this.tooltip.style('opacity', 0);

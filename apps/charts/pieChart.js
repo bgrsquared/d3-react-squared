@@ -68,7 +68,7 @@ export let pieChart = {
   },
 
   tweenFunc(a, context) {
-    let i = d3.interpolate(this._current, a);
+    let i = d3.interpolate(this._current || a, a);
     this._current = i(0);
     return function(t) {
 
@@ -118,8 +118,8 @@ export let pieChart = {
       .on('mouseover', (d) => {
         self.mouseoverSector.call(self, d, this);
       })
-      .on('mouseleave', (d) => {
-        self.mouseleaveSector.call(self, d, this);
+      .on('mouseout', (d) => {
+        self.mouseoutSector.call(self, d, this);
       })
       .on('mousemove', (d) => {
         self.mousemoveSector.call(self, d, this);
@@ -159,7 +159,7 @@ export let pieChart = {
           .style('fill-opacity', 0.5)
           .style('stroke-opacity', 1);
         break;
-      case 'mouseleave':
+      case 'mouseout':
         this.svg.selectAll('.pie-sector')
           .style('fill-opacity', 1)
           .style('stroke', 'white')
@@ -180,9 +180,9 @@ export let pieChart = {
       .style('left', (d3.event.pageX + 10) + 'px');
   },
 
-  mouseleaveSector(d) {
+  mouseoutSector(d) {
     //pass the event to the partent component
-    this.reactComp.handleChartEvent(d.data, 'mouseleave');
+    this.reactComp.handleChartEvent(d.data, 'mouseout');
 
     //hide tooltip
     this.tooltip.style('opacity', 0);
