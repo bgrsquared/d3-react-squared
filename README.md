@@ -120,6 +120,10 @@ See [wiki](https://github.com/bgrsquared/d3-react-squared/wiki)
 
 
 # Version Updates:
+0.1.2:
+- Replace `mouseout` by `mouseleave` (especially important in pie chart)
+- Fix minor `attrTween` bug in pie chart
+
 0.1.1:
 - add eslint and clean up code (lint and other stuff)
 - add propTypes.
