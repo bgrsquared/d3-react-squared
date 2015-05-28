@@ -47,6 +47,12 @@ class D3Component extends React.Component {
     } else {
       this.state.chartObject.updateFunction(newProps.data, newProps.params);
     }
+    //also, check if padding has changed
+    if (this.props.paddingBottom !== newProps.paddingBottom) {
+      this.setState({
+        chartStyle: Object.assign({}, this.state.chartStyle, {paddingBottom: newProps.paddingBottom})
+      });
+    }
   }
 
   onStatusChange(obj) {

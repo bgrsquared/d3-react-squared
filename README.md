@@ -120,6 +120,10 @@ See [wiki](https://github.com/bgrsquared/d3-react-squared/wiki)
 
 
 # Version Updates:
+0.1.3:
+- Add dynamic paddingBottom (useful in custom charts that have a dynamic aspect ratio depending on data)
+(let me know if you require an example)
+
 0.1.2:
 - Replace `mouseout` by `mouseleave` (especially important in pie chart)
 - Fix minor `attrTween` bug in pie chart
