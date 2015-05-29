@@ -120,6 +120,10 @@ See [wiki](https://github.com/bgrsquared/d3-react-squared/wiki)
 
 
 # Version Updates:
+0.1.4: 
+- Add highlightEmit and highlightListen props. This allows you to specifiy which
+events (which groups) a chart should listen to (and emit to).
+
 0.1.3:
 - Add dynamic paddingBottom (useful in custom charts that have a dynamic aspect ratio depending on data)
 (let me know if you require an example)
