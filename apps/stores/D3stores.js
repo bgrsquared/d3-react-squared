@@ -8,15 +8,15 @@ const d3Store = Reflux.createStore({
   listenables: d3Actions,
 
   //define actions
-  onD3Event(data, event) {
-    this.update(data, event);
+  onD3Event(data, event, emit) {
+    this.update(data, event, emit);
   },
 
   //publish
-  update(d, e) {
+  update(d, e, emit) {
     //d is the data object, we want to pass on the id
     //e is the event, such as 'mouseover'. We set accordingly
-    this.trigger({d, e});
+    this.trigger({d, e}, emit);
   }
 });
 

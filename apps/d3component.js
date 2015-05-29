@@ -55,8 +55,14 @@ class D3Component extends React.Component {
     }
   }
 
-  onStatusChange(obj) {
-    if (this.props.highlight && this.state.chartObject.onEvent) {
+  onStatusChange(obj, emitGroups) {
+    //check if you have an overlap between highlightEmit and highlightListen
+    let listenGroups = this.props.highlightListen;
+    let intersection = emitGroups.filter(function(n) {
+      return listenGroups.indexOf(n) != -1
+    });
+
+    if (intersection.length && this.props.highlight && this.state.chartObject.onEvent) {
       this.state.chartObject.onEvent(obj);
     }
   }
@@ -96,7 +102,7 @@ class D3Component extends React.Component {
 
   handleChartEvent(d, event) {
     //call action
-    d3Actions.d3Event(d, event);
+    d3Actions.d3Event(d, event, this.props.highlightEmit);
   }
 
   render() {
@@ -112,7 +118,9 @@ D3Component.defaultProps = {
   paddingBottom: '100%',
   chartModule: barChart,
   data: [],
-  highlight: true
+  highlight: true,
+  highlightEmit: ['default'],
+  highlightListen: ['default']
 };
 
 D3Component.propTypes = {
@@ -121,7 +129,9 @@ D3Component.propTypes = {
   paddingBottom: React.PropTypes.string,
   chartModule: React.PropTypes.object,
   data: React.PropTypes.array,
-  highlight: React.PropTypes.bool
+  highlight: React.PropTypes.bool,
+  highlightEmit: React.PropTypes.array,
+  highlightListen: React.PropTypes.array
 };
 
 module.exports = D3Component;
