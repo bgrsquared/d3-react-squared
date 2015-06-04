@@ -122,7 +122,8 @@ See [wiki](https://github.com/bgrsquared/d3-react-squared/wiki)
 # Version Updates:
 0.1.5: 
 - Add 'bubble up' of chart events. I.e. when a calling component passes `onChartEvent` property,
-it will be passed the the respective data object plus the event's label.
+it will be passed the the respective data object plus the event's label 
+(will add documentation to this later).
 
 0.1.4: 
 - Add highlightEmit and highlightListen props. This allows you to specifiy which
