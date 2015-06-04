@@ -102,6 +102,9 @@ class D3Component extends React.Component {
 
   handleChartEvent(d, event) {
     //call action
+    if (this.props.onChartEvent) {
+      this.props.onChartEvent(d, event);
+    }
     d3Actions.d3Event(d, event, this.props.highlightEmit);
   }
 
