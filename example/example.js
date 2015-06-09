@@ -39,6 +39,9 @@ export class Example extends React.Component {
       <Chart
         chartType='line'
         data={fakeLineData}
+        params={{
+          yAxisPlacement: 'right'
+        }}
         />
       <Chart
         data={fakeData}

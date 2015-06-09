@@ -13,6 +13,10 @@ export let lineChart = {
     colorArray: d3.scale.category20().range(),
     strokeWidth: '3px',
     yAxisPlacement: 'left',
+    xMax: -Infinity,
+    yMax: -Infinity,
+    xMin: Infinity,
+    yMin: Infinity,
     tooltip: (d) => {
       return ('<div>ID: ' + d.id + '</div>');
     }
@@ -117,7 +121,7 @@ export let lineChart = {
     let self = this;
     self.par = Object.assign({}, this.defaultParams, params);
 
-    let xMax = -Infinity, yMax = -Infinity, xMin = Infinity, yMin = Infinity;
+    let {xMax, yMax, xMin, yMin} = self.par;
     data.map(line => {
       line.values.map(val => {
         xMax = Math.max(val.x, xMax);
