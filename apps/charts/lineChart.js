@@ -9,13 +9,8 @@ export let lineChart = {
   defaultParams: {
     defaultDuration: 500,
     yLabel: 'Value',
+    xLabel: 'Value',
     colorArray: d3.scale.category20().range(),
-    fundMap: new Map(),
-    idMap: new Map(),
-    companyMap: new Map(),
-    catMap: new Map(),
-    viewMode: 'funds',
-    dates: [],
     strokeWidth: '3px',
     yAxisPlacement: 'left',
     tooltip: (d) => {
@@ -29,7 +24,7 @@ export let lineChart = {
 
     self.par = Object.assign({}, this.defaultParams, params);
 
-    this.size = 1000;
+    this.size = 800;
 
     this.margin = {top: 40, right: 40, bottom: 20, left: 40};
     this.width = this.size - this.margin.left - this.margin.right;
@@ -48,12 +43,10 @@ export let lineChart = {
 
     this.xAxis = d3.svg.axis()
       .scale(this.x)
-      .ticks(5)
       .orient('bottom');
 
     this.yAxis = d3.svg.axis()
       .scale(this.y)
-      .ticks(5)
       .orient(self.par.yAxisPlacement);
 
     this.vb = loc.append('svg')
@@ -86,13 +79,28 @@ export let lineChart = {
       .attr('transform', 'translate(0,' + this.height + ')')
       .call(this.xAxis);
 
+    this.xAx.append('text')
+      .attr('x', (self.par.yAxisPlacement === 'left' ? this.width : this.margin.left))
+      .attr('y', -7)
+      .style('text-anchor', 'end')
+      .text(self.par.xLabel);
+
     this.yAx = this.svg.append('g')
       .attr('class', 'y axis')
       .style('font-size', '10px')
       .style('font-family', 'sans-serif')
       .attr('transform', 'translate(' +
       ((self.par.yAxisPlacement === 'left' ? 0 : 1) * this.width) + ', 0)')
-      .call(this.xAxis);
+      .call(this.yAxis);
+
+    this.yAx
+      .append('text')
+      .attr('transform', 'rotate(-90)')
+      .attr('y', (self.par.yAxisPlacement === 'left' ? 6 : -12))
+      .attr('dy', '.71em')
+      .style('text-anchor', 'end')
+      .text(self.par.yLabel);
+    ;
 
     this.line = d3.svg.line()
       .x(d=>this.x(d.x))
