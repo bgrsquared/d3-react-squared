@@ -181,6 +181,13 @@ export let lineChart = {
     this.lineGroup = this.joinLine.enter().append('g')
       .attr('class', 'lineGroup');
 
+    this.joinLine.select('path')
+      .transition()
+      .duration(self.par.defaultDuration)
+      .attr('d', d=> {
+        return this.line(d.values);
+      });
+
     this.lineGroup.append('path')
       .attr('class', 'line')
       .attr('id', d => 'line' + d.id)
@@ -190,17 +197,23 @@ export let lineChart = {
       .style('stroke-linecap', 'round')
       .on('mouseover', d => this.mouseoverLine.call(self, d, this))
       .on('mouseout', d => this.mouseoutLine.call(self, d, this))
-      .on('mousemove', d => this.mousemoveLine.call(self, d, this));
-
-    this.joinLine.select('path')
-      .transition()
-      .duration(self.par.defaultDuration)
+      .on('mousemove', d => this.mousemoveLine.call(self, d, this))
       .attr('d', d=> {
         return this.line(d.values);
-      });
+      })
+      .style('opacity', 0)
+      .transition()
+      .duration(self.par.defaultDuration)
+      .style('opacity', 1);
+
+
 
     //EXIT
-    this.joinLine.exit().remove();
+    this.joinLine.exit()
+      .transition()
+      .duration(self.par.defaultDuration)
+      .style('opacity', 0)
+      .remove();
 
   },
 
