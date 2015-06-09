@@ -17,6 +17,7 @@ export let lineChart = {
     yMax: -Infinity,
     xMin: Infinity,
     yMin: Infinity,
+    interpolate: 'linear',
     tooltip: (d) => {
       return ('<div>ID: ' + d.id + '</div>');
     }
@@ -104,11 +105,6 @@ export let lineChart = {
       .attr('dy', '.71em')
       .style('text-anchor', 'end')
       .text(self.par.yLabel);
-    ;
-
-    this.line = d3.svg.line()
-      .x(d=>this.x(d.x))
-      .y(d=>this.y(d.y));
 
     this.updateFunction(data, params);
   },
@@ -121,6 +117,11 @@ export let lineChart = {
     let self = this;
     self.par = Object.assign({}, this.defaultParams, params);
 
+    this.line = d3.svg.line()
+      .interpolate(self.par.interpolate)
+      .x(d=>this.x(d.x))
+      .y(d=>this.y(d.y));
+
     let {xMax, yMax, xMin, yMin} = self.par;
     data.map(line => {
       line.values.map(val => {
@@ -131,6 +132,12 @@ export let lineChart = {
       })
     });
 
+    if (xMax === -Infinity && xMin === Infinity) {
+      xMax = xMin = 0;
+    }
+    if (yMax === -Infinity && yMin === Infinity) {
+      yMax = yMin = 0;
+    }
     this.x.domain([xMin, xMax]);
     this.y.domain([yMin, yMax]);
 
@@ -183,10 +190,7 @@ export let lineChart = {
       .style('stroke-linecap', 'round')
       .on('mouseover', d => this.mouseoverLine.call(self, d, this))
       .on('mouseout', d => this.mouseoutLine.call(self, d, this))
-      .on('mousemove', d => this.mousemoveLine.call(self, d, this))
-      .attr('d', d=> {
-        return this.line(d.values);
-      });
+      .on('mousemove', d => this.mousemoveLine.call(self, d, this));
 
     this.joinLine.select('path')
       .transition()
@@ -196,9 +200,6 @@ export let lineChart = {
       });
 
     //EXIT
-    this.joinLine.select('.line')
-      .attr('d', this.line);
-
     this.joinLine.exit().remove();
 
   },
@@ -217,41 +218,6 @@ export let lineChart = {
         this.svg.selectAll('.line')
           .style('stroke-width', self.par.strokeWidth);
         break;
-    }
-  },
-
-  onEvent2(obj) {
-    let self = this;
-    let {d, e} = obj;
-
-    if (self.par.companyMap.has(d.id)) {
-      let compFunds = [...self.par.companyMap.get(d.id)];
-
-      switch (e) {
-        case 'mouseover':
-          compFunds.map(fID => {
-            this.svg.selectAll('.views' + fID)
-              .style('opacity', 1);
-          });
-          break;
-        case 'mouseout':
-          compFunds.map(fID => {
-            this.svg.selectAll('.views' + fID)
-              .style('opacity', 0.5);
-          });
-          break;
-      }
-    } else {
-      switch (e) {
-        case 'mouseover':
-          this.svg.selectAll('.views' + d.id)
-            .style('opacity', 1);
-          break;
-        case 'mouseout':
-          this.svg.selectAll('.views' + d.id)
-            .style('opacity', 0.5);
-          break;
-      }
     }
   },
 
