@@ -67,11 +67,15 @@ export let barChart = {
 
     this.svg.append('g')
       .attr('class', 'x axis')
+      .style('font-size', '10px')
+      .style('font-family', 'sans-serif')
       .attr('transform', 'translate(0,' + this.height + ')')
       .call(this.xAxis);
 
     this.svg.append('g')
       .attr('class', 'y axis')
+      .style('font-size', '10px')
+      .style('font-family', 'sans-serif')
       .call(this.yAxis)
       .append('text')
       .attr('transform', 'rotate(-90)')
@@ -115,15 +119,11 @@ export let barChart = {
     this.y.domain([0, this.yMax]);
 
     this.svg.select('.y.axis')
-      .style('font-size', '10px')
-      .style('font-family', 'sans-serif')
       .transition()
       .duration(self.par.defaultDuration)
       .call(this.yAxis);
 
     this.svg.select('.x.axis')
-      .style('font-size', '10px')
-      .style('font-family', 'sans-serif')
       .transition()
       .duration(self.par.defaultDuration)
       .call(this.xAxis);

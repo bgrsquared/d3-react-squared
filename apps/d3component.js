@@ -6,6 +6,7 @@ import d3 from 'd3';
 //some examples
 import {barChart} from './charts/barChart';
 import {pieChart} from './charts/pieChart';
+import {lineChart} from './charts/lineChart';
 import d3Store from './stores/D3stores.js';
 import d3Actions from './actions/D3actions.js';
 
@@ -76,6 +77,10 @@ class D3Component extends React.Component {
       case 'bar':
         chartObject = Object.create(barChart);
         paddingBottom = '100%';
+        break;
+      case 'line':
+        chartObject = Object.create(lineChart);
+        paddingBottom = '50%';
         break;
       case 'pie':
         chartObject = Object.create(pieChart);
