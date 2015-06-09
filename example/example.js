@@ -22,17 +22,21 @@ export class Example extends React.Component {
   }
 
   fakeLineData() {
-    let numberLines = Math.floor(10 * Math.random())+1;
+    let numberLines = Math.floor(10 * Math.random()) + 1;
     let newData = [];
     for (let i = 0; i < numberLines; i++) {
+      let points = new Set();
+      for (let j = 0; j <  Math.floor(5 * Math.random()) + 3; j++) {
+        points.add(Math.floor(10 * Math.random()));
+      }
+      points = [...points].sort((a, b) => a - b);
+      let values = [];
+      points.map(x => {
+        values.push({x, y: Math.random()});
+      });
       newData.push({
         id: i,
-        values: [
-          {x: 1, y: Math.random()},
-          {x: 2, y: Math.random()},
-          {x: 3, y: Math.random()},
-          {x: 6, y: Math.random()}
-        ]
+        values
       });
     }
     this.setState({fakeLineData: newData});
