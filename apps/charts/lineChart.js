@@ -8,6 +8,7 @@ let d3 = require('d3');
 export let lineChart = {
   defaultParams: {
     defaultDuration: 500,
+    aspectRatio: 1 / 2,
     yLabel: 'Value',
     xLabel: 'Value',
     colorArray: d3.scale.category20().range(),
@@ -31,11 +32,11 @@ export let lineChart = {
 
     this.size = 800;
 
-    this.margin = {top: 40, right: 40, bottom: 20, left: 40};
+    this.margin = {top: this.size / 20, right: this.size / 20, bottom: this.size / 40, left: this.size / 20};
     this.width = this.size - this.margin.left - this.margin.right;
-    this.height = this.size / 2 - this.margin.top - this.margin.bottom;
+    this.height = this.size *this.par.aspectRatio - this.margin.top - this.margin.bottom;
     this.fullWidth = this.size;
-    this.fullHeight = this.size / 2;
+    this.fullHeight = this.size *this.par.aspectRatio;
 
     //this.x = d3.time.scale()
     //  .range([0, this.width]);
@@ -205,7 +206,6 @@ export let lineChart = {
       .transition()
       .duration(self.par.defaultDuration)
       .style('opacity', 1);
-
 
 
     //EXIT

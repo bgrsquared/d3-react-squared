@@ -26,7 +26,7 @@ export class Example extends React.Component {
     let newData = [];
     for (let i = 0; i < numberLines; i++) {
       let points = new Set();
-      for (let j = 0; j <  Math.floor(5 * Math.random()) + 3; j++) {
+      for (let j = 0; j < Math.floor(5 * Math.random()) + 3; j++) {
         points.add(Math.floor(10 * Math.random()));
       }
       points = [...points].sort((a, b) => a - b);
@@ -75,7 +75,9 @@ export class Example extends React.Component {
       <Chart
         chartType='line'
         data={this.state.fakeLineData}
+        paddingBottom='25%'
         params={{
+          aspectRatio: 1 / 4,
           yAxisPlacement: 'right',
           interpolate: this.state.lineInterpolate
         }}

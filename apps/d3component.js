@@ -76,15 +76,15 @@ class D3Component extends React.Component {
     switch (chartPrototype) {
       case 'bar':
         chartObject = Object.create(barChart);
-        paddingBottom = '100%';
+        paddingBottom = this.props.paddingBottom;
         break;
       case 'line':
         chartObject = Object.create(lineChart);
-        paddingBottom = '50%';
+        paddingBottom = this.props.paddingBottom;
         break;
       case 'pie':
         chartObject = Object.create(pieChart);
-        paddingBottom = '100%';
+        paddingBottom = this.props.paddingBottom;
         break;
       case 'custom':
         chartObject = Object.create(props.chartModule);
@@ -92,7 +92,7 @@ class D3Component extends React.Component {
         break;
       default:
         chartObject = Object.create(barChart);
-        paddingBottom = '100%';
+        paddingBottom = this.props.paddingBottom;
     }
 
     this.setState({
