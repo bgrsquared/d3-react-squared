@@ -83,6 +83,18 @@ export class Example extends React.Component {
         }}
         />
       <Chart
+        chartType='line'
+        data={this.state.fakeLineData}
+        paddingBottom='50%'
+        params={{
+          labelSize: 2,
+          strokeWidth: 10,
+          aspectRatio: 1 / 2,
+          yAxisPlacement: 'right',
+          interpolate: this.state.lineInterpolate
+        }}
+        />
+      <Chart
         data={fakeData}
         />
       <Chart

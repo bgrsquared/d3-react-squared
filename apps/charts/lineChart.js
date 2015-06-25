@@ -8,11 +8,13 @@ let d3 = require('d3');
 export let lineChart = {
   defaultParams: {
     defaultDuration: 500,
+    size: 1000, // debug switch, for exact values
     aspectRatio: 1 / 2,
+    labelSize: 1,
     yLabel: 'Value',
     xLabel: 'Value',
     colorArray: d3.scale.category20().range(),
-    strokeWidth: '3px',
+    strokeWidth: 3,
     yAxisPlacement: 'left',
     xMax: -Infinity,
     yMax: -Infinity,
@@ -30,13 +32,22 @@ export let lineChart = {
 
     self.par = Object.assign({}, this.defaultParams, params);
 
-    this.size = 800;
+    this.size = this.par.size;
+    let labelSize = this.par.labelSize;
+    this.fontSize = labelSize * this.size / 100;
+    let lM = 1, rM = 1;
+    (this.par.yAxisPlacement === 'left' ? lM = (1 + labelSize / 2) * 5 : rM = (1 + labelSize / 2) * 5);
 
-    this.margin = {top: this.size / 20, right: this.size / 20, bottom: this.size / 40, left: this.size / 20};
+    this.margin = {
+      top: this.size / 20,
+      right: rM * this.size / 100,
+      bottom: 2.5 * this.fontSize * Math.max(1, labelSize),
+      left: lM * this.size / 100
+    };
     this.width = this.size - this.margin.left - this.margin.right;
-    this.height = this.size *this.par.aspectRatio - this.margin.top - this.margin.bottom;
+    this.height = this.size * this.par.aspectRatio - this.margin.top - this.margin.bottom;
     this.fullWidth = this.size;
-    this.fullHeight = this.size *this.par.aspectRatio;
+    this.fullHeight = this.size * this.par.aspectRatio;
 
     //this.x = d3.time.scale()
     //  .range([0, this.width]);
@@ -49,10 +60,18 @@ export let lineChart = {
 
     this.xAxis = d3.svg.axis()
       .scale(this.x)
+      .ticks(Math.floor(10 / labelSize))
+      .innerTickSize(this.size / 250)
+      .outerTickSize(this.size / 250)
+      .tickPadding(this.size / 250)
       .orient('bottom');
 
     this.yAxis = d3.svg.axis()
       .scale(this.y)
+      .ticks(Math.floor(10 / labelSize))
+      .innerTickSize(this.size / 250)
+      .outerTickSize(this.size / 250)
+      .tickPadding(this.size / 250)
       .orient(self.par.yAxisPlacement);
 
     this.vb = loc.append('svg')
@@ -80,20 +99,22 @@ export let lineChart = {
 
     this.xAx = this.svg.append('g')
       .attr('class', 'x axis')
-      .style('font-size', '10px')
+      .style('stroke-width', this.par.size / 1000 + 'px')
+      .style('font-size', this.fontSize + 'px')
       .style('font-family', 'sans-serif')
       .attr('transform', 'translate(0,' + this.height + ')')
       .call(this.xAxis);
 
     this.xAx.append('text')
-      .attr('x', (self.par.yAxisPlacement === 'left' ? this.width : this.margin.left))
-      .attr('y', -7)
-      .style('text-anchor', 'end')
+      .attr('x', (self.par.yAxisPlacement === 'left' ? this.width : 0))
+      .attr('y', -this.fontSize / 2)
+      .style('text-anchor', (self.par.yAxisPlacement === 'left' ? 'end' : 'start'))
       .text(self.par.xLabel);
 
     this.yAx = this.svg.append('g')
       .attr('class', 'y axis')
-      .style('font-size', '10px')
+      .style('stroke-width', this.par.size / 1000 + 'px')
+      .style('font-size', this.fontSize + 'px')
       .style('font-family', 'sans-serif')
       .attr('transform', 'translate(' +
       ((self.par.yAxisPlacement === 'left' ? 0 : 1) * this.width) + ', 0)')
@@ -102,7 +123,7 @@ export let lineChart = {
     this.yAx
       .append('text')
       .attr('transform', 'rotate(-90)')
-      .attr('y', (self.par.yAxisPlacement === 'left' ? 6 : -12))
+      .attr('y', (self.par.yAxisPlacement === 'left' ? this.fontSize / 2 : -this.fontSize))
       .attr('dy', '.71em')
       .style('text-anchor', 'end')
       .text(self.par.yLabel);
@@ -225,7 +246,7 @@ export let lineChart = {
         this.svg.selectAll('.line')
           .style('stroke-width', self.par.strokeWidth);
         this.svg.select('#line' + d.id)
-          .style('stroke-width', '10px');
+          .style('stroke-width', self.par.strokeWidth * 3);
         break;
       case 'mouseout':
         this.svg.selectAll('.line')
@@ -240,7 +261,7 @@ export let lineChart = {
     //this.reactComp.handleChartEvent({id: this.par.fundMap.get(d.id).comp}, 'mouseover');
 
     this.svg.select('#line' + d.id)
-      .style('stroke-width', '10px');
+      .style('stroke-width', this.par.strokeWidth * 3);
 
     //show tooltip
     this.tooltip.html(this.par.tooltip(d))
