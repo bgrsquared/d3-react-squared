@@ -120,6 +120,19 @@ See [wiki](https://github.com/bgrsquared/d3-react-squared/wiki)
 
 
 # Version Updates:
+0.1.6:
+- Add 'line chart' with some new features (these will be added to other charts later, where appilcable), such as:
+  - Parametrized **aspect ratio** (make sure you also adjust paddingBottom!) This will be improved in future versions 
+    (We are thinking of automated paddingBottom ratios, unless overridden)
+  - Parametrized **label size**
+  - Parametrized **size** (currently not really useful (due to automated viewbox), unless you want to be pixel perfect)
+  - Parametrized **line thickness**
+  - 'Automatic' adjustment of margins (currently based on labelSize, not on actual tick label)
+  - For fun: parametrized (and sort-of-animated) **interpolation modes** for paths (based on d3)
+  - Some other, see documentation (when completed, until then: source)
+  - And: the line chart uses same highlight-sharing-system and tooltips as in the other examplary charts.
+  - Also added two exemplary line charts in ./example/example.js
+
 0.1.5: 
 - Add 'bubble up' of chart events. I.e. when a calling component passes `onChartEvent` property,
 it will be passed the the respective data object plus the event's label 
