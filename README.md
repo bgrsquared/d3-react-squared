@@ -2,8 +2,14 @@
 
 ### Some screenshots
 (the third is from the playground on the docu page)
-![Example](https://github.com/bgrsquared/d3-react-squared/blob/master/img/explPieBar.png)
+
+#### Dashboard like layout:
+![Example](https://github.com/bgrsquared/d3-react-squared/blob/master/img/explPieBarLine.png)
+
+#### Linked highlights:
 ![Example](https://github.com/bgrsquared/d3-react-squared/blob/master/img/explPieBar2.png)
+
+#### Playground to learn about parameters:
 ![Playground](https://github.com/bgrsquared/d3-react-squared/blob/master/img/explPlayground.png)
 
 # d3-react-squared
