@@ -125,6 +125,9 @@ See [wiki](https://github.com/bgrsquared/d3-react-squared/wiki)
 
 
 # Version Updates:
+0.1.8: 
+- Adjust margins in bar- and line-charts.
+
 0.1.7:
 - Add 'aspectRatio' and 'labelSize' to barChart
 - Change basic size of pie- and barCharts to 1000 (can be overridden in params)
