@@ -41,7 +41,7 @@ export let lineChart = {
     this.margin = {
       top: this.size / 20,
       right: rM * this.size / 100,
-      bottom: 2.5 * this.fontSize * Math.max(1, labelSize),
+      bottom: this.fontSize + this.size / 20,
       left: lM * this.size / 100
     };
     this.width = this.size - this.margin.left - this.margin.right;
@@ -60,7 +60,7 @@ export let lineChart = {
 
     this.xAxis = d3.svg.axis()
       .scale(this.x)
-      .ticks(Math.floor(10 / labelSize))
+      //.ticks(Math.floor(10 / labelSize))
       .innerTickSize(this.size / 250)
       .outerTickSize(this.size / 250)
       .tickPadding(this.size / 250)
@@ -68,7 +68,7 @@ export let lineChart = {
 
     this.yAxis = d3.svg.axis()
       .scale(this.y)
-      .ticks(Math.floor(10 / labelSize))
+      //.ticks(Math.floor(10 / labelSize))
       .innerTickSize(this.size / 250)
       .outerTickSize(this.size / 250)
       .tickPadding(this.size / 250)

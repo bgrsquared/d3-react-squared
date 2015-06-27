@@ -30,7 +30,12 @@ export let barChart = {
     let labelSize = this.par.labelSize;
     this.fontSize = labelSize * this.size / 100;
 
-    this.margin = {top: 10, right: 20, bottom: labelSize * 20, left: (1 + labelSize / 10) * 40};
+    this.margin = {
+      top: this.size / 100,
+      right: this.size / 50,
+      bottom: this.fontSize + this.size / 100,
+      left: (1 + labelSize / 10) * 40
+    };
     this.width = this.size - this.margin.left - this.margin.right;
     this.height = this.size * this.par.aspectRatio - this.margin.top - this.margin.bottom;
     this.fullWidth = this.size;
@@ -51,7 +56,7 @@ export let barChart = {
 
     this.yAxis = d3.svg.axis()
       .scale(this.y)
-      .ticks(Math.floor(10 / labelSize))
+      //.ticks(Math.floor(10 / labelSize))
       .innerTickSize(this.size / 250)
       .outerTickSize(this.size / 250)
       .tickPadding(this.size / 250)
