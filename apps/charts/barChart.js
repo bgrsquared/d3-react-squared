@@ -4,6 +4,9 @@ let d3 = require('d3');
 
 export let barChart = {
   defaultParams: {
+    size: 1000, // debug switch, for exact values
+    aspectRatio: 1,
+    labelSize: 1,
     col1: 'green',
     col2: 'red',
     defaultDuration: 500,
@@ -23,26 +26,35 @@ export let barChart = {
 
     self.par = Object.assign({}, this.defaultParams, params);
 
-    let size = 250;
+    this.size = this.par.size;
+    let labelSize = this.par.labelSize;
+    this.fontSize = labelSize * this.size / 100;
 
-    let margin = {top: 10, right: 20, bottom: 50, left: 40},
-      width = size - margin.left - margin.right;
-    this.height = size - margin.top - margin.bottom;
-    let fullWidth = size;
-    let fullHeight = size;
+    this.margin = {top: 10, right: 20, bottom: labelSize * 20, left: (1 + labelSize / 10) * 40};
+    this.width = this.size - this.margin.left - this.margin.right;
+    this.height = this.size * this.par.aspectRatio - this.margin.top - this.margin.bottom;
+    this.fullWidth = this.size;
+    this.fullHeight = this.size * this.par.aspectRatio;
 
     this.x = d3.scale.ordinal()
-      .rangeRoundBands([0, width], .1);
+      .rangeRoundBands([0, this.width], .1);
 
     this.y = d3.scale.linear()
       .range([this.height, 0]);
 
     this.xAxis = d3.svg.axis()
       .scale(this.x)
+      .innerTickSize(this.size / 250)
+      .outerTickSize(this.size / 250)
+      .tickPadding(this.size / 250)
       .orient('bottom');
 
     this.yAxis = d3.svg.axis()
       .scale(this.y)
+      .ticks(Math.floor(10 / labelSize))
+      .innerTickSize(this.size / 250)
+      .outerTickSize(this.size / 250)
+      .tickPadding(this.size / 250)
       .tickFormat(d3.format('s'))
       .orient('left');
 
@@ -51,9 +63,9 @@ export let barChart = {
       .style('display', 'inline-block')
       .style('position', 'absolute')
       .attr('preserveAspectRatio', 'xMinYMin slice')
-      .attr('viewBox', '0 0 ' + fullWidth + ' ' + fullHeight)
+      .attr('viewBox', '0 0 ' + this.fullWidth + ' ' + this.fullHeight)
       .append('g')
-      .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')');
+      .attr('transform', 'translate(' + this.margin.left + ',' + this.margin.top + ')');
 
 
     this.x.domain(data.map(function(d) {
@@ -65,21 +77,25 @@ export let barChart = {
     this.y.domain([0, this.yMax]);
 
 
-    this.svg.append('g')
+    this.xAx = this.svg.append('g')
       .attr('class', 'x axis')
-      .style('font-size', '10px')
+      .style('stroke-width', this.par.size / 1000 + 'px')
+      .style('font-size', this.fontSize + 'px')
       .style('font-family', 'sans-serif')
       .attr('transform', 'translate(0,' + this.height + ')')
       .call(this.xAxis);
 
-    this.svg.append('g')
+    this.yAx = this.svg.append('g')
       .attr('class', 'y axis')
-      .style('font-size', '10px')
+      .style('stroke-width', this.par.size / 1000 + 'px')
+      .style('font-size', this.fontSize + 'px')
       .style('font-family', 'sans-serif')
-      .call(this.yAxis)
+      .call(this.yAxis);
+
+    this.yAx
       .append('text')
       .attr('transform', 'rotate(-90)')
-      .attr('y', 6)
+      .attr('y', this.fontSize / 2)
       .attr('dy', '.71em')
       .style('text-anchor', 'end')
       .text(self.par.yLabel);
@@ -118,12 +134,12 @@ export let barChart = {
       }) || 100;
     this.y.domain([0, this.yMax]);
 
-    this.svg.select('.y.axis')
+    this.yAx
       .transition()
       .duration(self.par.defaultDuration)
       .call(this.yAxis);
 
-    this.svg.select('.x.axis')
+    this.xAx
       .transition()
       .duration(self.par.defaultDuration)
       .call(this.xAxis);
@@ -231,8 +247,8 @@ export let barChart = {
     let self = this;
     if (par.colorType === 'gradient') {
       return d => {
-          return d3.interpolateHsl(par.col1, par.col2)(d.value / self.yMax);
-        };
+        return d3.interpolateHsl(par.col1, par.col2)(d.value / self.yMax);
+      };
     } else if (par.colorType === 'category') {
       let cols = par.colorArray;
       return (d, i) => {

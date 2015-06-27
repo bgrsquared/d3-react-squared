@@ -4,6 +4,7 @@ let d3 = require('d3');
 
 export let pieChart = {
   defaultParams: {
+    size: 1000, // debug switch, for exact values
     col1: 'green',
     col2: 'red',
     defaultDuration: 500,
@@ -21,7 +22,7 @@ export let pieChart = {
 
     this.par = Object.assign({}, this.defaultParams, params);
 
-    let size = 250;
+    let size = this.par.size;
 
     let width = size - 20,
       height = size - 20,
