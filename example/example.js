@@ -109,7 +109,7 @@ export class Example extends React.Component {
           params={{
             colorType: 'category',
             aspectRatio: 2,
-            labelSize: 2
+            labelSize: 5
           }}
           />
       </div>
@@ -117,7 +117,8 @@ export class Example extends React.Component {
         <Chart
           data={fakeData()}
           params={{
-            colorType: 'category'
+            colorType: 'category',
+            labelSize: 2.5
           }}
           />
       </div>
@@ -128,7 +129,7 @@ export class Example extends React.Component {
           params={{
             colorType: 'category',
             aspectRatio: 2,
-            labelSize: 2
+            labelSize: 5
           }}
           />
       </div>
@@ -138,7 +139,8 @@ export class Example extends React.Component {
           paddingBottom='50%'
           params={{
             colorType: 'category',
-            aspectRatio: 1 / 2
+            aspectRatio: 1 / 2,
+            labelSize: 2.5
           }}
           />
       </div>
@@ -148,7 +150,8 @@ export class Example extends React.Component {
           paddingBottom='50%'
           params={{
             colorType: 'category',
-            aspectRatio: 1 / 2
+            aspectRatio: 1 / 2,
+            labelSize: 2.5
           }}
           />
       </div>
