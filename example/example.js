@@ -44,7 +44,14 @@ export class Example extends React.Component {
   }
 
   render() {
-    let fakeData = [{id: 1, value: 5}, {id: 2, value: 10}];
+    let fakeData = () => {
+      return [
+        {id: 1, value: 1 + Math.floor(10 * Math.random())},
+        {id: 2, value: 1 + Math.floor(10 * Math.random())},
+        {id: 3, value: 1 + Math.floor(10 * Math.random())}
+      ];
+    };
+
     let interpols =
       ['linear',
         'linear-closed',
@@ -94,12 +101,61 @@ export class Example extends React.Component {
           interpolate: this.state.lineInterpolate
         }}
         />
-      <Chart
-        data={fakeData}
-        />
+
+      <div style={{width: '25%', display: 'inline-block'}}>
+        <Chart
+          data={fakeData()}
+          paddingBottom='200%'
+          params={{
+            colorType: 'category',
+            aspectRatio: 2,
+            labelSize: 2
+          }}
+          />
+      </div>
+      <div style={{width: '50%', display: 'inline-block'}}>
+        <Chart
+          data={fakeData()}
+          params={{
+            colorType: 'category'
+          }}
+          />
+      </div>
+      <div style={{width: '25%', display: 'inline-block'}}>
+        <Chart
+          data={fakeData()}
+          paddingBottom='200%'
+          params={{
+            colorType: 'category',
+            aspectRatio: 2,
+            labelSize: 2
+          }}
+          />
+      </div>
+      <div style={{width: '50%', display: 'inline-block'}}>
+        <Chart
+          data={fakeData()}
+          paddingBottom='50%'
+          params={{
+            colorType: 'category',
+            aspectRatio: 1 / 2
+          }}
+          />
+      </div>
+      <div style={{width: '50%', display: 'inline-block'}}>
+        <Chart
+          data={fakeData()}
+          paddingBottom='50%'
+          params={{
+            colorType: 'category',
+            aspectRatio: 1 / 2
+          }}
+          />
+      </div>
+
       <Chart
         chartType='pie'
-        data={fakeData}
+        data={fakeData()}
         />
     </div>)
   }
