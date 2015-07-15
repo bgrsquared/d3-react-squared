@@ -1,6 +1,6 @@
 'use strict';
 //polyfill for Object.assign
-require("babel/polyfill");
+require('babel/polyfill');
 
 import React from 'react';
 

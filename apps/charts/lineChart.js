@@ -36,7 +36,12 @@ export let lineChart = {
     let labelSize = this.par.labelSize;
     this.fontSize = labelSize * this.size / 100;
     let lM = 1, rM = 1;
-    (this.par.yAxisPlacement === 'left' ? lM = (1 + labelSize / 2) * 5 : rM = (1 + labelSize / 2) * 5);
+
+    if (this.par.yAxisPlacement === 'left') {
+      lM = (1 + labelSize / 2) * 5;
+    } else {
+      rM = (1 + labelSize / 2) * 5;
+    }
 
     this.margin = {
       top: this.size / 20,
@@ -151,7 +156,7 @@ export let lineChart = {
         yMax = Math.max(val.y, yMax);
         xMin = Math.min(val.x, xMin);
         yMin = Math.min(val.y, yMin);
-      })
+      });
     });
 
     if (xMax === -Infinity && xMin === Infinity) {

@@ -26,13 +26,6 @@ class D3Component extends React.Component {
     };
   }
 
-  componentWillUnmount() {
-    if (this.state.chartObject.destroyFunction) {
-      this.state.chartObject.destroyFunction();
-    }
-    this.unsubscribe();
-  }
-
   componentDidMount() {
     //load reflux store
     this.unsubscribe = d3Store.listen(this.onStatusChange.bind(this));
@@ -56,11 +49,18 @@ class D3Component extends React.Component {
     }
   }
 
+  componentWillUnmount() {
+    if (this.state.chartObject.destroyFunction) {
+      this.state.chartObject.destroyFunction();
+    }
+    this.unsubscribe();
+  }
+
   onStatusChange(obj, emitGroups) {
     //check if you have an overlap between highlightEmit and highlightListen
     let listenGroups = this.props.highlightListen;
     let intersection = emitGroups.filter(function(n) {
-      return listenGroups.indexOf(n) != -1
+      return listenGroups.indexOf(n) !== -1;
     });
 
     if (intersection.length && this.props.highlight && this.state.chartObject.onEvent) {
@@ -132,14 +132,15 @@ D3Component.defaultProps = {
 };
 
 D3Component.propTypes = {
-  params: React.PropTypes.object,
-  chartType: React.PropTypes.string,
-  paddingBottom: React.PropTypes.string,
   chartModule: React.PropTypes.object,
+  chartType: React.PropTypes.string,
   data: React.PropTypes.array,
   highlight: React.PropTypes.bool,
   highlightEmit: React.PropTypes.array,
-  highlightListen: React.PropTypes.array
+  highlightListen: React.PropTypes.array,
+  onChartEvent: React.PropTypes.func,
+  paddingBottom: React.PropTypes.string,
+  params: React.PropTypes.object
 };
 
 module.exports = D3Component;

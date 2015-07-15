@@ -13,27 +13,34 @@ export class Example extends React.Component {
     };
   }
 
-  handleLineInterpolate(lineInterpolate) {
-    this.setState({lineInterpolate});
-  }
-
   componentDidMount() {
     this.fakeLineData();
+  }
+
+  handleLineInterpolate(lineInterpolate) {
+    this.setState({lineInterpolate});
   }
 
   fakeLineData() {
     let numberLines = Math.floor(10 * Math.random()) + 1;
     let newData = [];
+
+    let sortAsc = function(a, b) {
+      return a - b;
+    };
+
     for (let i = 0; i < numberLines; i++) {
       let points = new Set();
       for (let j = 0; j < Math.floor(5 * Math.random()) + 3; j++) {
         points.add(Math.floor(10 * Math.random()));
       }
-      points = [...points].sort((a, b) => a - b);
+      points = [...points].sort(sortAsc);
+
       let values = [];
-      points.map(x => {
-        values.push({x, y: Math.random()});
-      });
+      for (let ii = 0; ii < points.length; ii++) {
+        values.push({x: points[ii], y: Math.random()});
+      }
+
       newData.push({
         id: i,
         values
@@ -160,6 +167,6 @@ export class Example extends React.Component {
         chartType='pie'
         data={fakeData()}
         />
-    </div>)
+    </div>);
   }
 }
