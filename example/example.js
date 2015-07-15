@@ -46,9 +46,9 @@ export class Example extends React.Component {
   render() {
     let fakeData = () => {
       return [
+        {id: 0, value: 1 + Math.floor(10 * Math.random())},
         {id: 1, value: 1 + Math.floor(10 * Math.random())},
-        {id: 2, value: 1 + Math.floor(10 * Math.random())},
-        {id: 3, value: 1 + Math.floor(10 * Math.random())}
+        {id: 2, value: 1 + Math.floor(10 * Math.random())}
       ];
     };
 

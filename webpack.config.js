@@ -33,10 +33,17 @@ var config = {
         test: /\.js$/,
         include: [app_dir, expl_dir,
           path.join(node_modules_dir, 'd3-react-squared')
-          //the last line is to show how you'd include this
-          //component to babel
         ],
-        loader: "babel-loader"
+        loader: 'babel-loader'
+      }
+    ],
+    preLoaders: [
+      {
+        test: /\.js$/,
+        include: [app_dir, expl_dir,
+          path.join(node_modules_dir, 'd3-react-squared')
+        ],
+        loader: 'eslint'
       }
     ]
   },
