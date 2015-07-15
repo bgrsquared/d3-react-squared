@@ -125,6 +125,10 @@ See [wiki](https://github.com/bgrsquared/d3-react-squared/wiki)
 
 
 # Version Updates:
+0.1.9: 
+- Update dependencies
+- Linting.
+
 0.1.8: 
 - Adjust margins in bar- and line-charts.
 
