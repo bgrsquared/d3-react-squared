@@ -4,9 +4,9 @@
 
 var webpack = require('webpack');
 var path = require('path');
-var node_modules_dir = path.join(__dirname, 'node_modules');
-var app_dir = path.join(__dirname, 'app');
-var expl_dir = path.join(__dirname, 'example');
+var nodeModulesDir = path.join(__dirname, 'node_modules');
+var appDir = path.join(__dirname, 'app');
+var explDir = path.join(__dirname, 'example');
 var licenseBanner = 'Thanks to all the providers of the components. See the respective' +
   'github pages for their licenses.';
 
@@ -31,8 +31,10 @@ var config = {
     loaders: [
       {
         test: /\.js$/,
-        include: [app_dir, expl_dir,
-          path.join(node_modules_dir, 'd3-react-squared')
+        include: [appDir, explDir,
+          path.join(nodeModulesDir, 'd3-react-squared')
+          //the last line is to show how you'd include this
+          //component to babel
         ],
         loader: 'babel-loader'
       }
@@ -40,8 +42,8 @@ var config = {
     preLoaders: [
       {
         test: /\.js$/,
-        include: [app_dir, expl_dir,
-          path.join(node_modules_dir, 'd3-react-squared')
+        include: [appDir, explDir,
+          path.join(nodeModulesDir, 'd3-react-squared')
         ],
         loader: 'eslint'
       }

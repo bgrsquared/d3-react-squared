@@ -5,7 +5,7 @@
   "main": "./apps/d3component.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "NODE_ENV=dev webpack-dev-server --devtool eval --progress --colors --hot --content-base example/"
+    "dev": "NODE_ENV=dev webpack-dev-server --devtool eval-source-map --progress --colors --hot --content-base example/"
   },
   "repository": {
     "type": "git",
