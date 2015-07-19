@@ -4,62 +4,99 @@
 
 var webpack = require('webpack');
 var path = require('path');
-var nodeModulesDir = path.join(__dirname, 'node_modules');
 var appDir = path.join(__dirname, 'app');
 var explDir = path.join(__dirname, 'example');
 var licenseBanner = 'Thanks to all the providers of the components. See the respective' +
   'github pages for their licenses.';
 
-var config = {
-  addVendor: function(name, path) {
-    this.resolve.alias[name] = path;
-    this.module.noParse.push(path);
-  },
-  context: __dirname,
-  entry: {
-    app: ['webpack/hot/dev-server',
+var outputPath, filename, entry, externals;
+switch (process.env.NODE_ENV) {
+  case 'example':
+    outputPath = __dirname + '/example';
+    filename = 'bundle.js';
+    entry = ['webpack/hot/dev-server',
       (
         './example/main.js'
-      )]
-  },
+      )];
+    output = {
+      path: outputPath,
+      filename: filename
+    };
+    externals = [];
+    break;
+  case 'production':
+    outputPath = __dirname + '/dist';
+    filename = 'd3-react-squared.js';
+    entry = './apps/d3component.js';
+    output = {
+      path: outputPath,
+      library: 'd3-react-squared',
+      libraryTarget: 'umd'
+    };
+    externals = [
+      {
+        'react': {
+          root: 'React',
+          commonjs2: 'react',
+          commonjs: 'react',
+          amd: 'react'
+        },
+        'd3': {
+          root: 'd3',
+          commonjs2: 'd3',
+          commonjs: 'd3',
+          amd: 'd3'
+        }
+      }
+    ];
+    break;
+  default:
+    outputPath = __dirname + '/dist';
+    filename = 'bundle.js';
+    entry = ['webpack/hot/dev-server',
+      (
+        './example/main.js'
+      )];
+    output = {
+      path: outputPath,
+      filename: filename
+    };
+    externals = [];
+}
+
+var config = {
+  context: __dirname,
+
+  entry: entry,
+
   output: {
-    path: __dirname + "/example",
-    filename: "bundle.js"
+    path: outputPath,
+    filename: filename
   },
+
   module: {
     noParse: [],
     loaders: [
       {
         test: /\.js$/,
-        include: [appDir, explDir,
-          path.join(nodeModulesDir, 'd3-react-squared')
-          //the last line is to show how you'd include this
-          //component to babel
-        ],
+        include: [appDir, explDir],
         loader: 'babel-loader'
       }
     ],
     preLoaders: [
       {
         test: /\.js$/,
-        include: [appDir, explDir,
-          path.join(nodeModulesDir, 'd3-react-squared')
-        ],
+        include: [appDir, explDir],
         loader: 'eslint'
       }
     ]
   },
+
+  externals: externals,
+
   plugins: [
-    new webpack.optimize.CommonsChunkPlugin('app', null, false),
-    new webpack.ProvidePlugin({
-      $: "jquery",
-      jQuery: "jquery"
-    }),
     new webpack.BannerPlugin(licenseBanner)
   ]
 };
-
-//example for addVendor
-//config.addVendor('jquery', path.resolve(bower_dir, 'jquery/dist/jquery.js'));
 
 module.exports = config;

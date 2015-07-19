@@ -56,19 +56,6 @@ build/*
 # --------------------
 # Public Files
 # --------------------
-dist/*
-!dist/index.html
-!dist/img
-dist_bgr2/*
-!dist_bgr2/index.html
-!dist_bgr2/img
-dist_qacube/*
-!dist_qacube/index.html
-!dist_qacube/img
-dist_SC/*
-!dist_SC/index.html
-!dist_SC/img
-!dist_SC/mock_SC
 
 # --------------------
 # Other
