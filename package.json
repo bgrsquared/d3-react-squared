@@ -2,7 +2,7 @@
   "name": "d3-react-squared",
   "version": "0.1.9",
   "description": "Load basic or customized D3 charts in React.js.",
-  "main": "./apps/d3component.js",
+  "main": "./dist/d3-react-squared.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "NODE_ENV=dev webpack-dev-server --devtool eval-source-map --progress --colors --hot --content-base example/",
