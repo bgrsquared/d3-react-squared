@@ -84,11 +84,7 @@ var config = {
 
   plugins: [
     new webpack.BannerPlugin(licenseBanner)
-  ],
-
-  resolve: {
-    extensions: ['', '.js', '.jsx']
-  }
+  ]
 };
 
 module.exports = config;
