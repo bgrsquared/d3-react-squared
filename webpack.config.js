@@ -41,12 +41,7 @@ switch (process.env.NODE_ENV) {
           commonjs: 'react',
           amd: 'react'
         },
-        'd3': {
-          root: 'd3',
-          commonjs2: 'd3',
-          commonjs: 'd3',
-          amd: 'd3'
-        }
+        'd3': 'd3'
       }
     ];
     break;
