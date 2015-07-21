@@ -31,16 +31,12 @@ switch (process.env.NODE_ENV) {
     output = {
       path: outputPath,
       library: 'd3-react-squared',
-      libraryTarget: 'umd'
+      libraryTarget: 'umd',
+      filename: filename
     };
     externals = [
       {
-        'react': {
-          root: 'React',
-          commonjs2: 'react',
-          commonjs: 'react',
-          amd: 'react'
-        },
+        'react': 'react',
         'd3': 'd3'
       }
     ];
@@ -64,10 +60,7 @@ var config = {
 
   entry: entry,
 
-  output: {
-    path: outputPath,
-    filename: filename
-  },
+  output: output,
 
   module: {
     noParse: [],
@@ -91,7 +84,11 @@ var config = {
 
   plugins: [
     new webpack.BannerPlugin(licenseBanner)
-  ]
+  ],
+
+  resolve: {
+    extensions: ['', '.js', '.jsx']
+  }
 };
 
 module.exports = config;

@@ -1,5 +1,15 @@
 /*! Thanks to all the providers of the components. See the respectivegithub pages for their licenses. */
-/******/ (function(modules) { // webpackBootstrap
+(function webpackUniversalModuleDefinition(root, factory) {
+	if(typeof exports === 'object' && typeof module === 'object')
+		module.exports = factory(require("react"), require("d3"));
+	else if(typeof define === 'function' && define.amd)
+		define(["react", "d3"], factory);
+	else if(typeof exports === 'object')
+		exports["d3-react-squared"] = factory(require("react"), require("d3"));
+	else
+		root["d3-react-squared"] = factory(root["react"], root["d3"]);
+})(this, function(__WEBPACK_EXTERNAL_MODULE_1__, __WEBPACK_EXTERNAL_MODULE_2__) {
+return /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
 /******/ 	var installedModules = {};
 
@@ -234,13 +244,13 @@
 /* 1 */
 /***/ function(module, exports) {
 
-	module.exports = undefined;
+	module.exports = __WEBPACK_EXTERNAL_MODULE_1__;
 
 /***/ },
 /* 2 */
 /***/ function(module, exports) {
 
-	module.exports = d3;
+	module.exports = __WEBPACK_EXTERNAL_MODULE_2__;
 
 /***/ },
 /* 3 */
@@ -2522,4 +2532,6 @@
 	module.exports = exports['default'];
 
 /***/ }
-/******/ ]);
+/******/ ])
+});
+;
