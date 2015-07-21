@@ -1,3 +1,5 @@
+## NOTE: use 0.1.9 for now (@latest), the newer versions such as 0.2.1-beta do not work properly, yet 
+
 [--> Demos, Examples, Playground, Docu](http://bgrsquared.com/#dr2)
 
 ### Some screenshots
