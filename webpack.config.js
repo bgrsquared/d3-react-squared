@@ -9,7 +9,7 @@ var explDir = path.join(__dirname, 'example');
 var licenseBanner = 'Thanks to all the providers of the components. See the respective' +
   'github pages for their licenses.';
 
-var outputPath, filename, entry, externals;
+var outputPath, filename, entry, externals, output;
 switch (process.env.NODE_ENV) {
   case 'example':
     outputPath = __dirname + '/example';
