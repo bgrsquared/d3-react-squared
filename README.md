@@ -127,6 +127,12 @@ See [wiki](https://github.com/bgrsquared/d3-react-squared/wiki)
 
 
 # Version Updates:
+0.2.3: 
+- Precompiled (babel) single library as direct entry point, to make stuff easier for direct users.
+
+0.2.0 - 0.2.2 (including some betas): 
+- Experiments with npm packages.
+
 0.1.9: 
 - Update dependencies
 - Linting.
