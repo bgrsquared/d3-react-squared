@@ -1,4 +1,5 @@
-## NOTE: use 0.1.9 for now (@latest), the newer versions such as 0.2.1-beta do not work properly, yet 
+## NOTE: use 0.2.2 is pointing to src directly. Starting in 0.2.3 we use a precompiled lib (and point to that).
+ Please let me know if you have troubles with the library, I am no expert on that at all.
 
 [--> Demos, Examples, Playground, Docu](http://bgrsquared.com/#dr2)
 
