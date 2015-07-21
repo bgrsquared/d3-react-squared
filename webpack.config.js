@@ -40,8 +40,7 @@ switch (process.env.NODE_ENV) {
           commonjs2: 'react',
           commonjs: 'react',
           amd: 'react'
-        },
-        'd3': 'd3'
+        }
       }
     ];
     break;
