@@ -1,7 +1,7 @@
 'use strict';
 
-import React from 'react';
-import d3 from 'd3';
+let React = require('react');
+let d3 = require('d3');
 
 //some examples
 import {barChart} from './charts/barChart';
