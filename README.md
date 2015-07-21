@@ -1,5 +1,5 @@
-## NOTE: use 0.2.2 is pointing to src directly. Starting in 0.2.3 we use a precompiled lib (and point to that).
- Please let me know if you have troubles with the library, I am no expert on that at all.
+### NOTE: 0.2.2 is pointing to src directly. Starting in 0.2.3 we use a precompiled lib (and point to that by default).
+#### Please let me know if you have troubles with the library, I am no expert on that at all.
 
 [--> Demos, Examples, Playground, Docu](http://bgrsquared.com/#dr2)
 
