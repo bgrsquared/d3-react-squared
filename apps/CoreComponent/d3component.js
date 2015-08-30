@@ -38,7 +38,7 @@ export default class D3Component extends Component {
     if (!chartObject.mainFunction ||
       newProps.chartType !== chartType) {
       this.createNewChart.call(this, newProps.chartType, newProps);
-    } else {
+    } else if (newProps.eventData.timeStamp <= lastEvent) {
       chartObject.updateFunction(newProps.data, newProps.params);
     }
 
