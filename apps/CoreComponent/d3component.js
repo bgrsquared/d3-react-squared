@@ -115,14 +115,14 @@ export default class D3Component extends Component {
   }
 
   handleChartEvent(d, event) {
+    let {onChartEvent, highlightEmit, setEvent} = this.props;
     //call action
-    if (this.props.onChartEvent) {
-      this.props.onChartEvent(d, event);
+    if (onChartEvent) {
+      onChartEvent(d, event);
     }
 
     //redux
-    let {highlightEmit, setEvent} = this.props;
-    let eventObj = {data: d, event, eventGroup: this.props.highlightEmit};
+    let eventObj = {data: d, event, eventGroup: highlightEmit};
     this.props.setEvent(eventObj);
   }
 
