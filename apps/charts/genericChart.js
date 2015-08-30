@@ -68,7 +68,7 @@ export let genericChart = {
 
   onEvent(obj) {
     //this function is called when this or another component fires
-    //an event (an action) to the reflux store
+    //an event (an action) to the redux store
     //d is the data object of the item that triggered the event
     //e is the event name
     let {d, e} = obj;

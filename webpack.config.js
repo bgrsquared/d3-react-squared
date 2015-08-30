@@ -4,7 +4,7 @@
 
 var webpack = require('webpack');
 var path = require('path');
-var appDir = path.join(__dirname, 'app');
+var appDir = path.join(__dirname, 'apps');
 var explDir = path.join(__dirname, 'example');
 var licenseBanner = 'Thanks to all the providers of the components. See the respective' +
   'github pages for their licenses.';
@@ -27,7 +27,7 @@ switch (process.env.NODE_ENV) {
   case 'production':
     outputPath = __dirname + '/dist';
     filename = 'd3-react-squared.js';
-    entry = './apps/d3component.js';
+    entry = './apps/main.js';
     output = {
       path: outputPath,
       library: 'd3-react-squared',

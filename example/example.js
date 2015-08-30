@@ -1,10 +1,10 @@
 'use strict';
 
-import React from 'react';
+import React, {Component} from 'react';
 
-let Chart = require('../apps/d3component');
+let Chart = require('../apps/main');
 
-export class Example extends React.Component {
+export default class Example extends Component {
   constructor() {
     super();
     this.state = {
@@ -79,6 +79,7 @@ export class Example extends React.Component {
         {inter}
       </button>);
     });
+
     return (<div>
       First a show-off (the rest is rather ordinary...
       you might want to check out the playground on the documentary page for more exmampels):

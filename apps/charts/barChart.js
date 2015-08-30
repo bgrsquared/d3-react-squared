@@ -2,7 +2,7 @@
 
 let d3 = require('d3');
 
-export let barChart = {
+export const barChart = {
   defaultParams: {
     size: 1000, // debug switch, for exact values
     aspectRatio: 1,
