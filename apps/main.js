@@ -1,6 +1,4 @@
 'use strict';
-//polyfill for Object.assign
-require('babel/register');
 
 import React, {Component} from 'react';
 

@@ -36,7 +36,6 @@ switch (process.env.NODE_ENV) {
     };
     externals = [
       {
-        'babel': 'babel',
         'react': 'react',
         'd3': 'd3'
       }
