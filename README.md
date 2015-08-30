@@ -119,7 +119,8 @@ Huge thanks to all the people involved in providing awesome tools such as:
 * [D3](http://d3js.org)
 * [webpack](http://webpack.github.io)
 * [BabelJS](https://babeljs.io)
-* [Reflux](https://github.com/spoike/refluxjs)
+* [Reflux (no longer using it, thanks anyway!)](https://github.com/spoike/refluxjs)
+* [redux (replaces Reflux)](https://github.com/rackt/redux)
 
 and many others...
 
@@ -128,6 +129,8 @@ See [wiki](https://github.com/bgrsquared/d3-react-squared/wiki)
 
 
 # Version Updates:
+0.2.4: We replaced Reflux and are using redux now. We implemented it so that you shouldn't notice a thing (breaking changes might occur later, as we have added possible functionality)
+
 0.2.3: 
 - Precompiled (babel) single library as direct entry point, to make stuff easier for direct users.
 
