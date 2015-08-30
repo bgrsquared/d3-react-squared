@@ -56,6 +56,10 @@ export default class D3Component extends Component {
     }
   }
 
+  shouldComponentUpdate(newProps) {
+    return (newProps.eventData.timeStamp <= this.state.lastEvent);
+  }
+
   componentWillUnmount() {
     let {chartObject} = this.state;
     if (chartObject.destroyFunction) {
