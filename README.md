@@ -33,7 +33,7 @@ or how-tos:
 - [siftblog](http://blog.siftscience.com/blog/2015/4/6/d-threeact-how-sift-science-made-d3-react-besties)
 - [@sharifsbeat post](http://busypeoples.github.io/post/d3-with-react-js/)
 
-and many more...
+[A gist with some links here](https://gist.github.com/chroth7/a56fafed1efc43737d11) 
 
 Most of these articles/code aims to combine/add d3 into the lifecycle methods to
 generate charts that way. Have a look at them, great ideas there.
@@ -129,7 +129,8 @@ See [wiki](https://github.com/bgrsquared/d3-react-squared/wiki)
 
 
 # Version Updates:
-0.2.4: We replaced Reflux and are using redux now. We implemented it so that you shouldn't notice a thing (breaking changes might occur later, as we have added possible functionality)
+0.2.4:
+- We replaced Reflux and are using redux now. We implemented it so that you shouldn't notice a thing (breaking changes might occur later, as we have added possible functionality)
 
 0.2.3: 
 - Precompiled (babel) single library as direct entry point, to make stuff easier for direct users.
