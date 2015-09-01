@@ -45,7 +45,8 @@ export default class D3Component extends Component {
     //also, check if padding has changed
     if (paddingBottom !== newProps.paddingBottom) {
       this.setState({
-        chartStyle: Object.assign({}, chartStyle, {paddingBottom: newProps.paddingBottom})
+        chartStyle: Object.assign({}, chartStyle,
+          {paddingBottom: newProps.paddingBottom})
       });
     }
 

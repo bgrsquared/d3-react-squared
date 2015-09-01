@@ -87,7 +87,9 @@ export default class Example extends Component {
       And some exemplary charts (do note:{' '}
       <strong>d3-react-squared is a not a charts-library!</strong>):
       <hr/>
-      <button onClick={this.fakeLineData.bind(this)}>New line data (random)</button>
+      <button onClick={this.fakeLineData.bind(this)}>
+        New line data (random)
+      </button>
       <br/>
       {interpolButtons}
       <Chart
@@ -99,7 +101,7 @@ export default class Example extends Component {
           yAxisPlacement: 'right',
           interpolate: this.state.lineInterpolate
         }}
-        />
+      />
       <Chart
         chartType='line'
         data={this.state.fakeLineData}
@@ -111,7 +113,7 @@ export default class Example extends Component {
           yAxisPlacement: 'right',
           interpolate: this.state.lineInterpolate
         }}
-        />
+      />
 
       <div style={{width: '25%', display: 'inline-block'}}>
         <Chart
@@ -122,7 +124,7 @@ export default class Example extends Component {
             aspectRatio: 2,
             labelSize: 5
           }}
-          />
+        />
       </div>
       <div style={{width: '50%', display: 'inline-block'}}>
         <Chart
@@ -131,7 +133,7 @@ export default class Example extends Component {
             colorType: 'category',
             labelSize: 2.5
           }}
-          />
+        />
       </div>
       <div style={{width: '25%', display: 'inline-block'}}>
         <Chart
@@ -142,7 +144,7 @@ export default class Example extends Component {
             aspectRatio: 2,
             labelSize: 5
           }}
-          />
+        />
       </div>
       <div style={{width: '50%', display: 'inline-block'}}>
         <Chart
@@ -153,7 +155,7 @@ export default class Example extends Component {
             aspectRatio: 1 / 2,
             labelSize: 2.5
           }}
-          />
+        />
       </div>
       <div style={{width: '50%', display: 'inline-block'}}>
         <Chart
@@ -164,13 +166,13 @@ export default class Example extends Component {
             aspectRatio: 1 / 2,
             labelSize: 2.5
           }}
-          />
+        />
       </div>
 
       <Chart
         chartType='pie'
         data={fakeData()}
-        />
+      />
     </div>);
   }
 }

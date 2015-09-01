@@ -50,7 +50,8 @@ export let lineChart = {
       left: lM * this.size / 100
     };
     this.width = this.size - this.margin.left - this.margin.right;
-    this.height = this.size * this.par.aspectRatio - this.margin.top - this.margin.bottom;
+    this.height = this.size * this.par.aspectRatio -
+      this.margin.top - this.margin.bottom;
     this.fullWidth = this.size;
     this.fullHeight = this.size * this.par.aspectRatio;
 
@@ -87,7 +88,8 @@ export let lineChart = {
       .attr('viewBox', '0 0 ' + this.fullWidth + ' ' + this.fullHeight);
 
     this.svg = this.vb.append('g')
-      .attr('transform', 'translate(' + this.margin.left + ',' + this.margin.top + ')');
+      .attr('transform', 'translate(' + this.margin.left + ',' +
+      this.margin.top + ')');
 
     this.tooltip = d3.select('body')
       .append('div')
@@ -113,7 +115,8 @@ export let lineChart = {
     this.xAx.append('text')
       .attr('x', (self.par.yAxisPlacement === 'left' ? this.width : 0))
       .attr('y', -this.fontSize / 2)
-      .style('text-anchor', (self.par.yAxisPlacement === 'left' ? 'end' : 'start'))
+      .style('text-anchor', (self.par.yAxisPlacement === 'left' ?
+        'end' : 'start'))
       .text(self.par.xLabel);
 
     this.yAx = this.svg.append('g')
@@ -128,7 +131,8 @@ export let lineChart = {
     this.yAx
       .append('text')
       .attr('transform', 'rotate(-90)')
-      .attr('y', (self.par.yAxisPlacement === 'left' ? this.fontSize / 2 : -this.fontSize))
+      .attr('y', (self.par.yAxisPlacement === 'left' ?
+      this.fontSize / 2 : -this.fontSize))
       .attr('dy', '.71em')
       .style('text-anchor', 'end')
       .text(self.par.yLabel);
@@ -263,7 +267,8 @@ export let lineChart = {
   mouseoverLine(d) {
     //pass the event to the partent component
     this.reactComp.handleChartEvent(d, 'mouseover');
-    //this.reactComp.handleChartEvent({id: this.par.fundMap.get(d.id).comp}, 'mouseover');
+    //this.reactComp
+    // .handleChartEvent({id: this.par.fundMap.get(d.id).comp}, 'mouseover');
 
     this.svg.select('#line' + d.id)
       .style('stroke-width', this.par.strokeWidth * 3);

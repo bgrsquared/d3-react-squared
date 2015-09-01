@@ -37,7 +37,8 @@ export const barChart = {
       left: (1 + labelSize / 10) * 40
     };
     this.width = this.size - this.margin.left - this.margin.right;
-    this.height = this.size * this.par.aspectRatio - this.margin.top - this.margin.bottom;
+    this.height = this.size * this.par.aspectRatio -
+      this.margin.top - this.margin.bottom;
     this.fullWidth = this.size;
     this.fullHeight = this.size * this.par.aspectRatio;
 
@@ -70,7 +71,8 @@ export const barChart = {
       .attr('preserveAspectRatio', 'xMinYMin slice')
       .attr('viewBox', '0 0 ' + this.fullWidth + ' ' + this.fullHeight)
       .append('g')
-      .attr('transform', 'translate(' + this.margin.left + ',' + this.margin.top + ')');
+      .attr('transform', 'translate(' + this.margin.left + ',' +
+      this.margin.top + ')');
 
 
     this.x.domain(data.map(function(d) {

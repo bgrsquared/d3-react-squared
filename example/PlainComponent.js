@@ -33,7 +33,8 @@ export default class PlainComponent extends Component {
       let hours = date.getHours();
       let minutes = '0' + date.getMinutes();
       let seconds = '0' + date.getSeconds();
-      formattedTime = hours + ':' + minutes.substr(-2) + ':' + seconds.substr(-2);
+      formattedTime = hours + ':' + minutes.substr(-2) + ':' +
+        seconds.substr(-2);
       eventId = ' on data id ' + eventData.data.id;
       eventType = ' (' + eventData.event + ')'
       eventGroup = ' on group ' + eventData.eventGroup.join(', ');
@@ -52,7 +53,8 @@ export default class PlainComponent extends Component {
         high-order component</a>),
         to have access to the chart events! (from anywhere in our app)
         <br/><br/>
-        We can <strong>read</strong> from event system: Last event {eventType} at:{' '}
+        We can <strong>read</strong> from event system:
+        Last event {eventType} at:{' '}
         <strong>{formattedTime}</strong>
         {eventId}{eventGroup}
         <br/><br/>
@@ -75,7 +77,8 @@ export default class PlainComponent extends Component {
         <br/>
         <br/>
         Oh: and you can pass props through the wrapper, as you might expect:
-        Example: <strong>{passThruProp}</strong> (see source code for the origin of this;
+        Example: <strong>{passThruProp}</strong> (see source code
+        for the origin of this;
         spoiler: outside the wrapper)
         <hr/>
       </div>);

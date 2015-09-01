@@ -134,8 +134,9 @@ export let pieChart = {
     let self = this;
     if (this.par.colorType === 'gradient') {
       return (d) => {
-          return d3.interpolateHsl(self.par.col1, self.par.col2)((d.endAngle - d.startAngle) / self.angMax);
-        };
+        return d3.interpolateHsl(self.par.col1, self.par.col2)(
+          (d.endAngle - d.startAngle) / self.angMax);
+      };
     } else if (self.par.colorType === 'category') {
       let cols = self.par.colorArray;
       return (d, i) => {

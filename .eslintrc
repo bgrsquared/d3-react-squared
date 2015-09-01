@@ -16,9 +16,11 @@
   // To give you an idea how to override rule options:
   "rules": {
     "quotes": [2, "single"],
+    "max-len": [1, 80, 4],
     "eol-last": [0],
     "no-mixed-requires": [0],
     "no-underscore-dangle": [0],
+    "no-loop-func": [0], //TODO
     //"react/display-name": 1,
     "react/jsx-boolean-value": 1,
     "react/jsx-no-undef": 1,
