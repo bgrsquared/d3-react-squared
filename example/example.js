@@ -4,6 +4,8 @@ import React, {Component} from 'react';
 
 let Chart = require('../apps/main');
 
+import WrappedComponent from './WrappedComponent';
+
 export default class Example extends Component {
   constructor() {
     super();
@@ -81,8 +83,9 @@ export default class Example extends Component {
     });
 
     return (<div>
-      First a show-off (the rest is rather ordinary...
-      you might want to check out the playground on the documentary page for more exmampels):
+      <WrappedComponent/>
+      And some exemplary charts (do note:{' '}
+      <strong>d3-react-squared is a not a charts-library!</strong>):
       <hr/>
       <button onClick={this.fakeLineData.bind(this)}>New line data (random)</button>
       <br/>
