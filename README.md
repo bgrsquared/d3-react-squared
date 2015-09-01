@@ -129,6 +129,11 @@ See [wiki](https://github.com/bgrsquared/d3-react-squared/wiki)
 
 
 # Version Updates:
+0.2.5:
+- Add wrapper functionality (so far undocumented on dr2 page). Core idea: 
+Use the Chart Component to wrap a component that is passed to it to enable access to chart-related redux functionality.
+(listen to events or even init events).
+
 0.2.4:
 - We replaced Reflux and are using redux now. We implemented it so that you shouldn't notice a thing (breaking changes might occur later, as we have added possible functionality)
 
