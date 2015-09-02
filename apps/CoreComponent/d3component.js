@@ -145,7 +145,7 @@ export default class D3Component extends Component {
     if (paddingBottom) {
       chartStyle = Object.assign({}, chartStyle, {paddingBottom});
     }
-    return (<div style={this.state.chartStyle}/>);
+    return (<div style={chartStyle}/>);
   }
 }
 
