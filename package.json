@@ -1,6 +1,6 @@
 {
   "name": "d3-react-squared",
-  "version": "0.2.6-beta3",
+  "version": "0.2.6-beta4",
   "description": "Load basic or customized D3 charts in React.js.",
   "main": "./dist/d3-react-squared.js",
   "scripts": {
