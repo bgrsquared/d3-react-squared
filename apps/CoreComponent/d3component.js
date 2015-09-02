@@ -136,6 +136,9 @@ export default class D3Component extends Component {
   }
 
   render() {
+    console.log('render');
+    console.log(this.state);
+    console.log(this.props);
     return (<div style={this.state.chartStyle}/>);
   }
 }
