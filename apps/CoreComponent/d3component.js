@@ -32,7 +32,8 @@ export default class D3Component extends Component {
 
   componentWillReceiveProps(newProps) {
     let {chartObject, chartStyle, lastEvent} = this.state;
-    let {chartType, paddingBottom, eventData} = this.props;
+    let {chartType, eventData} = this.props;
+    let {paddingBottom} = chartStyle;
     console.log('cWRP');
     console.log(this.props);
     console.log(paddingBottom);
