@@ -33,6 +33,10 @@ export default class D3Component extends Component {
   componentWillReceiveProps(newProps) {
     let {chartObject, chartStyle, lastEvent} = this.state;
     let {chartType, paddingBottom, eventData} = this.props;
+    console.log(cWRP);
+    console.log(this.props);
+    console.log(paddingBottom);
+    console.log(newProps.paddingBottom);
 
     //we check if we need to create a new chart or update the existing one
     if (!chartObject.mainFunction ||
@@ -43,8 +47,6 @@ export default class D3Component extends Component {
     }
 
     //also, check if padding has changed
-    console.log(paddingBottom);
-    console.log(newProps.paddingBottom);
     if (paddingBottom !== newProps.paddingBottom) {
       this.setState({
         chartStyle: Object.assign({}, chartStyle,
