@@ -31,8 +31,8 @@ export default class D3Component extends Component {
   }
 
   componentWillReceiveProps(newProps) {
-    let {chartObject, chartStyle, lastEvent} = this.state;
-    let {chartType, paddingBottom, eventData} = this.props;
+    let {chartObject, lastEvent} = this.state;
+    let {chartType, eventData} = this.props;
 
     //we check if we need to create a new chart or update the existing one
     if (!chartObject.mainFunction ||
@@ -40,14 +40,6 @@ export default class D3Component extends Component {
       this.createNewChart.call(this, newProps.chartType, newProps);
     } else if (newProps.eventData.timeStamp <= lastEvent) {
       chartObject.updateFunction(newProps.data, newProps.params);
-    }
-
-    //also, check if padding has changed
-    if (paddingBottom !== newProps.paddingBottom) {
-      this.setState({
-        chartStyle: Object.assign({}, chartStyle,
-          {paddingBottom: newProps.paddingBottom})
-      });
     }
 
     //Redux Events
@@ -132,7 +124,12 @@ export default class D3Component extends Component {
   }
 
   render() {
-    return (<div style={this.state.chartStyle}/>);
+    let {paddingBottom} = this.props;
+    let {chartStyle} = this.state;
+    if (paddingBottom) {
+      chartStyle = Object.assign({}, chartStyle, {paddingBottom});
+    }
+    return (<div style={chartStyle}/>);
   }
 }
 
