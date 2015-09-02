@@ -48,12 +48,12 @@ export default class D3Component extends Component {
     }
 
     //also, check if padding has changed
-    if (paddingBottom !== newProps.paddingBottom) {
+    /*if (paddingBottom !== newProps.paddingBottom) {
       this.setState({
         chartStyle: Object.assign({}, chartStyle,
           {paddingBottom: newProps.paddingBottom})
       });
-    }
+    }*/
 
     //Redux Events
     if (newProps.eventData.timeStamp > lastEvent) {
@@ -140,6 +140,11 @@ export default class D3Component extends Component {
     console.log('render');
     console.log(this.state);
     console.log(this.props);
+    let {paddingBottom} = this.props;
+    let {chartStyle} = this.state;
+    if (paddingBottom) {
+      chartStyle = Object.assign({}, chartStyle, {paddingBottom});
+    }
     return (<div style={this.state.chartStyle}/>);
   }
 }
