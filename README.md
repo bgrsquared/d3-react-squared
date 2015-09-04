@@ -5,53 +5,35 @@
 
 ### Some screenshots
 
-#### Dashboard like layout:
-![Example](https://github.com/bgrsquared/d3-react-squared/blob/master/img/explPieBarLine.png)
-
-#### Linked highlights:
-![Example](https://github.com/bgrsquared/d3-react-squared/blob/master/img/explPieBar2.png)
+#### New Docu-Page 
+![DocuPage](https://github.com/bgrsquared/d3-react-squared/blob/master/img/dr2overview.png)
 
 #### Playground ([--> See here](http://bgrsquared.com/#dr2)) to learn about parameters:
-![Playground](https://github.com/bgrsquared/d3-react-squared/blob/master/img/explPlayground.png)
+![Playground](https://github.com/bgrsquared/d3-react-squared/blob/master/img/explPlayground2.png)
 
 # d3-react-squared
 [![npm version](https://badge.fury.io/js/d3-react-squared.png)](http://badge.fury.io/js/d3-react-squared)
 
-Not-so-stable-yet-version
-ToDo list: 
-see [wiki](https://github.com/bgrsquared/d3-react-squared/wiki) on github
 Feedback, ideas, PRs, etc. very welcome!
 
 Version Update log at the bottom.
 
 ## Why yet another d3-react component?
 There are already some great solutions out there, combining React and D3, e.g.:
-- [react-d3-components](https://github.com/codesuki/react-d3-components)
-- [react-d3](https://github.com/esbullington/react-d3)
-
-or how-tos:
-- [siftblog](http://blog.siftscience.com/blog/2015/4/6/d-threeact-how-sift-science-made-d3-react-besties)
-- [@sharifsbeat post](http://busypeoples.github.io/post/d3-with-react-js/)
 
 [A gist with some links here](https://gist.github.com/chroth7/a56fafed1efc43737d11) 
 
 Most of these articles/code aims to combine/add d3 into the lifecycle methods to
 generate charts that way. Have a look at them, great ideas there.
 
-This is a great approach and has many use cases.
+See docu page for some details about my approach. I don't want to bore you with details here -
+just contact us (contacts on docu page). I am very happy to discuss ideas/concepts!
 
-Our approach is not so different: we just keep all the d3 code of a chart in a module 
-(also to have reusable, stateful components), 
-without mixing in react there. This allows us to use most d3 examples on the net directly
-and also, we can port the d3 charts to other frame works rather direclty. Put differently:
-we do not mix react and d3 (or as little as possible), so that e.g. interaction designers don't
-have to think about react-lifecycle hooks etc. Maybe you could call that 'separation of concerns'.
-
-In keywords:
+Some keywords:
 - Use D3 charts 'directly', maybe very limited adjustments needed (just think [examples](https://github.com/mbostock/d3/wiki/Gallery)!)
 - Provide viewboxes etc. to get responsive graphs
 - Make chart modular (a.k.a. reusable)
-- Provide a clean API to create and update charts.
+- Provide a clean API to create and update charts (from ANY component!).
 - Parametrize charts
 - Be lightweight
 - Provide a limited set of examples in this repo and make it easy to the users to add their own custom charts
@@ -59,12 +41,7 @@ In keywords:
 We believe that especially the last bullet is helpful to teams separate concerns and have maintainable solutions.
 Why? The chart generating code is in its own module and the interaction designer doesn't really have to care about React (maybe he should, but that's another story...).
 
-We also plan to add few more basic charts in this repo directly and if there is demand, maybe add other modules (repos) with more advanced charts. 
-This is too keep this thing as small as possible but give d3-beginners a chance to access more advanced graphs, still.
-
-### Our hands-on-experience
-In our daily work, we have to create many prototypes, for dashboard-like solutions. 
-It is very helpful to us to have a way to load basic charts without effort and use the very same framework to implement more complicated solutions too.
+Details?
 
 [See also here](http://bgrsquared.com/#dr2)
 
@@ -72,11 +49,9 @@ It is very helpful to us to have a way to load basic charts without effort and u
 ## Documentation
 [--> See here](http://bgrsquared.com/#dr2)
 
-This documentation is still very basic and gives you mostly an idea on how to use the
-existing charts (pie, bar). We try to find some time to write something about 
-the layout of the charts (so that you can create your own charts.
+The documentation is still somewhat basic. Definitely check out the examples in the repo!
 
-For that we clean up the API a bit first. (wanna help?)
+But hey, writing docu is sooooo time consuming...
 
 ## Stand-alone example
 This repo now includes a stand-alone example. Simply:
@@ -94,24 +69,13 @@ npm run dev
 and it should be running on `localhost:8080`.
 
 ### Requirements
-Please use above example as reference.
+As far as I know, you shouldn't need anything fancy.
 
-We designed this component to be **very lightweight**. 
-All you need to do is include it in your existing [React.JS](https://facebook.github.io/react/) app.
+We run it in a babel/webpack/react setup, plain vanilla, so to speak (plenty of setup guides out there),
+and it works. 
 
-Only additional (?) requirement:
-* [BabelJS](https://babeljs.io)
-
-Note: we run it in a webpack setup. If you are too, you might need something along those lines:
-```
-{
-  test: /\.js$/,
-  include: [app_dir, path.join(node_modules_dir, 'd3-react-squared')],
-  loader: "babel-loader"
-},
-```
-Also: we have bootstrap, no other css/sass/...
-(Note: you could, if you wanted, to use SASS to style your graphs, must require the files where and when needed).
+Also: we have bootstrap, no other css/sass/... (actually: we love [react-bootstrap](https://react-bootstrap.github.io))
+(Note: you could, if you wanted, to use SASS to style your graphs, must require the files where and when needed; you know how.).
  
 # Thanks
 Huge thanks to all the people involved in providing awesome tools such as:
@@ -124,11 +88,11 @@ Huge thanks to all the people involved in providing awesome tools such as:
 
 and many others...
 
-# ToDos
-See [wiki](https://github.com/bgrsquared/d3-react-squared/wiki)
-
-
 # Version Updates:
+0.2.6:
+- Update documentation.
+- Fix a paddingBottom issue.
+
 0.2.5:
 - Add wrapper functionality (so far undocumented on dr2 page). Core idea: 
 Use the Chart Component to wrap a component that is passed to it to enable access to chart-related redux functionality.
