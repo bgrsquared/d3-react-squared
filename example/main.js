@@ -5,5 +5,5 @@ require('babel/polyfill');
 import React from 'react';
 
 //load example component
-import Example from './example.js';
+import Example from './c3example.js';
 React.render(<Example/>, document.getElementById('app'));
