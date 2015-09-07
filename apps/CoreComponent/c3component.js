@@ -42,7 +42,9 @@ export default class C3Component extends Component {
     let {c3obj, eventData} = newProps;
     let {c3fct, c3arg} = c3obj;
     let {chartObject, lastEvent} = this.state;
-    chartObject[c3fct](c3arg);
+    if (c3fct !== 'generate') {
+      chartObject[c3fct](c3arg);
+    }
     /*let {chartObject, lastEvent} = this.state;
      let {chartType, eventData} = this.props;
 
@@ -77,7 +79,6 @@ export default class C3Component extends Component {
     });
 
     if (intersection.length && highlight) {
-      //chartObject.onEvent({d: data, e: event});
       if (event === 'mouseover') {
         chartObject.focus(data.id);
       } else if (event === 'mouseout') {
