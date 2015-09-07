@@ -9,11 +9,12 @@ import {barChart} from '../charts/barChart';
 import {pieChart} from '../charts/pieChart';
 import {lineChart} from '../charts/lineChart';
 
-export default class D3Component extends Component {
+export default class C3Component extends Component {
   constructor() {
     super();
     this.state = {
       chartObject: {},
+      chartBoundTo: '',
       lastEvent: 0,
       chartStyle: { //svg-container
         display: 'block',
@@ -28,14 +29,21 @@ export default class D3Component extends Component {
 
   componentDidMount() {
     let {c3obj} = this.props;
-    c3.generate(c3obj);
+    let {c3fct, c3arg} = c3obj;
+    let chartObject = c3[c3fct](c3arg);
+    let chartBoundTo = (c3arg.bindto).substr(1);
+    this.setState({chartObject, chartBoundTo});
     //c3.generate(
     //create new chart
     //this.createNewChart.call(this, this.props.chartType, this.props);
   }
 
   componentWillReceiveProps(newProps) {
-    let {chartObject, lastEvent} = this.state;
+    let {c3obj} = newProps;
+    let {c3fct, c3arg} = c3obj;
+    let {chartObject} = this.state;
+    chartObject[c3fct](c3arg);
+    /*let {chartObject, lastEvent} = this.state;
     let {chartType, eventData} = this.props;
 
     //we check if we need to create a new chart or update the existing one
@@ -50,7 +58,7 @@ export default class D3Component extends Component {
     if (newProps.eventData.timeStamp > lastEvent) {
       this.setState({lastEvent: eventData.timeStamp});
       this.incomingEvent(newProps.eventData, ['default']);
-    }
+    }*/
   }
 
   shouldComponentUpdate(newProps) {
@@ -88,17 +96,20 @@ export default class D3Component extends Component {
 
   render() {
     let {paddingBottom, c3obj} = this.props;
-    let {bindto} = c3obj;
-    let {chartStyle} = this.state;
+    let {bindto} = c3obj.c3arg;
+    let {chartStyle, chartBoundTo} = this.state;
+    if (bindto) {
+      chartBoundTo = bindto.substr(1);
+    }
     if (paddingBottom) {
       chartStyle = Object.assign({}, chartStyle, {paddingBottom});
     }
 
-    return (<div id={bindto.substr(1)} style={chartStyle}/>);
+    return (<div id={chartBoundTo} style={chartStyle}/>);
   }
 }
 
-D3Component.defaultProps = {
+C3Component.defaultProps = {
   params: {},
   chartType: 'bar',
   paddingBottom: '100%',
@@ -109,7 +120,7 @@ D3Component.defaultProps = {
   highlightListen: ['default']
 };
 
-D3Component.propTypes = {
+C3Component.propTypes = {
   chartModule: PropTypes.object,
   chartType: PropTypes.string,
   data: PropTypes.array,
