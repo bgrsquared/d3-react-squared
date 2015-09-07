@@ -49,5 +49,6 @@ mainClass.defaultProps = {
 };
 
 mainClass.propTypes = {
+  c3obj: PropTypes.object,
   component: PropTypes.object
 }

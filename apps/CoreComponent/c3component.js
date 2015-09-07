@@ -28,11 +28,12 @@ export default class C3Component extends Component {
   }
 
   componentDidMount() {
-    let {c3obj} = this.props;
+    let {c3obj, setEvent} = this.props;
     let {c3fct, c3arg} = c3obj;
     let chartObject = c3[c3fct](c3arg);
     let chartBoundTo = (c3arg.bindto).substr(1);
     this.setState({chartObject, chartBoundTo});
+    chartObject.setEvent = setEvent;
     //c3.generate(
     //create new chart
     //this.createNewChart.call(this, this.props.chartType, this.props);
@@ -124,6 +125,7 @@ C3Component.defaultProps = {
 };
 
 C3Component.propTypes = {
+  c3obj: PropTypes.object,
   chartModule: PropTypes.object,
   chartType: PropTypes.string,
   data: PropTypes.array,

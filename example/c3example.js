@@ -17,6 +17,23 @@ export default class C3Example extends Component {
               ['data2', 50, 20, 10, 40, 15, 25],
               ['data3', -50, -20, -10, -40, -15, -25]
             ]
+          },
+          legend: {
+            item: {
+              onmouseover: function(id) {
+                let eventObj = {
+                  data: {id}, event: 'mouseover', eventGroup: ['default']
+                };
+                this.api.setEvent(eventObj);
+              },
+              onmouseout: function(id) {
+                let eventObj = {
+                  data: {id}, event: 'mouseout', eventGroup: ['default']
+                };
+                this.api.setEvent(eventObj);
+              }
+
+            }
           }
         },
         c3fct: 'generate'
