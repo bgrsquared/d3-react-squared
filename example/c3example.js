@@ -59,6 +59,7 @@ export default class C3Example extends Component {
     return {
       c3arg: {
         bindto: '#chart1',
+        color: {pattern: d3.scale.category10().range()},
         data: {
           columns: this.fakeC3LineData(),
           groups: [['data1', 'data2', 'data3']],
@@ -87,13 +88,13 @@ export default class C3Example extends Component {
   randomType(obj) {
     let rand = Math.random();
     let type;
-    if (rand < 1/5) {
+    if (rand < 1 / 5) {
       type = 'bar';
-    } else if (rand < 2/5) {
+    } else if (rand < 2 / 5) {
       type = 'area';
-    } else if (rand < 3/5) {
+    } else if (rand < 3 / 5) {
       type = 'spline';
-    } else if (rand < 4/5) {
+    } else if (rand < 4 / 5) {
       type = 'pie';
     } else {
       type = 'area-spline';
@@ -206,10 +207,26 @@ export default class C3Example extends Component {
             <DR2 c3obj={c3obj2}/>
           </div>
         </div>
-        <div>
-          <DR2
-            data={fakeDataBar()}
-          />
+        <div style={{display: 'flex'}}>
+          <div style={{width: '50%'}}>
+            <DR2
+              data={fakeDataBar()}
+              params={{
+              colorType: 'category',
+              colorArray: d3.scale.category10().range()
+              }}
+            />
+          </div>
+          <div style={{width: '50%'}}>
+            <DR2
+              chartType='pie'
+              data={fakeDataBar()}
+              params={{
+              colorType: 'category',
+              colorArray: d3.scale.category10().range()
+              }}
+            />
+          </div>
         </div>
       </div>
     );

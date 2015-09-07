@@ -1,6 +1,3 @@
-### NOTE: 0.2.2 is pointing to src directly. Starting in 0.2.3 we use a precompiled lib (and point to that by default).
-#### Please let me know if you have troubles with the library, I am no expert on that at all.
-
 [--> Demos, Examples, Playground, Docu](http://bgrsquared.com/#dr2)
 
 ### Some screenshots
@@ -36,6 +33,8 @@ Some keywords:
 - Provide a clean API to create and update charts (from ANY component!).
 - Parametrize charts
 - Be lightweight
+- Provide a way to share events between charts (and using a wrapper: any component!)
+- Provide access to a charts library (we currently offer [c3js](http://c3js.org), as of v0.2.7)
 - Provide a limited set of examples in this repo and make it easy to the users to add their own custom charts
 
 We believe that especially the last bullet is helpful to teams separate concerns and have maintainable solutions.
@@ -85,10 +84,14 @@ Huge thanks to all the people involved in providing awesome tools such as:
 * [BabelJS](https://babeljs.io)
 * [Reflux (no longer using it, thanks anyway!)](https://github.com/spoike/refluxjs)
 * [redux (replaces Reflux)](https://github.com/rackt/redux)
+* [c3.js](http://c3js.org)
 
 and many others...
 
 # Version Updates:
+0.2.7:
+- Add c3-wrapper, so that you can add [c3](http://c3js.org) charts to the mix.
+
 0.2.6:
 - Update documentation.
 - Fix a paddingBottom issue.
