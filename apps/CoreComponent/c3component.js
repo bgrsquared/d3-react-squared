@@ -39,26 +39,26 @@ export default class C3Component extends Component {
   }
 
   componentWillReceiveProps(newProps) {
-    let {c3obj} = newProps;
+    let {c3obj, eventData} = newProps;
     let {c3fct, c3arg} = c3obj;
-    let {chartObject} = this.state;
+    let {chartObject, lastEvent} = this.state;
     chartObject[c3fct](c3arg);
     /*let {chartObject, lastEvent} = this.state;
-    let {chartType, eventData} = this.props;
+     let {chartType, eventData} = this.props;
 
-    //we check if we need to create a new chart or update the existing one
-    if (!chartObject.mainFunction ||
-      newProps.chartType !== chartType) {
-      this.createNewChart.call(this, newProps.chartType, newProps);
-    } else if (newProps.eventData.timeStamp <= lastEvent) {
-      chartObject.updateFunction(newProps.data, newProps.params);
-    }
+     //we check if we need to create a new chart or update the existing one
+     if (!chartObject.mainFunction ||
+     newProps.chartType !== chartType) {
+     this.createNewChart.call(this, newProps.chartType, newProps);
+     } else if (newProps.eventData.timeStamp <= lastEvent) {
+     chartObject.updateFunction(newProps.data, newProps.params);
+     }*/
 
     //Redux Events
     if (newProps.eventData.timeStamp > lastEvent) {
       this.setState({lastEvent: eventData.timeStamp});
       this.incomingEvent(newProps.eventData, ['default']);
-    }*/
+    }
   }
 
   shouldComponentUpdate(newProps) {
@@ -76,8 +76,13 @@ export default class C3Component extends Component {
       return listenGroups.indexOf(n) !== -1;
     });
 
-    if (intersection.length && highlight && chartObject.onEvent) {
-      chartObject.onEvent({d: data, e: event});
+    if (intersection.length && highlight) {
+      //chartObject.onEvent({d: data, e: event});
+      if (event === 'mouseover') {
+        chartObject.focus(data.id);
+      } else if (event === 'mouseout') {
+        chartObject.revert();
+      }
     }
   }
 
@@ -95,17 +100,14 @@ export default class C3Component extends Component {
   }
 
   render() {
-    let {paddingBottom, c3obj} = this.props;
+    let {c3obj} = this.props;
     let {bindto} = c3obj.c3arg;
-    let {chartStyle, chartBoundTo} = this.state;
+    let {chartBoundTo} = this.state;
     if (bindto) {
       chartBoundTo = bindto.substr(1);
     }
-    if (paddingBottom) {
-      chartStyle = Object.assign({}, chartStyle, {paddingBottom});
-    }
 
-    return (<div id={chartBoundTo} style={chartStyle}/>);
+    return (<div id={chartBoundTo}/>);
   }
 }
 

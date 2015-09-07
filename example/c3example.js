@@ -49,6 +49,14 @@ export default class C3Example extends Component {
   }
 
   render() {
+    let fakeData = () => {
+      return [
+        {id: 'data1', value: 1 + Math.floor(10 * Math.random())},
+        {id: 'data2', value: 1 + Math.floor(10 * Math.random())},
+        {id: 'data3', value: 1 + Math.floor(10 * Math.random())}
+      ];
+    };
+
     return (
       <div>
         <button onClick={this.newData.bind(this)}>
@@ -61,6 +69,11 @@ export default class C3Example extends Component {
           Revert all
         </button>
         <DR2 c3obj={this.state.c3obj}/>
+        <div>
+          <DR2
+            data={fakeData()}
+          />
+        </div>
       </div>
     );
   }
