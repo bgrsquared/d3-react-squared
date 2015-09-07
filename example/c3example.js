@@ -36,13 +36,17 @@ export default class C3Example extends Component {
       item: {
         onmouseover: function(id) {
           let eventObj = {
-            data: {id}, event: 'mouseover', eventGroup: ['default']
+            data: {id},
+            event: 'mouseover',
+            eventGroup: this.api.highlightEmit
           };
           this.api.setEvent(eventObj);
         },
         onmouseout: function(id) {
           let eventObj = {
-            data: {id}, event: 'mouseout', eventGroup: ['default']
+            data: {id},
+            event: 'mouseout',
+            eventGroup: this.api.highlightEmit
           };
           this.api.setEvent(eventObj);
         }
@@ -80,11 +84,34 @@ export default class C3Example extends Component {
     }
   }
 
+  randomType(obj) {
+    let rand = Math.random();
+    let type;
+    if (rand < 1/5) {
+      type = 'bar';
+    } else if (rand < 2/5) {
+      type = 'area';
+    } else if (rand < 3/5) {
+      type = 'spline';
+    } else if (rand < 4/5) {
+      type = 'pie';
+    } else {
+      type = 'area-spline';
+    }
+    let c3obj = {
+      c3arg: {
+        columns: this.fakeC3LineData(),
+        type
+      },
+      c3fct: 'load'
+    };
+    this.setState({[obj]: c3obj});
+  }
 
   newData(obj) {
     let c3obj = {
       c3arg: {
-        columns: this.fakeC3LineData()
+        columns: this.fakeC3LineData(),
       },
       c3fct: 'load'
     };
@@ -153,7 +180,9 @@ export default class C3Example extends Component {
             <button onClick={this.ungroupLines.bind(this, 'c3obj1')}>
               Ungroup all
             </button>
-            <DR2 c3obj={c3obj1}/>
+            <DR2
+              c3obj={c3obj1}
+            />
           </div>
           <div style={{width: '50%'}}>
             <button onClick={this.newData.bind(this, 'c3obj2')}>
@@ -162,8 +191,17 @@ export default class C3Example extends Component {
             <button onClick={this.focusData.bind(this, 'data1', 'c3obj2')}>
               Focus 1
             </button>
-            <button onClick={this.revert.bind(this, '', 'c3obj3')}>
+            <button onClick={this.revert.bind(this, '', 'c3obj2')}>
               Revert all
+            </button>
+            <button onClick={this.groupLines.bind(this, 'c3obj2')}>
+              Group all
+            </button>
+            <button onClick={this.ungroupLines.bind(this, 'c3obj2')}>
+              Ungroup all
+            </button>
+            <button onClick={this.randomType.bind(this, 'c3obj2')}>
+              Random Type
             </button>
             <DR2 c3obj={c3obj2}/>
           </div>

@@ -4,39 +4,24 @@ import React, {Component, PropTypes} from 'react';
 import d3 from 'd3';
 import c3 from 'c3';
 
-//some examples
-import {barChart} from '../charts/barChart';
-import {pieChart} from '../charts/pieChart';
-import {lineChart} from '../charts/lineChart';
-
 export default class C3Component extends Component {
   constructor() {
     super();
     this.state = {
       chartObject: {},
       chartBoundTo: '',
-      lastEvent: 0,
-      chartStyle: { //svg-container
-        display: 'block',
-        position: 'relative',
-        width: '100%',
-        'paddingBottom': '50%', //adjust below for other aspect ratios!
-        'verticalAlign': 'middle',
-        overflow: 'hidden'
-      }
+      lastEvent: 0
     };
   }
 
   componentDidMount() {
-    let {c3obj, setEvent} = this.props;
+    let {c3obj, setEvent, highlightEmit} = this.props;
     let {c3fct, c3arg} = c3obj;
     let chartObject = c3[c3fct](c3arg);
     let chartBoundTo = (c3arg.bindto).substr(1);
     this.setState({chartObject, chartBoundTo});
     chartObject.setEvent = setEvent;
-    //c3.generate(
-    //create new chart
-    //this.createNewChart.call(this, this.props.chartType, this.props);
+    chartObject.highlightEmit = highlightEmit;
   }
 
   componentWillReceiveProps(newProps) {
@@ -46,16 +31,6 @@ export default class C3Component extends Component {
     if (c3fct !== 'generate') {
       chartObject[c3fct](c3arg);
     }
-    /*let {chartObject, lastEvent} = this.state;
-     let {chartType, eventData} = this.props;
-
-     //we check if we need to create a new chart or update the existing one
-     if (!chartObject.mainFunction ||
-     newProps.chartType !== chartType) {
-     this.createNewChart.call(this, newProps.chartType, newProps);
-     } else if (newProps.eventData.timeStamp <= lastEvent) {
-     chartObject.updateFunction(newProps.data, newProps.params);
-     }*/
 
     //Redux Events
     if (newProps.eventData.timeStamp > lastEvent) {
@@ -88,19 +63,6 @@ export default class C3Component extends Component {
     }
   }
 
-
-  handleChartEvent(d, event) {
-    let {onChartEvent, highlightEmit, setEvent} = this.props;
-    //call action
-    if (onChartEvent) {
-      onChartEvent(d, event);
-    }
-
-    //redux
-    let eventObj = {data: d, event, eventGroup: highlightEmit};
-    this.props.setEvent(eventObj);
-  }
-
   render() {
     let {c3obj} = this.props;
     let {bindto} = c3obj.c3arg;
@@ -114,11 +76,6 @@ export default class C3Component extends Component {
 }
 
 C3Component.defaultProps = {
-  params: {},
-  chartType: 'bar',
-  paddingBottom: '100%',
-  chartModule: barChart,
-  data: [],
   highlight: true,
   highlightEmit: ['default'],
   highlightListen: ['default']
@@ -126,15 +83,9 @@ C3Component.defaultProps = {
 
 C3Component.propTypes = {
   c3obj: PropTypes.object,
-  chartModule: PropTypes.object,
-  chartType: PropTypes.string,
-  data: PropTypes.array,
   eventData: PropTypes.object.isRequired,
   highlight: PropTypes.bool,
   highlightEmit: PropTypes.array,
   highlightListen: PropTypes.array,
-  onChartEvent: PropTypes.func,
-  paddingBottom: PropTypes.string,
-  params: PropTypes.object,
   setEvent: PropTypes.func.isRequired,
 };
