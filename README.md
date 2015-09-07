@@ -1,5 +1,10 @@
 [--> Demos, Examples, Playground, Docu](http://bgrsquared.com/#dr2)
 
+### Note
+For the new c3 integration (v0.2.7):
+Please note that this is still 'beta'. So far, there is no docu on the docu page.
+--> please check out the c3example.js in the source (./examples).
+
 ### Some screenshots
 
 #### New Docu-Page 
