@@ -1,4 +1,5 @@
 [--> Demos, Examples, Playground, Docu](http://bgrsquared.com/#dr2)
+(click on DR2 in top right navigation!)
 
 ### Note
 For the new c3 integration (v0.2.7):
@@ -48,10 +49,12 @@ Why? The chart generating code is in its own module and the interaction designer
 Details?
 
 [See also here](http://bgrsquared.com/#dr2)
+(click on DR2 in top right navigation!)
 
 
 ## Documentation
 [--> See here](http://bgrsquared.com/#dr2)
+(click on DR2 in top right navigation!)
 
 The documentation is still somewhat basic. Definitely check out the examples in the repo!
 
