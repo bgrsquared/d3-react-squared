@@ -1,5 +1,5 @@
-[--> Demos, Examples, Playground, Docu](http://bgrsquared.com/#dr2)
-(click on DR2 in top right navigation!)
+[--> Demos, Examples, Playground, Docu](http://bgrsquared.com/DR2/)
+(FIXED Link)
 
 ### Note
 For the new c3 integration (v0.2.7):
@@ -11,7 +11,7 @@ Please note that this is still 'beta'. So far, there is no docu on the docu page
 #### New Docu-Page 
 ![DocuPage](https://github.com/bgrsquared/d3-react-squared/blob/master/img/dr2overview.png)
 
-#### Playground ([--> See here](http://bgrsquared.com/#dr2)) to learn about parameters:
+#### Playground ([--> See here](http://bgrsquared.com/DR2/)) to learn about parameters:
 ![Playground](https://github.com/bgrsquared/d3-react-squared/blob/master/img/explPlayground2.png)
 
 # d3-react-squared
@@ -48,12 +48,12 @@ Why? The chart generating code is in its own module and the interaction designer
 
 Details?
 
-[See also here](http://bgrsquared.com/#dr2)
+[See also here](http://bgrsquared.com/DR2/)
 (click on DR2 in top right navigation!)
 
 
 ## Documentation
-[--> See here](http://bgrsquared.com/#dr2)
+[--> See here](http://bgrsquared.com/DR2/)
 (click on DR2 in top right navigation!)
 
 The documentation is still somewhat basic. Definitely check out the examples in the repo!
@@ -168,7 +168,7 @@ events (which groups) a chart should listen to (and emit to).
 
 0.0.8:
 - Add destroyFunction to charts (essentially to get rid of tooltips on unload)
-- Added playground to docu! [--> See here](http://bgrsquared.com/#dr2)
+- Added playground to docu! [--> See here](http://bgrsquared.com/DR2/)
 
 0.0.7:
 - Add tooltips to bar and pie charts
