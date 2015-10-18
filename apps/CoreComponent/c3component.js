@@ -1,7 +1,5 @@
-'use strict';
-
 import React, {Component, PropTypes} from 'react';
-import d3 from 'd3';
+
 import c3 from 'c3';
 
 export default class C3Component extends Component {
@@ -10,29 +8,23 @@ export default class C3Component extends Component {
     this.state = {
       chartObject: {},
       chartBoundTo: '',
-      lastEvent: 0
+      lastEvent: 0,
     };
   }
 
   componentDidMount() {
-    let {c3obj, setEvent, highlightEmit} = this.props;
-    let {c3fct, c3arg} = c3obj;
-    let chartObject = c3[c3fct](c3arg);
-    let chartBoundTo = (c3arg.bindto).substr(1);
-    this.setState({chartObject, chartBoundTo});
-    chartObject.setEvent = setEvent;
-    chartObject.highlightEmit = highlightEmit;
+    this.onMount();
   }
 
   componentWillReceiveProps(newProps) {
-    let {c3obj, eventData} = newProps;
-    let {c3fct, c3arg} = c3obj;
-    let {chartObject, lastEvent} = this.state;
+    const {c3obj, eventData} = newProps;
+    const {c3fct, c3arg} = c3obj;
+    const {chartObject, lastEvent} = this.state;
     if (c3fct !== 'generate') {
       chartObject[c3fct](c3arg);
     }
 
-    //Redux Events
+    // Redux Events
     if (newProps.eventData.timeStamp > lastEvent) {
       this.setState({lastEvent: eventData.timeStamp});
       this.incomingEvent(newProps.eventData, ['default']);
@@ -43,14 +35,24 @@ export default class C3Component extends Component {
     return (newProps.eventData.timeStamp <= this.state.lastEvent);
   }
 
+  onMount() {
+    const {c3obj, setEvent, highlightEmit} = this.props;
+    const {c3fct, c3arg} = c3obj;
+    const chartObject = c3[c3fct](c3arg);
+    const chartBoundTo = (c3arg.bindto).substr(1);
+    this.setState({chartObject, chartBoundTo});
+    chartObject.setEvent = setEvent;
+    chartObject.highlightEmit = highlightEmit;
+  }
+
 
   incomingEvent(obj) {
-    let {data, event, eventGroup} = obj;
-    let {highlightListen, highlight} = this.props;
-    let {chartObject} = this.state;
-    //check if you have an overlap between highlightEmit and highlightListen
-    let listenGroups = highlightListen;
-    let intersection = eventGroup.filter(function(n) {
+    const {data, event, eventGroup} = obj;
+    const {highlightListen, highlight} = this.props;
+    const {chartObject} = this.state;
+    // check if you have an overlap between highlightEmit and highlightListen
+    const listenGroups = highlightListen;
+    const intersection = eventGroup.filter((n) => {
       return listenGroups.indexOf(n) !== -1;
     });
 
@@ -64,8 +66,8 @@ export default class C3Component extends Component {
   }
 
   render() {
-    let {c3obj} = this.props;
-    let {bindto} = c3obj.c3arg;
+    const {c3obj} = this.props;
+    const {bindto} = c3obj.c3arg;
     let {chartBoundTo} = this.state;
     if (bindto) {
       chartBoundTo = bindto.substr(1);
@@ -78,7 +80,7 @@ export default class C3Component extends Component {
 C3Component.defaultProps = {
   highlight: true,
   highlightEmit: ['default'],
-  highlightListen: ['default']
+  highlightListen: ['default'],
 };
 
 C3Component.propTypes = {

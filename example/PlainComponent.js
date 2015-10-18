@@ -1,46 +1,48 @@
-'use strict';
-
 import React, {Component, PropTypes} from 'react';
 
 export default class PlainComponent extends Component {
   highlightID0() {
-    let {setEvent} = this.props;
-    let eventObj = {
-      data: {id: 0}, event: 'mouseover', eventGroup: ['default']
+    const {setEvent} = this.props;
+    const eventObj = {
+      data: {id: 0},
+      event: 'mouseover',
+      eventGroup: ['default'],
     };
     setEvent(eventObj);
   }
 
   mouseout() {
-    let {setEvent} = this.props;
-    let eventObj = {
-      data: {}, event: 'mouseout', eventGroup: ['default']
+    const {setEvent} = this.props;
+    const eventObj = {
+      data: {},
+      event: 'mouseout',
+      eventGroup: ['default'],
     };
     setEvent(eventObj);
   }
 
   render() {
-    let {eventData, passThruProp} = this.props;
+    const {eventData, passThruProp} = this.props;
 
-    //date... (momentjs would be easier...)
-    let ts = eventData.timeStamp;
+    // date... (momentjs would be easier...)
+    const ts = eventData.timeStamp;
     let eventId = '';
     let eventType = '';
     let eventGroup = '';
     let formattedTime = 'no event recorded, yet... (try mouseover in charts)';
     if (ts) {
-      let date = new Date(ts);
-      let hours = date.getHours();
-      let minutes = '0' + date.getMinutes();
-      let seconds = '0' + date.getSeconds();
+      const date = new Date(ts);
+      const hours = date.getHours();
+      const minutes = '0' + date.getMinutes();
+      const seconds = '0' + date.getSeconds();
       formattedTime = hours + ':' + minutes.substr(-2) + ':' +
         seconds.substr(-2);
       eventId = ' on data id ' + eventData.data.id;
-      eventType = ' (' + eventData.event + ')'
+      eventType = ' (' + eventData.event + ')';
       eventGroup = ' on group ' + eventData.eventGroup.join(', ');
     }
 
-    let content = (
+    const content = (
       <div>
         <hr/>
         Here, we have a plain component <strong>wrapped</strong> in a HOC
@@ -49,7 +51,7 @@ export default class PlainComponent extends Component {
         '@dan_abramov/' +
         'mixins-are-dead-long-live-higher-' +
         'order-components-94a0d2f9e750'}
-        target='_blank'>
+        target={'_blank'}>
         high-order component</a>),
         to have access to the chart events! (from anywhere in our app)
         <br/><br/>
@@ -84,12 +86,12 @@ export default class PlainComponent extends Component {
       </div>);
     return (<div>
       {content}
-    </div>)
+    </div>);
   }
 }
 
 PlainComponent.propTypes = {
   eventData: PropTypes.object,
   passThruProp: PropTypes.string,
-  setEvent: PropTypes.func.isRequired
+  setEvent: PropTypes.func.isRequired,
 };

@@ -1,23 +1,21 @@
-'use strict';
-
 import {
-  SET_EVENT
+  SET_EVENT,
 } from '../constants/ActionTypes';
 
 const initialState = {
   data: {},
   eventGroup: [],
   event: '',
-  timeStamp: 0
+  timeStamp: 0,
 
 };
 
 export default function chartReducer(state = initialState, action) {
   switch (action.type) {
     case SET_EVENT:
-      let {data, event, eventGroup} = action.event;
-      let timeStamp = new Date().getTime();
-      let newState = Object.assign(
+      const {data, event, eventGroup} = action.event;
+      const timeStamp = new Date().getTime();
+      const newState = Object.assign(
         {},
         state,
         {data, event, eventGroup, timeStamp}

@@ -1,8 +1,6 @@
-'use strict';
-
 import React, {Component} from 'react';
 
-let Chart = require('../apps/main');
+const Chart = require('../apps/main');
 
 import WrappedComponent from './WrappedComponent';
 
@@ -11,7 +9,7 @@ export default class Example extends Component {
     super();
     this.state = {
       fakeLineData: [],
-      lineInterpolate: 'none'
+      lineInterpolate: 'none',
     };
   }
 
@@ -24,10 +22,10 @@ export default class Example extends Component {
   }
 
   fakeLineData() {
-    let numberLines = Math.floor(10 * Math.random()) + 1;
-    let newData = [];
+    const numberLines = Math.floor(10 * Math.random()) + 1;
+    const newData = [];
 
-    let sortAsc = function(a, b) {
+    const sortAsc = (a, b) => {
       return a - b;
     };
 
@@ -38,30 +36,29 @@ export default class Example extends Component {
       }
       points = [...points].sort(sortAsc);
 
-      let values = [];
+      const values = [];
       for (let ii = 0; ii < points.length; ii++) {
         values.push({x: points[ii], y: Math.random()});
       }
 
       newData.push({
         id: i,
-        values
+        values,
       });
     }
     this.setState({fakeLineData: newData});
-
   }
 
   render() {
-    let fakeData = () => {
+    const fakeData = () => {
       return [
         {id: 0, value: 1 + Math.floor(10 * Math.random())},
         {id: 1, value: 1 + Math.floor(10 * Math.random())},
-        {id: 2, value: 1 + Math.floor(10 * Math.random())}
+        {id: 2, value: 1 + Math.floor(10 * Math.random())},
       ];
     };
 
-    let interpols =
+    const interpols =
       ['linear',
         'linear-closed',
         'step',
@@ -74,7 +71,7 @@ export default class Example extends Component {
         'cardinal-open',
         'cardinal-closed',
         'monotone'];
-    let interpolButtons = [];
+    const interpolButtons = [];
     interpols.map(inter => {
       interpolButtons.push(<button
         key={'btn' + inter}
@@ -94,36 +91,36 @@ export default class Example extends Component {
       <br/>
       {interpolButtons}
       <Chart
-        chartType='line'
+        chartType={'line'}
         data={this.state.fakeLineData}
-        paddingBottom='25%'
+        paddingBottom={'25%'}
         params={{
           aspectRatio: 1 / 4,
           yAxisPlacement: 'right',
-          interpolate: this.state.lineInterpolate
+          interpolate: this.state.lineInterpolate,
         }}
       />
       <Chart
-        chartType='line'
+        chartType={'line'}
         data={this.state.fakeLineData}
-        paddingBottom='50%'
+        paddingBottom={'50%'}
         params={{
           labelSize: 2,
           strokeWidth: 10,
           aspectRatio: 1 / 2,
           yAxisPlacement: 'right',
-          interpolate: this.state.lineInterpolate
+          interpolate: this.state.lineInterpolate,
         }}
       />
 
       <div style={{width: '25%', display: 'inline-block'}}>
         <Chart
           data={fakeData()}
-          paddingBottom='200%'
+          paddingBottom={'200%'}
           params={{
             colorType: 'category',
             aspectRatio: 2,
-            labelSize: 5
+            labelSize: 5,
           }}
         />
       </div>
@@ -132,46 +129,46 @@ export default class Example extends Component {
           data={fakeData()}
           params={{
             colorType: 'category',
-            labelSize: 2.5
+            labelSize: 2.5,
           }}
         />
       </div>
       <div style={{width: '25%', display: 'inline-block'}}>
         <Chart
           data={fakeData()}
-          paddingBottom='200%'
+          paddingBottom={'200%'}
           params={{
             colorType: 'category',
             aspectRatio: 2,
-            labelSize: 5
+            labelSize: 5,
           }}
         />
       </div>
       <div style={{width: '50%', display: 'inline-block'}}>
         <Chart
           data={fakeData()}
-          paddingBottom='50%'
+          paddingBottom={'50%'}
           params={{
             colorType: 'category',
             aspectRatio: 1 / 2,
-            labelSize: 2.5
+            labelSize: 2.5,
           }}
         />
       </div>
       <div style={{width: '50%', display: 'inline-block'}}>
         <Chart
           data={fakeData()}
-          paddingBottom='50%'
+          paddingBottom={'50%'}
           params={{
             colorType: 'category',
             aspectRatio: 1 / 2,
-            labelSize: 2.5
+            labelSize: 2.5,
           }}
         />
       </div>
 
       <Chart
-        chartType='pie'
+        chartType={'pie'}
         data={fakeData()}
       />
     </div>);

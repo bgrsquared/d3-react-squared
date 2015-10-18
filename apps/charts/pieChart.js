@@ -1,8 +1,6 @@
-'use strict';
+const d3 = require('d3');
 
-let d3 = require('d3');
-
-export let pieChart = {
+export const pieChart = {
   defaultParams: {
     size: 1000, // debug switch, for exact values
     col1: 'green',
@@ -14,7 +12,7 @@ export let pieChart = {
     colorArray: d3.scale.category20().range(),
     tooltip: (d) => {
       return ('<div>ID: ' + d.id + '<br/>Value: ' + d.value + '</div>');
-    }
+    },
   },
 
   mainFunction(loc, data, params, reactComp) {
@@ -22,20 +20,20 @@ export let pieChart = {
 
     this.par = Object.assign({}, this.defaultParams, params);
 
-    let size = this.par.size;
+    const size = this.par.size;
 
-    let width = size - 20,
-      height = size - 20,
-      radius = Math.min(width, height) / 2;
-    let fullWidth = size;
-    let fullHeight = size;
+    const width = size - 20;
+    const height = size - 20;
+    const radius = Math.min(width, height) / 2;
+    const fullWidth = size;
+    const fullHeight = size;
 
     this.arc = d3.svg.arc()
       .outerRadius(radius - 10);
 
     this.pie = d3.layout.pie()
       .sort(null)
-      .value(function(d) {
+      .value((d) => {
         return d.value;
       });
 
@@ -69,16 +67,15 @@ export let pieChart = {
   },
 
   tweenFunc(a, context) {
-    let i = d3.interpolate(this._current || a, a);
+    const i = d3.interpolate(this._current || a, a);
     this._current = i(0);
-    return function(t) {
-
+    return (t) => {
       return context.arc(i(t));
     };
   },
 
   updateFunction(data, params) {
-    let self = this;
+    const self = this;
     this.par = Object.assign({}, this.defaultParams, params);
 
     this.colFunc = this.colorFunction(this.par);
@@ -98,15 +95,15 @@ export let pieChart = {
     this.join
       .transition()
       .duration(500)
-      .attrTween('d', function(d) {
+      .attrTween('d', (d) => {
         return self.tweenFunc.apply(this, [d, self]);
       })
       .style('fill', (d, i) => self.colFunc(d, i));
 
-    //ENTER
+    // ENTER
     this.join.enter().append('path')
       .attr('class', 'pie pie-sector')
-      .attr('id', function(d) {
+      .attr('id', (d) => {
         return 'pie-sector-' + d.data.id;
       })
       .style('stroke', 'white')
@@ -126,30 +123,29 @@ export let pieChart = {
         self.mousemoveSector.call(self, d, this);
       });
 
-    //EXIT
+    // EXIT
     this.join.exit().remove();
   },
 
   colorFunction() {
-    let self = this;
+    const self = this;
     if (this.par.colorType === 'gradient') {
       return (d) => {
         return d3.interpolateHsl(self.par.col1, self.par.col2)(
           (d.endAngle - d.startAngle) / self.angMax);
       };
     } else if (self.par.colorType === 'category') {
-      let cols = self.par.colorArray;
+      const cols = self.par.colorArray;
       return (d, i) => {
         return cols[i];
       };
-    } else {
-      return () => 'gray';
     }
+    return () => 'gray';
   },
 
   onEvent(obj) {
-    let self = this;
-    let {d, e} = obj;
+    const self = this;
+    const {d, e} = obj;
     switch (e) {
       case 'mouseover':
         this.svg.selectAll('.pie-sector')
@@ -168,14 +164,15 @@ export let pieChart = {
           .style('stroke-width', '2px')
           .style('stroke-opacity', 1);
         break;
+      default:
     }
   },
 
   mouseoverSector(d) {
-    //pass the event to the partent component
+    // pass the event to the partent component
     this.reactComp.handleChartEvent(d.data, 'mouseover');
 
-    //show tooltip
+    // show tooltip
     this.tooltip.html(this.par.tooltip(d.data))
       .style('opacity', 1)
       .style('top', (d3.event.pageY - 10) + 'px')
@@ -183,19 +180,19 @@ export let pieChart = {
   },
 
   mouseoutSector(d) {
-    //pass the event to the partent component
+    // pass the event to the partent component
     this.reactComp.handleChartEvent(d.data, 'mouseout');
 
-    //hide tooltip
+    // hide tooltip
     this.tooltip.style('opacity', 0);
   },
 
   mousemoveSector() {
-    //note: we do not pass that event to parent component
+    // note: we do not pass that event to parent component
 
-    //move tooltip
+    // move tooltip
     this.tooltip
       .style('top', (d3.event.pageY) + 'px')
       .style('left', (d3.event.pageX + 10) + 'px');
-  }
+  },
 };

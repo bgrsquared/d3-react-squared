@@ -1,11 +1,9 @@
-'use strict';
+const d3 = require('d3');
+// import {tooltipGenerator} from './matrixChartTooltip.js';
 
-let d3 = require('d3');
-//import {tooltipGenerator} from './matrixChartTooltip.js';
+// let moment = require('moment');
 
-//let moment = require('moment');
-
-export let lineChart = {
+export const lineChart = {
   defaultParams: {
     defaultDuration: 500,
     size: 1000, // debug switch, for exact values
@@ -23,19 +21,20 @@ export let lineChart = {
     interpolate: 'linear',
     tooltip: (d) => {
       return ('<div>ID: ' + d.id + '</div>');
-    }
+    },
   },
 
   mainFunction(loc, data, params, reactComp) {
-    let self = this;
+    const self = this;
     this.reactComp = reactComp;
 
     self.par = Object.assign({}, this.defaultParams, params);
 
     this.size = this.par.size;
-    let labelSize = this.par.labelSize;
+    const labelSize = this.par.labelSize;
     this.fontSize = labelSize * this.size / 100;
-    let lM = 1, rM = 1;
+    let lM = 1;
+    let rM = 1;
 
     if (this.par.yAxisPlacement === 'left') {
       lM = (1 + labelSize / 2) * 5;
@@ -47,16 +46,13 @@ export let lineChart = {
       top: this.size / 20,
       right: rM * this.size / 100,
       bottom: this.fontSize + this.size / 20,
-      left: lM * this.size / 100
+      left: lM * this.size / 100,
     };
     this.width = this.size - this.margin.left - this.margin.right;
     this.height = this.size * this.par.aspectRatio -
       this.margin.top - this.margin.bottom;
     this.fullWidth = this.size;
     this.fullHeight = this.size * this.par.aspectRatio;
-
-    //this.x = d3.time.scale()
-    //  .range([0, this.width]);
 
     this.x = d3.scale.linear()
       .range([0, this.width]);
@@ -66,7 +62,6 @@ export let lineChart = {
 
     this.xAxis = d3.svg.axis()
       .scale(this.x)
-      //.ticks(Math.floor(10 / labelSize))
       .innerTickSize(this.size / 250)
       .outerTickSize(this.size / 250)
       .tickPadding(this.size / 250)
@@ -74,7 +69,6 @@ export let lineChart = {
 
     this.yAxis = d3.svg.axis()
       .scale(this.y)
-      //.ticks(Math.floor(10 / labelSize))
       .innerTickSize(this.size / 250)
       .outerTickSize(this.size / 250)
       .tickPadding(this.size / 250)
@@ -89,7 +83,7 @@ export let lineChart = {
 
     this.svg = this.vb.append('g')
       .attr('transform', 'translate(' + this.margin.left + ',' +
-      this.margin.top + ')');
+        this.margin.top + ')');
 
     this.tooltip = d3.select('body')
       .append('div')
@@ -125,7 +119,7 @@ export let lineChart = {
       .style('font-size', this.fontSize + 'px')
       .style('font-family', 'sans-serif')
       .attr('transform', 'translate(' +
-      ((self.par.yAxisPlacement === 'left' ? 0 : 1) * this.width) + ', 0)')
+        ((self.par.yAxisPlacement === 'left' ? 0 : 1) * this.width) + ', 0)')
       .call(this.yAxis);
 
     this.yAx
@@ -145,7 +139,7 @@ export let lineChart = {
   },
 
   updateFunction(data, params) {
-    let self = this;
+    const self = this;
     self.par = Object.assign({}, this.defaultParams, params);
 
     this.line = d3.svg.line()
@@ -205,10 +199,10 @@ export let lineChart = {
     this.joinLine = this.svg.selectAll('.lineGroup')
       .data(data,
         d => {
-        return d.id;
-      });
+          return d.id;
+        });
 
-    //ENTER
+    // ENTER
     this.lineGroup = this.joinLine.enter().append('g')
       .attr('class', 'lineGroup');
 
@@ -238,18 +232,17 @@ export let lineChart = {
       .style('opacity', 1);
 
 
-    //EXIT
+    // EXIT
     this.joinLine.exit()
       .transition()
       .duration(self.par.defaultDuration)
       .style('opacity', 0)
       .remove();
-
   },
 
   onEvent(obj) {
-    let self = this;
-    let {d, e} = obj;
+    const self = this;
+    const {d, e} = obj;
     switch (e) {
       case 'mouseover':
         this.svg.selectAll('.line')
@@ -261,19 +254,20 @@ export let lineChart = {
         this.svg.selectAll('.line')
           .style('stroke-width', self.par.strokeWidth);
         break;
+      default:
     }
   },
 
   mouseoverLine(d) {
-    //pass the event to the partent component
+    // pass the event to the partent component
     this.reactComp.handleChartEvent(d, 'mouseover');
-    //this.reactComp
+    // this.reactComp
     // .handleChartEvent({id: this.par.fundMap.get(d.id).comp}, 'mouseover');
 
     this.svg.select('#line' + d.id)
       .style('stroke-width', this.par.strokeWidth * 3);
 
-    //show tooltip
+    // show tooltip
     this.tooltip.html(this.par.tooltip(d))
       .style('opacity', 1)
       .style('top', (d3.event.pageY - 10) + 'px')
@@ -281,7 +275,7 @@ export let lineChart = {
   },
 
   mouseoutLine(d) {
-    //pass the event to the partent component
+    // pass the event to the partent component
     this.reactComp.handleChartEvent(d, 'mouseout');
 
     this.svg.select('#line' + d.id)
@@ -289,16 +283,16 @@ export let lineChart = {
       .duration(this.par.defaultDuration)
       .style('stroke-width', this.par.strokeWidth);
 
-    //hide tooltip
+    // hide tooltip
     this.tooltip.style('opacity', 0);
   },
 
   mousemoveLine() {
-    //note: we do not pass that event to parent component
+    // note: we do not pass that event to parent component
 
-    //move tooltip
+    // move tooltip
     this.tooltip
       .style('top', (d3.event.pageY) + 'px')
       .style('left', (+!this.par.debugMode * d3.event.pageX + 10) + 'px');
-  }
+  },
 };

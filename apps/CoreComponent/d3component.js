@@ -1,10 +1,8 @@
-'use strict';
-
 import React, {Component, PropTypes} from 'react';
 import ReactDOM from 'react-dom';
 import d3 from 'd3';
 
-//some examples
+// some examples
 import {barChart} from '../charts/barChart';
 import {pieChart} from '../charts/pieChart';
 import {lineChart} from '../charts/lineChart';
@@ -15,27 +13,27 @@ export default class D3Component extends Component {
     this.state = {
       chartObject: {},
       lastEvent: 0,
-      chartStyle: { //svg-container
+      chartStyle: { // svg-container
         display: 'block',
         position: 'relative',
         width: '100%',
-        'paddingBottom': '50%', //adjust below for other aspect ratios!
+        'paddingBottom': '50%', // adjust below for other aspect ratios!
         'verticalAlign': 'middle',
-        overflow: 'hidden'
-      }
+        overflow: 'hidden',
+      },
     };
   }
 
   componentDidMount() {
-    //create new chart
+    // create new chart
     this.createNewChart.call(this, this.props.chartType, this.props);
   }
 
   componentWillReceiveProps(newProps) {
-    let {chartObject, lastEvent} = this.state;
-    let {chartType, eventData} = this.props;
+    const {chartObject, lastEvent} = this.state;
+    const {chartType, eventData} = this.props;
 
-    //we check if we need to create a new chart or update the existing one
+    // we check if we need to create a new chart or update the existing one
     if (!chartObject.mainFunction ||
       newProps.chartType !== chartType) {
       this.createNewChart.call(this, newProps.chartType, newProps);
@@ -43,7 +41,7 @@ export default class D3Component extends Component {
       chartObject.updateFunction(newProps.data, newProps.params);
     }
 
-    //Redux Events
+    // Redux Events
     if (newProps.eventData.timeStamp > lastEvent) {
       this.setState({lastEvent: eventData.timeStamp});
       this.incomingEvent(newProps.eventData, ['default']);
@@ -55,19 +53,19 @@ export default class D3Component extends Component {
   }
 
   componentWillUnmount() {
-    let {chartObject} = this.state;
+    const {chartObject} = this.state;
     if (chartObject.destroyFunction) {
       chartObject.destroyFunction();
     }
   }
 
   incomingEvent(obj) {
-    let {data, event, eventGroup} = obj;
-    let {highlightListen, highlight} = this.props;
-    let {chartObject} = this.state;
-    //check if you have an overlap between highlightEmit and highlightListen
-    let listenGroups = highlightListen;
-    let intersection = eventGroup.filter(function(n) {
+    const {data, event, eventGroup} = obj;
+    const {highlightListen, highlight} = this.props;
+    const {chartObject} = this.state;
+    // check if you have an overlap between highlightEmit and highlightListen
+    const listenGroups = highlightListen;
+    const intersection = eventGroup.filter((n) => {
       return listenGroups.indexOf(n) !== -1;
     });
 
@@ -77,11 +75,11 @@ export default class D3Component extends Component {
   }
 
   createNewChart(chartPrototype, props) {
-    let {paddingBottom, setEvent} = this.props;
+    const {paddingBottom, setEvent} = this.props;
 
-    //clean up existing stuff
+    // clean up existing stuff
     d3.select(ReactDOM.findDOMNode(this)).select('#d3graphSVG').remove();
-    //Create afresh
+    // Create afresh
     let chartObject;
     switch (chartPrototype) {
       case 'bar':
@@ -103,29 +101,28 @@ export default class D3Component extends Component {
     chartObject.setEvent = setEvent;
     this.setState({
       chartObject,
-      chartStyle: Object.assign({}, this.state.chartStyle, {paddingBottom})
+      chartStyle: Object.assign({}, this.state.chartStyle, {paddingBottom}),
     });
 
-    //and create it:
+    // and create it:
     chartObject.mainFunction(d3.select(ReactDOM.findDOMNode(this)),
       props.data, props.params, this);
-
   }
 
   handleChartEvent(d, event) {
-    let {onChartEvent, highlightEmit, setEvent} = this.props;
-    //call action
+    const {onChartEvent, highlightEmit} = this.props;
+    // call action
     if (onChartEvent) {
       onChartEvent(d, event);
     }
 
-    //redux
-    let eventObj = {data: d, event, eventGroup: highlightEmit};
+    // redux
+    const eventObj = {data: d, event, eventGroup: highlightEmit};
     this.props.setEvent(eventObj);
   }
 
   render() {
-    let {paddingBottom} = this.props;
+    const {paddingBottom} = this.props;
     let {chartStyle} = this.state;
     if (paddingBottom) {
       chartStyle = Object.assign({}, chartStyle, {paddingBottom});
@@ -142,7 +139,7 @@ D3Component.defaultProps = {
   data: [],
   highlight: true,
   highlightEmit: ['default'],
-  highlightListen: ['default']
+  highlightListen: ['default'],
 };
 
 D3Component.propTypes = {

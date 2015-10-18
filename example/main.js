@@ -1,11 +1,9 @@
-'use strict';
-//polyfill for Object.assign
 require('babel/polyfill');
 
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-//load example component
+// load example component
 import Example from './example';
 import C3Example from './c3example';
 if (window.location.pathname === '/indexExpl.html') {

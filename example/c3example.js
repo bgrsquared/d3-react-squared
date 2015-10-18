@@ -1,7 +1,5 @@
-'use strict';
-
 import React, {Component} from 'react';
-import c3 from 'c3';
+import d3 from 'd3';
 import DR2 from '../apps/main';
 
 export default class C3Example extends Component {
@@ -9,8 +7,8 @@ export default class C3Example extends Component {
     super();
     this.state = {
       c3obj1: false,
-      c3obj2: false
-    }
+      c3obj2: false,
+    };
   }
 
   myRand() {
@@ -18,13 +16,13 @@ export default class C3Example extends Component {
   }
 
   myRandVector(id) {
-    let vect = Array.from({length: 6}, () => this.myRand());
+    const vect = Array.from({length: 6}, () => this.myRand());
     vect.unshift('data' + id);
     return vect;
   }
 
   fakeC3LineData() {
-    let data = [];
+    const data = [];
     for (let i = 0; i < 3; i++) {
       data.push(this.myRandVector(i + 1));
     }
@@ -34,24 +32,24 @@ export default class C3Example extends Component {
   dr2legend() {
     return {
       item: {
-        onmouseover: function(id) {
-          let eventObj = {
+        onmouseover: (id) => {
+          const eventObj = {
             data: {id},
             event: 'mouseover',
-            eventGroup: this.api.highlightEmit
+            eventGroup: this.api.highlightEmit,
           };
           this.api.setEvent(eventObj);
         },
-        onmouseout: function(id) {
-          let eventObj = {
+        onmouseout: (id) => {
+          const eventObj = {
             data: {id},
             event: 'mouseout',
-            eventGroup: this.api.highlightEmit
+            eventGroup: this.api.highlightEmit,
           };
           this.api.setEvent(eventObj);
-        }
-      }
-    }
+        },
+      },
+    };
   }
 
   c3chart1gen() {
@@ -63,12 +61,12 @@ export default class C3Example extends Component {
         data: {
           columns: this.fakeC3LineData(),
           groups: [['data1', 'data2', 'data3']],
-          type: 'area'
+          type: 'area',
         },
-        legend: this.dr2legend()
+        legend: this.dr2legend(),
       },
-      c3fct: 'generate'
-    }
+      c3fct: 'generate',
+    };
   }
 
   c3chart2gen() {
@@ -77,16 +75,16 @@ export default class C3Example extends Component {
         bindto: '#chart2',
         data: {
           columns: this.fakeC3LineData(),
-          type: 'spline'
+          type: 'spline',
         },
-        legend: this.dr2legend()
+        legend: this.dr2legend(),
       },
-      c3fct: 'generate'
-    }
+      c3fct: 'generate',
+    };
   }
 
   randomType(obj) {
-    let rand = Math.random();
+    const rand = Math.random();
     let type;
     if (rand < 1 / 5) {
       type = 'bar';
@@ -99,59 +97,59 @@ export default class C3Example extends Component {
     } else {
       type = 'area-spline';
     }
-    let c3obj = {
+    const c3obj = {
       c3arg: {
         columns: this.fakeC3LineData(),
-        type
+        type,
       },
-      c3fct: 'load'
+      c3fct: 'load',
     };
     this.setState({[obj]: c3obj});
   }
 
   newData(obj) {
-    let c3obj = {
+    const c3obj = {
       c3arg: {
         columns: this.fakeC3LineData(),
       },
-      c3fct: 'load'
+      c3fct: 'load',
     };
     this.setState({[obj]: c3obj});
   }
 
   focusData(id, obj) {
-    let c3obj = {c3arg: id, c3fct: 'focus'};
+    const c3obj = {c3arg: id, c3fct: 'focus'};
     this.setState({[obj]: c3obj});
   }
 
   revert(id, obj) {
-    let c3obj = {c3arg: id, c3fct: 'revert'};
+    const c3obj = {c3arg: id, c3fct: 'revert'};
     this.setState({[obj]: c3obj});
   }
 
   groupLines(obj) {
-    let c3obj = {
+    const c3obj = {
       c3arg: [['data1', 'data2', 'data3']],
-      c3fct: 'groups'
+      c3fct: 'groups',
     };
     this.setState({[obj]: c3obj});
   }
 
   ungroupLines(obj) {
-    let c3obj = {
+    const c3obj = {
       c3arg: [[]],
-      c3fct: 'groups'
+      c3fct: 'groups',
     };
     this.setState({[obj]: c3obj});
   }
 
   render() {
     let {c3obj1, c3obj2} = this.state;
-    let fakeDataBar = () => {
+    const fakeDataBar = () => {
       return [
         {id: 'data1', value: 1 + Math.floor(10 * Math.random())},
         {id: 'data2', value: 1 + Math.floor(10 * Math.random())},
-        {id: 'data3', value: 1 + Math.floor(10 * Math.random())}
+        {id: 'data3', value: 1 + Math.floor(10 * Math.random())},
       ];
     };
 
@@ -213,17 +211,17 @@ export default class C3Example extends Component {
               data={fakeDataBar()}
               params={{
               colorType: 'category',
-              colorArray: d3.scale.category10().range()
+              colorArray: d3.scale.category10().range(),
               }}
             />
           </div>
           <div style={{width: '50%'}}>
             <DR2
-              chartType='pie'
+              chartType={'pie'}
               data={fakeDataBar()}
               params={{
               colorType: 'category',
-              colorArray: d3.scale.category10().range()
+              colorArray: d3.scale.category10().range(),
               }}
             />
           </div>
