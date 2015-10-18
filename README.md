@@ -1,7 +1,8 @@
 [--> Demos, Examples, Playground, Docu](http://bgrsquared.com/DR2/)
-(FIXED Link)
 
-### Note
+### Notes
+--> v0.3.0 requires React 0.14!
+
 For the new c3 integration (v0.2.7):
 Please note that this is still 'beta'. So far, there is no docu on the docu page.
 --> please check out the c3example.js in the source (./examples).
@@ -97,6 +98,10 @@ Huge thanks to all the people involved in providing awesome tools such as:
 and many others...
 
 # Version Updates:
+0.3.0
+- Update react to 0.14 and redux to v3.0 (and update other dependencies)
+- Linting (airbnb style).
+
 0.2.7:
 - Add c3-wrapper, so that you can add [c3](http://c3js.org) charts to the mix.
 
