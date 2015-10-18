@@ -29,16 +29,16 @@ export default class mainClass extends Component {
     if (component) {
       let Comp = wrapper(component);
       return (<Provider store={store}>
-        {() => <Comp {...this.props} dispatch={store.dispatch}/>}
+        <Comp {...this.props} dispatch={store.dispatch}/>
       </Provider>)
     } else if (c3obj) {
       return (<Provider store={store}>
-        {() => <C3Container {...this.props} dispatch={store.dispatch}/>}
+        <C3Container {...this.props} dispatch={store.dispatch}/>
       </Provider>)
     }
      else {
       return (<Provider store={store}>
-        {() => <D3Container {...this.props} dispatch={store.dispatch}/>}
+        <D3Container {...this.props} dispatch={store.dispatch}/>
       </Provider>)
     }
   }
@@ -50,5 +50,5 @@ mainClass.defaultProps = {
 
 mainClass.propTypes = {
   c3obj: PropTypes.object,
-  component: PropTypes.object
+  component: PropTypes.any,
 }

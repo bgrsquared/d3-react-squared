@@ -1,6 +1,7 @@
 'use strict';
 
 import React, {Component, PropTypes} from 'react';
+import ReactDOM from 'react-dom';
 import d3 from 'd3';
 
 //some examples
@@ -79,7 +80,7 @@ export default class D3Component extends Component {
     let {paddingBottom, setEvent} = this.props;
 
     //clean up existing stuff
-    d3.select(React.findDOMNode(this)).select('#d3graphSVG').remove();
+    d3.select(ReactDOM.findDOMNode(this)).select('#d3graphSVG').remove();
     //Create afresh
     let chartObject;
     switch (chartPrototype) {
@@ -106,7 +107,7 @@ export default class D3Component extends Component {
     });
 
     //and create it:
-    chartObject.mainFunction(d3.select(React.findDOMNode(this)),
+    chartObject.mainFunction(d3.select(ReactDOM.findDOMNode(this)),
       props.data, props.params, this);
 
   }

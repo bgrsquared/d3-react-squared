@@ -77,6 +77,7 @@ export default class Example extends Component {
     let interpolButtons = [];
     interpols.map(inter => {
       interpolButtons.push(<button
+        key={'btn' + inter}
         onClick={this.handleLineInterpolate.bind(this, inter)}>
         {inter}
       </button>);
