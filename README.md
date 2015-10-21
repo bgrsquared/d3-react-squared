@@ -98,6 +98,9 @@ Huge thanks to all the people involved in providing awesome tools such as:
 and many others...
 
 # Version Updates:
+0.3.3:
+- Fix event system (events blocked first update after event)
+
 0.3.2:
 - While we're at it, externalize c3 too.
 
