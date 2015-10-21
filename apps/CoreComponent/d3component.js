@@ -31,20 +31,21 @@ export default class D3Component extends Component {
 
   componentWillReceiveProps(newProps) {
     const {chartObject, lastEvent} = this.state;
-    const {chartType, eventData} = this.props;
+    const {chartType} = this.props;
+    const {eventData} = newProps;
 
     // we check if we need to create a new chart or update the existing one
     if (!chartObject.mainFunction ||
       newProps.chartType !== chartType) {
       this.createNewChart.call(this, newProps.chartType, newProps);
-    } else if (newProps.eventData.timeStamp <= lastEvent) {
+    } else if (eventData.timeStamp <= lastEvent) {
       chartObject.updateFunction(newProps.data, newProps.params);
     }
 
     // Redux Events
-    if (newProps.eventData.timeStamp > lastEvent) {
+    if (eventData.timeStamp > lastEvent) {
       this.setState({lastEvent: eventData.timeStamp});
-      this.incomingEvent(newProps.eventData, ['default']);
+      this.incomingEvent(eventData, ['default']);
     }
   }
 
