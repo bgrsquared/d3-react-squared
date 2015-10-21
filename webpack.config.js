@@ -38,7 +38,8 @@ switch (process.env.NODE_ENV) {
       {
         'react': 'react',
         'react-dom': 'react-dom',
-        'd3': 'd3'
+        'd3': 'd3',
+        'c3': 'c3'
       }
     ];
     break;

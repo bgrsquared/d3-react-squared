@@ -98,11 +98,14 @@ Huge thanks to all the people involved in providing awesome tools such as:
 and many others...
 
 # Version Updates:
-0.3.1
+0.3.2:
+- While we're at it, externalize c3 too.
+
+0.3.1:
 - Fix webpack externals (react-dom) to avoid "...it probably means that 
 you've loaded two copies of React..."
 
-0.3.0
+0.3.0:
 - Update react to 0.14 and redux to v3.0 (and update other dependencies)
 - Linting (airbnb style).
 
