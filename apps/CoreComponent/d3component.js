@@ -44,9 +44,11 @@ export default class D3Component extends Component {
 
     // Redux Events
     if (eventData.timeStamp > lastEvent) {
-      this.setState({lastEvent: eventData.timeStamp});
       this.incomingEvent(eventData, ['default']);
     }
+
+    // update timestamp
+    this.setState({lastEvent: eventData.timeStamp});
   }
 
   shouldComponentUpdate(newProps) {
