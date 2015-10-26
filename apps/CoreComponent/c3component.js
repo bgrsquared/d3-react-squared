@@ -26,9 +26,10 @@ export default class C3Component extends Component {
 
     // Redux Events
     if (newProps.eventData.timeStamp > lastEvent) {
-      this.setState({lastEvent: eventData.timeStamp});
       this.incomingEvent(newProps.eventData, ['default']);
     }
+
+    this.setState({lastEvent: eventData.timeStamp});
   }
 
   shouldComponentUpdate(newProps) {
