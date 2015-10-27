@@ -98,6 +98,9 @@ Huge thanks to all the people involved in providing awesome tools such as:
 and many others...
 
 # Version Updates:
+0.3.4 & 0.3.5:
+- Bug fixing.
+
 0.3.3:
 - Fix event system (events blocked first update after event)
 
