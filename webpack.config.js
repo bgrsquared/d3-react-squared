@@ -32,14 +32,13 @@ switch (process.env.NODE_ENV) {
       path: outputPath,
       library: 'd3-react-squared',
       libraryTarget: 'umd',
-      filename: filename
+      filename: filename,
     };
     externals = [
       {
         'react': 'react',
         'react-dom': 'react-dom',
         'd3': 'd3',
-        'c3': 'c3'
       }
     ];
     break;
@@ -70,23 +69,23 @@ var config = {
       {
         test: /\.js$/,
         include: [appDir, explDir],
-        loader: 'babel-loader'
-      }
+        loader: 'babel-loader',
+      },
     ],
     preLoaders: [
       {
         test: /\.js$/,
         include: [appDir, explDir],
-        loader: 'eslint'
-      }
-    ]
+        loader: 'eslint',
+      },
+    ],
   },
 
   externals: externals,
 
   plugins: [
-    new webpack.BannerPlugin(licenseBanner)
-  ]
+    new webpack.BannerPlugin(licenseBanner),
+  ],
 };
 
 module.exports = config;
