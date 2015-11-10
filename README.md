@@ -5,14 +5,14 @@
 ### Notes
 --> v0.3.0 and later require React 0.14!
 
-## c3
+### c3
 
 Documentation is still missing, sorry!
 
-# v0.3.6 and newer
+#### v0.3.6 and newer
 Starting in 0.3.6, c3 charts are loaded using [d3-react-squared-c3-loader](https://github.com/bgrsquared/d3-react-squared-c3-loader)
 
-# v0.2.7 through v0.3.5:
+#### v0.2.7 through v0.3.5:
 Please note that this is still 'beta'. So far, there is no docu on the docu page.
 --> please check out the c3example.js in the source (./examples).
 
