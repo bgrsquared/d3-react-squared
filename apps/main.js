@@ -2,7 +2,6 @@ import React, {Component, PropTypes} from 'react';
 
 import D3Container from './CoreComponent/d3container';
 import wrapper from './CoreComponent/wrapper';
-// import C3Container from './CoreComponent/c3container';
 
 import { applyMiddleware, combineReducers, createStore } from 'redux';
 import thunkMiddleware from 'redux-thunk';
@@ -41,7 +40,6 @@ mainClass.defaultProps = {
 };
 
 mainClass.propTypes = {
-  c3obj: PropTypes.object,
   component: PropTypes.any,
   Loader: PropTypes.any,
 };
