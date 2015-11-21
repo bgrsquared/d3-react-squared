@@ -2,6 +2,10 @@
 
 [--> d3-react-squared-c3-loader](https://github.com/bgrsquared/d3-react-squared-c3-loader)
 
+[--> New live example](http://bgrsquared.com/dogs/)
+
+[--> New blog post, based on live example](https://medium.com/@ilikepiecharts/about-using-d3-react-squared-an-example-8cc5e5a6b58e#.jso6use4q)
+
 ### Notes
 --> v0.3.0 and later require React 0.14!
 
@@ -16,20 +20,10 @@ Starting in 0.3.6, c3 charts are loaded using [d3-react-squared-c3-loader](https
 Please note that this is still 'beta'. So far, there is no docu on the docu page.
 --> please check out the c3example.js in the source (./examples).
 
-### Some screenshots
-
-#### New Docu-Page 
-![DocuPage](https://github.com/bgrsquared/d3-react-squared/blob/master/img/dr2overview.png)
-
-#### Playground ([--> See here](http://bgrsquared.com/DR2/)) to learn about parameters:
-![Playground](https://github.com/bgrsquared/d3-react-squared/blob/master/img/explPlayground2.png)
-
 # d3-react-squared
 [![npm version](https://badge.fury.io/js/d3-react-squared.png)](http://badge.fury.io/js/d3-react-squared)
 
 Feedback, ideas, PRs, etc. very welcome!
-
-Version Update log at the bottom.
 
 ## Why yet another d3-react component?
 There are already some great solutions out there, combining React and D3, e.g.:
@@ -106,3 +100,10 @@ Huge thanks to all the people involved in providing awesome tools such as:
 
 and many others...
 
+### Some screenshots
+
+#### New Docu-Page 
+![DocuPage](https://github.com/bgrsquared/d3-react-squared/blob/master/img/dr2overview.png)
+
+#### Playground ([--> See here](http://bgrsquared.com/DR2/)) to learn about parameters:
+![Playground](https://github.com/bgrsquared/d3-react-squared/blob/master/img/explPlayground2.png)
