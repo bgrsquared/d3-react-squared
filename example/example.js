@@ -25,9 +25,7 @@ export default class Example extends Component {
     const numberLines = Math.floor(10 * Math.random()) + 1;
     const newData = [];
 
-    const sortAsc = (a, b) => {
-      return a - b;
-    };
+    const sortAsc = (a, b) => a - b;
 
     for (let i = 0; i < numberLines; i++) {
       let points = new Set();
@@ -40,7 +38,7 @@ export default class Example extends Component {
       for (let ii = 0; ii < points.length; ii++) {
         values.push({
           x: points[ii],
-          y: Math.random()
+          y: Math.random(),
         });
       }
 
@@ -53,22 +51,20 @@ export default class Example extends Component {
   }
 
   render() {
-    const fakeData = () => {
-      return [
-        {
-          id: 0,
-          value: 1 + Math.floor(10 * Math.random()),
-        },
-        {
-          id: 1,
-          value: 1 + Math.floor(10 * Math.random()),
-        },
-        {
-          id: 2,
-          value: 1 + Math.floor(10 * Math.random()),
-        },
-      ];
-    };
+    const fakeData = () => [
+      {
+        id: 0,
+        value: 1 + Math.floor(10 * Math.random()),
+      },
+      {
+        id: 1,
+        value: 1 + Math.floor(10 * Math.random()),
+      },
+      {
+        id: 2,
+        value: 1 + Math.floor(10 * Math.random()),
+      },
+    ];
 
     const interpols =
       ['linear',
@@ -84,23 +80,25 @@ export default class Example extends Component {
         'cardinal-closed',
         'monotone'];
     const interpolButtons = [];
-    interpols.map(inter => {
-      interpolButtons.push(<button
-        key={'btn' + inter}
-        onClick={this.handleLineInterpolate.bind(this, inter)}>
-        {inter}
-      </button>);
+    interpols.forEach(inter => {
+      interpolButtons.push(
+        <button
+          key={`btn${inter}`}
+          onClick={() => this.handleLineInterpolate(inter)}
+        >
+          {inter}
+        </button>);
     });
 
     return (<div>
-      <WrappedComponent/>
+      <WrappedComponent />
       And some exemplary charts (do note:{' '}
       <strong>d3-react-squared is a not a charts-library!</strong>):
-      <hr/>
-      <button onClick={this.fakeLineData.bind(this)}>
+      <hr />
+      <button onClick={() => this.fakeLineData()}>
         New line data (random)
       </button>
-      <br/>
+      <br />
       {interpolButtons}
       <Chart
         chartType={'line'}
@@ -125,7 +123,7 @@ export default class Example extends Component {
         }}
       />
 
-      <div style={{width: '25%', display: 'inline-block'}}>
+      <div style={{ width: '25%', display: 'inline-block' }}>
         <Chart
           data={fakeData()}
           paddingBottom={'200%'}
@@ -136,7 +134,7 @@ export default class Example extends Component {
           }}
         />
       </div>
-      <div style={{width: '50%', display: 'inline-block'}}>
+      <div style={{ width: '50%', display: 'inline-block' }}>
         <Chart
           data={fakeData()}
           params={{
@@ -145,7 +143,7 @@ export default class Example extends Component {
           }}
         />
       </div>
-      <div style={{width: '25%', display: 'inline-block'}}>
+      <div style={{ width: '25%', display: 'inline-block' }}>
         <Chart
           data={fakeData()}
           paddingBottom={'200%'}
@@ -156,7 +154,7 @@ export default class Example extends Component {
           }}
         />
       </div>
-      <div style={{width: '50%', display: 'inline-block'}}>
+      <div style={{ width: '50%', display: 'inline-block' }}>
         <Chart
           data={fakeData()}
           paddingBottom={'50%'}
@@ -167,7 +165,7 @@ export default class Example extends Component {
           }}
         />
       </div>
-      <div style={{width: '50%', display: 'inline-block'}}>
+      <div style={{ width: '50%', display: 'inline-block' }}>
         <Chart
           data={fakeData()}
           paddingBottom={'50%'}
