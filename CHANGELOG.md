@@ -1,4 +1,10 @@
 # Version Updates:
+0.5.0
+Update other dependencies to current versions (EXCEPT for d3 (still using v3))
+
+0.4.0
+- Update dependencies to React 15 (based on PR)
+
 0.3.6:
 - Remove c3 from this library and create [d3-react-squared-c3-loader](https://github.com/bgrsquared/d3-react-squared-c3-loader)
 
