@@ -1,11 +1,11 @@
-import React, {Component, PropTypes} from 'react';
+import React, { Component, PropTypes } from 'react';
 import ReactDOM from 'react-dom';
 import d3 from 'd3';
 
 // some examples
-import {barChart} from '../charts/barChart';
-import {pieChart} from '../charts/pieChart';
-import {lineChart} from '../charts/lineChart';
+import { barChart } from '../charts/barChart';
+import { pieChart } from '../charts/pieChart';
+import { lineChart } from '../charts/lineChart';
 
 export default class D3Component extends Component {
   constructor() {
@@ -17,8 +17,8 @@ export default class D3Component extends Component {
         display: 'block',
         position: 'relative',
         width: '100%',
-        'paddingBottom': '50%', // adjust below for other aspect ratios!
-        'verticalAlign': 'middle',
+        paddingBottom: '50%', // adjust below for other aspect ratios!
+        verticalAlign: 'middle',
         overflow: 'hidden',
       },
     };
@@ -30,9 +30,9 @@ export default class D3Component extends Component {
   }
 
   componentWillReceiveProps(newProps) {
-    const {chartObject, lastEvent} = this.state;
-    const {chartType} = this.props;
-    const {eventData} = newProps;
+    const { chartObject, lastEvent } = this.state;
+    const { chartType } = this.props;
+    const { eventData } = newProps;
 
     // we check if we need to create a new chart or update the existing one
     if (!chartObject.mainFunction ||
@@ -48,7 +48,7 @@ export default class D3Component extends Component {
     }
 
     // update timestamp
-    this.setState({lastEvent: eventData.timeStamp});
+    this.setState({ lastEvent: eventData.timeStamp });
   }
 
   shouldComponentUpdate(newProps) {
@@ -56,29 +56,30 @@ export default class D3Component extends Component {
   }
 
   componentWillUnmount() {
-    const {chartObject} = this.state;
+    const { chartObject } = this.state;
     if (chartObject.destroyFunction) {
       chartObject.destroyFunction();
     }
   }
 
   incomingEvent(obj) {
-    const {data, event, eventGroup} = obj;
-    const {highlightListen, highlight} = this.props;
-    const {chartObject} = this.state;
+    const { data, event, eventGroup } = obj;
+    const { highlightListen, highlight } = this.props;
+    const { chartObject } = this.state;
     // check if you have an overlap between highlightEmit and highlightListen
     const listenGroups = highlightListen;
-    const intersection = eventGroup.filter((n) => {
-      return listenGroups.indexOf(n) !== -1;
-    });
+    const intersection = eventGroup.filter(n => listenGroups.indexOf(n) !== -1);
 
     if (intersection.length && highlight && chartObject.onEvent) {
-      chartObject.onEvent({d: data, e: event});
+      chartObject.onEvent({
+        d: data,
+        e: event,
+      });
     }
   }
 
   createNewChart(chartPrototype, props) {
-    const {paddingBottom, setEvent} = this.props;
+    const { paddingBottom, setEvent } = this.props;
 
     // clean up existing stuff
     d3.select(ReactDOM.findDOMNode(this)).select('#d3graphSVG').remove();
@@ -104,7 +105,7 @@ export default class D3Component extends Component {
     chartObject.setEvent = setEvent;
     this.setState({
       chartObject,
-      chartStyle: Object.assign({}, this.state.chartStyle, {paddingBottom}),
+      chartStyle: Object.assign({}, this.state.chartStyle, { paddingBottom }),
     });
 
     // and create it:
@@ -113,24 +114,30 @@ export default class D3Component extends Component {
   }
 
   handleChartEvent(d, event) {
-    const {onChartEvent, highlightEmit} = this.props;
+    const { onChartEvent, highlightEmit } = this.props;
     // call action
     if (onChartEvent) {
       onChartEvent(d, event);
     }
 
     // redux
-    const eventObj = {data: d, event, eventGroup: highlightEmit};
+    const eventObj = {
+      data: d,
+      event,
+      eventGroup: highlightEmit,
+    };
     this.props.setEvent(eventObj);
   }
 
   render() {
-    const {paddingBottom} = this.props;
-    let {chartStyle} = this.state;
+    const { paddingBottom } = this.props;
+    let { chartStyle } = this.state;
     if (paddingBottom) {
-      chartStyle = Object.assign({}, chartStyle, {paddingBottom});
+      chartStyle = Object.assign({}, chartStyle, { paddingBottom });
     }
-    return (<div style={chartStyle}/>);
+    return (<div
+      style={chartStyle}
+    />);
   }
 }
 

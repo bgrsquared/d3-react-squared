@@ -1,4 +1,4 @@
-import React, {Component, PropTypes} from 'react';
+import React, { Component, PropTypes } from 'react';
 
 import D3Container from './CoreComponent/d3container';
 import wrapper from './CoreComponent/wrapper';
@@ -16,21 +16,33 @@ const createStoreWithMiddleware = applyMiddleware(
 const store = createStoreWithMiddleware(reducer);
 
 export default class mainClass extends Component {
+  temp() {
+  }
+
   // this is a bit ugly here, will clean up in due time...
   render() {
-    const {component, Loader} = this.props;
+    const { component, Loader } = this.props;
     if (component) { // wrapper
       const Comp = wrapper(component);
       return (<Provider store={store}>
-        <Comp {...this.props} dispatch={store.dispatch}/>
+        <Comp
+          {...this.props}
+          dispatch={store.dispatch}
+        />
       </Provider>);
     } else if (Loader) { // external loader
       return (<Provider store={store}>
-        <Loader {...this.props} dispatch={store.dispatch}/>
+        <Loader
+          {...this.props}
+          dispatch={store.dispatch}
+        />
       </Provider>);
     }
     return (<Provider store={store}>
-      <D3Container {...this.props} dispatch={store.dispatch}/>
+      <D3Container
+        {...this.props}
+        dispatch={store.dispatch}
+      />
     </Provider>);
   }
 }

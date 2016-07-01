@@ -1,5 +1,5 @@
-import {bindActionCreators} from 'redux';
-import {connect} from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
 import * as ChartActions from '../actions/ChartActions';
 
 import D3Component from './d3component';

@@ -1,1 +1,1 @@
-export {default as d3ReactSquared} from './chartReducer';
+export { default as d3ReactSquared } from './chartReducer';
