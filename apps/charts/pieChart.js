@@ -10,9 +10,7 @@ export const pieChart = {
     cornerRadius: 5,
     colorType: 'gradient',
     colorArray: d3.scale.category20().range(),
-    tooltip: (d) => {
-      return ('<div>ID: ' + d.id + '<br/>Value: ' + d.value + '</div>');
-    },
+    tooltip: d => `<div>ID: ${d.id}<br/>Value: ${d.value}</div>`,
   },
 
   mainFunction(loc, data, params, reactComp) {
@@ -33,18 +31,16 @@ export const pieChart = {
 
     this.pie = d3.layout.pie()
       .sort(null)
-      .value((d) => {
-        return d.value;
-      });
+      .value(d => d.value);
 
     this.svg = loc.append('svg')
       .attr('id', 'd3graphSVG')
       .style('display', 'inline-block')
       .style('position', 'absolute')
       .attr('preserveAspectRatio', 'xMinYMin slice')
-      .attr('viewBox', '0 0 ' + fullWidth + ' ' + fullHeight)
+      .attr('viewBox', `0 0 ${fullWidth} ${fullHeight}`)
       .append('g')
-      .attr('transform', 'translate(' + width / 2 + ',' + height / 2 + ')');
+      .attr('transform', `translate(${(width / 2)},${(height / 2)})`);
 
     this.tooltip = d3.select('body')
       .append('div')
@@ -69,9 +65,7 @@ export const pieChart = {
   tweenFunc(a, context) {
     const i = d3.interpolate(this._current || a, a);
     this._current = i(0);
-    return (t) => {
-      return context.arc(i(t));
-    };
+    return t => context.arc(i(t));
   },
 
   updateFunction(data, params) {
@@ -85,27 +79,19 @@ export const pieChart = {
       .cornerRadius(this.par.cornerRadius);
 
     this.join = this.svg.selectAll('.pie')
-      .data(this.pie(data), (d) => {
-        return d.data.id;
-      });
-    this.angMax = d3.max(this.pie(data).map((d) => {
-      return d.endAngle - d.startAngle;
-    }));
+      .data(this.pie(data), d => d.data.id);
+    this.angMax = d3.max(this.pie(data).map((d) => d.endAngle - d.startAngle));
 
     this.join
       .transition()
       .duration(500)
-      .attrTween('d', (d) => {
-        return self.tweenFunc.apply(this, [d, self]);
-      })
+      .attrTween('d', d => self.tweenFunc.apply(this, [d, self]))
       .style('fill', (d, i) => self.colFunc(d, i));
 
     // ENTER
     this.join.enter().append('path')
       .attr('class', 'pie pie-sector')
-      .attr('id', (d) => {
-        return 'pie-sector-' + d.data.id;
-      })
+      .attr('id', (d) => `pie-sector-${d.data.id}`)
       .style('stroke', 'white')
       .style('stroke-width', '2px')
       .attr('d', this.arc)
@@ -130,22 +116,18 @@ export const pieChart = {
   colorFunction() {
     const self = this;
     if (this.par.colorType === 'gradient') {
-      return (d) => {
-        return d3.interpolateHsl(self.par.col1, self.par.col2)(
-          (d.endAngle - d.startAngle) / self.angMax);
-      };
+      return (d) => d3.interpolateHsl(self.par.col1, self.par.col2)(
+        (d.endAngle - d.startAngle) / self.angMax);
     } else if (self.par.colorType === 'category') {
       const cols = self.par.colorArray;
-      return (d, i) => {
-        return cols[i];
-      };
+      return (d, i) => cols[i];
     }
     return () => 'gray';
   },
 
   onEvent(obj) {
     const self = this;
-    const {d, e} = obj;
+    const { d, e } = obj;
     switch (e) {
       case 'mouseover':
         this.svg.selectAll('.pie-sector')
@@ -153,7 +135,7 @@ export const pieChart = {
           .style('stroke-opacity', 0)
           .style('stroke-width', '5px')
           .style('stroke', (dd, i) => self.colFunc(dd, i));
-        this.svg.selectAll('#pie-sector-' + d.id)
+        this.svg.selectAll(`#pie-sector-${d.id}`)
           .style('fill-opacity', 0.5)
           .style('stroke-opacity', 1);
         break;
@@ -175,8 +157,8 @@ export const pieChart = {
     // show tooltip
     this.tooltip.html(this.par.tooltip(d.data))
       .style('opacity', 1)
-      .style('top', (d3.event.pageY - 10) + 'px')
-      .style('left', (d3.event.pageX + 10) + 'px');
+      .style('top', `${(d3.event.pageY - 10)}px`)
+      .style('left', `${(d3.event.pageX + 10)}px`);
   },
 
   mouseoutSector(d) {
@@ -192,7 +174,7 @@ export const pieChart = {
 
     // move tooltip
     this.tooltip
-      .style('top', (d3.event.pageY) + 'px')
-      .style('left', (d3.event.pageX + 10) + 'px');
+      .style('top', `${(d3.event.pageY)}px`)
+      .style('left', `${(d3.event.pageX + 10)}px`);
   },
 };

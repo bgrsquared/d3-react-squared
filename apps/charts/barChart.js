@@ -13,9 +13,7 @@ export const barChart = {
     yLabel: 'Value',
     colorType: 'gradient',
     colorArray: d3.scale.category20().range(),
-    tooltip: (d) => {
-      return ('<div>ID: ' + d.id + '<br/>Value: ' + d.value + '</div>');
-    },
+    tooltip: d => `<div>ID: ${d.id}<br/>Value: ${d.value}</div>`,
   },
 
   mainFunction(loc, data, params, reactComp) {
@@ -66,33 +64,28 @@ export const barChart = {
       .style('display', 'inline-block')
       .style('position', 'absolute')
       .attr('preserveAspectRatio', 'xMinYMin slice')
-      .attr('viewBox', '0 0 ' + this.fullWidth + ' ' + this.fullHeight)
+      .attr('viewBox', `0 0 ${this.fullWidth} ${this.fullHeight}`)
       .append('g')
-      .attr('transform', 'translate(' + this.margin.left + ',' +
-        this.margin.top + ')');
+      .attr('transform', `translate(${this.margin.left},${this.margin.top})`);
 
 
-    this.x.domain(data.map((d) => {
-      return d.id;
-    }));
-    this.yMax = d3.max(data, (d) => {
-        return d.value;
-      }) || 100;
+    this.x.domain(data.map(d => d.id));
+    this.yMax = d3.max(data, d => d.value) || 100;
     this.y.domain([0, this.yMax]);
 
 
     this.xAx = this.svg.append('g')
       .attr('class', 'x axis')
-      .style('stroke-width', this.par.size / 1000 + 'px')
-      .style('font-size', this.fontSize + 'px')
+      .style('stroke-width', `${(this.par.size / 1000)}px`)
+      .style('font-size', `${this.fontSize}px`)
       .style('font-family', 'sans-serif')
-      .attr('transform', 'translate(0,' + this.height + ')')
+      .attr('transform', `translate(0,${this.height})`)
       .call(this.xAxis);
 
     this.yAx = this.svg.append('g')
       .attr('class', 'y axis')
-      .style('stroke-width', this.par.size / 1000 + 'px')
-      .style('font-size', this.fontSize + 'px')
+      .style('stroke-width', `${(this.par.size / 1000)}px`)
+      .style('font-size', `${this.fontSize}px`)
       .style('font-family', 'sans-serif')
       .call(this.yAxis);
 
@@ -130,12 +123,8 @@ export const barChart = {
 
     self.colFunc = this.colorFunction(self.par);
 
-    this.x.domain(data.map((d) => {
-      return d.id;
-    }));
-    this.yMax = d3.max(data, (d) => {
-        return d.value;
-      }) || 100;
+    this.x.domain(data.map(d => d.id));
+    this.yMax = d3.max(data, (d) => d.value) || 100;
     this.y.domain([0, this.yMax]);
 
     this.yAx
@@ -159,23 +148,15 @@ export const barChart = {
       .style('shape-rendering', 'crispEdges');
 
     this.join = this.svg.selectAll('.bar')
-      .data(data, (d) => {
-        return d.id;
-      });
+      .data(data, d => d.id);
 
     this.join
       .transition()
       .duration(self.par.defaultDuration)
-      .attr('y', (d) => {
-        return self.y(d.value);
-      })
-      .attr('height', (d) => {
-        return self.height - self.y(d.value);
-      })
+      .attr('y', d => self.y(d.value))
+      .attr('height', (d) => self.height - self.y(d.value))
       .attr('width', self.x.rangeBand())
-      .attr('x', (d) => {
-        return self.x(d.id);
-      })
+      .attr('x', d => self.x(d.id))
       .style('fill', (d, i) => self.colFunc(d, i));
 
     // ENTER
@@ -199,19 +180,11 @@ export const barChart = {
       .transition()
       .duration(self.par.defaultDuration)
       .attr('class', 'bar bar')
-      .attr('id', (d) => {
-        return 'bar-' + d.id;
-      })
-      .attr('x', (d) => {
-        return self.x(d.id);
-      })
+      .attr('id', d => `bar-${d.id}`)
+      .attr('x', d => self.x(d.id))
       .attr('width', self.x.rangeBand())
-      .attr('y', (d) => {
-        return self.y(d.value);
-      })
-      .attr('height', (d) => {
-        return self.height - self.y(d.value);
-      })
+      .attr('y', d => self.y(d.value))
+      .attr('height', (d) => self.height - self.y(d.value))
       .style('fill', (d, i) => self.colFunc(d, i));
 
     // EXIT
@@ -225,7 +198,7 @@ export const barChart = {
 
   onEvent(obj) {
     const self = this;
-    const {d, e} = obj;
+    const { d, e } = obj;
     switch (e) {
       case 'mouseover':
         this.svg.selectAll('.bar')
@@ -233,7 +206,7 @@ export const barChart = {
           .style('stroke-opacity', 0)
           .style('stroke-width', '5px')
           .style('stroke', (dd, i) => self.colFunc(dd, i));
-        this.svg.selectAll('#bar-' + d.id)
+        this.svg.selectAll(`#bar-${d.id}`)
           .style('fill-opacity', 0.5)
           .style('stroke-opacity', 1);
         break;
@@ -251,14 +224,10 @@ export const barChart = {
   colorFunction(par) {
     const self = this;
     if (par.colorType === 'gradient') {
-      return d => {
-        return d3.interpolateHsl(par.col1, par.col2)(d.value / self.yMax);
-      };
+      return d => d3.interpolateHsl(par.col1, par.col2)(d.value / self.yMax);
     } else if (par.colorType === 'category') {
       const cols = par.colorArray;
-      return (d, i) => {
-        return cols[i];
-      };
+      return (d, i) => cols[i];
     }
     return () => 'gray';
   },
@@ -270,8 +239,8 @@ export const barChart = {
     // show tooltip
     this.tooltip.html(this.par.tooltip(d))
       .style('opacity', 1)
-      .style('top', (d3.event.pageY - 10) + 'px')
-      .style('left', (d3.event.pageX + 10) + 'px');
+      .style('top', `${(d3.event.pageY - 10)}px`)
+      .style('left', `${(d3.event.pageX + 10)}px`);
   },
 
   mouseoutBar(d) {
@@ -287,7 +256,7 @@ export const barChart = {
 
     // move tooltip
     this.tooltip
-      .style('top', (d3.event.pageY) + 'px')
-      .style('left', (d3.event.pageX + 10) + 'px');
+      .style('top', `${(d3.event.pageY)}px`)
+      .style('left', `${(d3.event.pageX + 10)}px`);
   },
 };

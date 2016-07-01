@@ -19,9 +19,7 @@ export const lineChart = {
     xMin: Infinity,
     yMin: Infinity,
     interpolate: 'linear',
-    tooltip: (d) => {
-      return ('<div>ID: ' + d.id + '</div>');
-    },
+    tooltip: (d) => `<div>ID: ${d.id}</div>`,
   },
 
   mainFunction(loc, data, params, reactComp) {
@@ -79,11 +77,11 @@ export const lineChart = {
       .style('display', 'inline-block')
       .style('position', 'absolute')
       .attr('preserveAspectRatio', 'xMinYMin slice')
-      .attr('viewBox', '0 0 ' + this.fullWidth + ' ' + this.fullHeight);
+      .attr('viewBox', `0 0 ${this.fullWidth} ${this.fullHeight}`);
 
     this.svg = this.vb.append('g')
-      .attr('transform', 'translate(' + this.margin.left + ',' +
-        this.margin.top + ')');
+      .attr('transform',
+        `translate(${this.margin.left},${this.margin.top})`);
 
     this.tooltip = d3.select('body')
       .append('div')
@@ -100,10 +98,10 @@ export const lineChart = {
 
     this.xAx = this.svg.append('g')
       .attr('class', 'x axis')
-      .style('stroke-width', this.par.size / 1000 + 'px')
-      .style('font-size', this.fontSize + 'px')
+      .style('stroke-width', `${(this.par.size / 1000)}px`)
+      .style('font-size', `${this.fontSize}px`)
       .style('font-family', 'sans-serif')
-      .attr('transform', 'translate(0,' + this.height + ')')
+      .attr('transform', `translate(0,${this.height})`)
       .call(this.xAxis);
 
     this.xAx.append('text')
@@ -115,11 +113,11 @@ export const lineChart = {
 
     this.yAx = this.svg.append('g')
       .attr('class', 'y axis')
-      .style('stroke-width', this.par.size / 1000 + 'px')
-      .style('font-size', this.fontSize + 'px')
+      .style('stroke-width', `${(this.par.size / 1000)}px`)
+      .style('font-size', `${this.fontSize}px`)
       .style('font-family', 'sans-serif')
-      .attr('transform', 'translate(' +
-        ((self.par.yAxisPlacement === 'left' ? 0 : 1) * this.width) + ', 0)')
+      .attr('transform',
+        `translate(${((self.par.yAxisPlacement === 'left' ? 0 : 1) * this.width)}, 0)`)
       .call(this.yAxis);
 
     this.yAx
@@ -144,12 +142,12 @@ export const lineChart = {
 
     this.line = d3.svg.line()
       .interpolate(self.par.interpolate)
-      .x(d=>this.x(d.x))
-      .y(d=>this.y(d.y));
+      .x(d => this.x(d.x))
+      .y(d => this.y(d.y));
 
-    let {xMax, yMax, xMin, yMin} = self.par;
-    data.map(line => {
-      line.values.map(val => {
+    let { xMax, yMax, xMin, yMin } = self.par;
+    data.forEach(line => {
+      line.values.forEach(val => {
         xMax = Math.max(val.x, xMax);
         yMax = Math.max(val.y, yMax);
         xMin = Math.min(val.x, xMin);
@@ -197,10 +195,7 @@ export const lineChart = {
       .style('shape-rendering', 'crispEdges');
 
     this.joinLine = this.svg.selectAll('.lineGroup')
-      .data(data,
-        d => {
-          return d.id;
-        });
+      .data(data, d => d.id);
 
     // ENTER
     this.lineGroup = this.joinLine.enter().append('g')
@@ -209,13 +204,11 @@ export const lineChart = {
     this.joinLine.select('path')
       .transition()
       .duration(self.par.defaultDuration)
-      .attr('d', d=> {
-        return this.line(d.values);
-      });
+      .attr('d', d => this.line(d.values));
 
     this.lineGroup.append('path')
       .attr('class', 'line')
-      .attr('id', d => 'line' + d.id)
+      .attr('id', d => `line${d.id}`)
       .style('fill', 'none')
       .style('stroke', (d, i) => self.par.colorArray[i])
       .style('stroke-width', self.par.strokeWidth)
@@ -223,9 +216,7 @@ export const lineChart = {
       .on('mouseover', d => this.mouseoverLine.call(self, d, this))
       .on('mouseout', d => this.mouseoutLine.call(self, d, this))
       .on('mousemove', d => this.mousemoveLine.call(self, d, this))
-      .attr('d', d=> {
-        return this.line(d.values);
-      })
+      .attr('d', d => this.line(d.values))
       .style('opacity', 0)
       .transition()
       .duration(self.par.defaultDuration)
@@ -242,12 +233,12 @@ export const lineChart = {
 
   onEvent(obj) {
     const self = this;
-    const {d, e} = obj;
+    const { d, e } = obj;
     switch (e) {
       case 'mouseover':
         this.svg.selectAll('.line')
           .style('stroke-width', self.par.strokeWidth);
-        this.svg.select('#line' + d.id)
+        this.svg.select(`#line${d.id}`)
           .style('stroke-width', self.par.strokeWidth * 3);
         break;
       case 'mouseout':
@@ -264,21 +255,21 @@ export const lineChart = {
     // this.reactComp
     // .handleChartEvent({id: this.par.fundMap.get(d.id).comp}, 'mouseover');
 
-    this.svg.select('#line' + d.id)
+    this.svg.select(`#line${d.id}`)
       .style('stroke-width', this.par.strokeWidth * 3);
 
     // show tooltip
     this.tooltip.html(this.par.tooltip(d))
       .style('opacity', 1)
-      .style('top', (d3.event.pageY - 10) + 'px')
-      .style('left', (d3.event.pageX + 10) + 'px');
+      .style('top', `${(d3.event.pageY - 10)}px`)
+      .style('left', `${(d3.event.pageX + 10)}px`);
   },
 
   mouseoutLine(d) {
     // pass the event to the partent component
     this.reactComp.handleChartEvent(d, 'mouseout');
 
-    this.svg.select('#line' + d.id)
+    this.svg.select(`#line${d.id}`)
       .transition()
       .duration(this.par.defaultDuration)
       .style('stroke-width', this.par.strokeWidth);
@@ -292,7 +283,7 @@ export const lineChart = {
 
     // move tooltip
     this.tooltip
-      .style('top', (d3.event.pageY) + 'px')
-      .style('left', (+!this.par.debugMode * d3.event.pageX + 10) + 'px');
+      .style('top', `${(d3.event.pageY)}px`)
+      .style('left', `${(+!this.par.debugMode * d3.event.pageX + 10)}px`);
   },
 };
