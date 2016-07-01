@@ -1,6 +1,6 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 
-const Chart = require('../apps/main');
+import Chart from '../apps/main';
 
 import WrappedComponent from './WrappedComponent';
 
@@ -18,7 +18,7 @@ export default class Example extends Component {
   }
 
   handleLineInterpolate(lineInterpolate) {
-    this.setState({lineInterpolate});
+    this.setState({ lineInterpolate });
   }
 
   fakeLineData() {
@@ -38,7 +38,10 @@ export default class Example extends Component {
 
       const values = [];
       for (let ii = 0; ii < points.length; ii++) {
-        values.push({x: points[ii], y: Math.random()});
+        values.push({
+          x: points[ii],
+          y: Math.random()
+        });
       }
 
       newData.push({
@@ -46,15 +49,24 @@ export default class Example extends Component {
         values,
       });
     }
-    this.setState({fakeLineData: newData});
+    this.setState({ fakeLineData: newData });
   }
 
   render() {
     const fakeData = () => {
       return [
-        {id: 0, value: 1 + Math.floor(10 * Math.random())},
-        {id: 1, value: 1 + Math.floor(10 * Math.random())},
-        {id: 2, value: 1 + Math.floor(10 * Math.random())},
+        {
+          id: 0,
+          value: 1 + Math.floor(10 * Math.random()),
+        },
+        {
+          id: 1,
+          value: 1 + Math.floor(10 * Math.random()),
+        },
+        {
+          id: 2,
+          value: 1 + Math.floor(10 * Math.random()),
+        },
       ];
     };
 
