@@ -7,6 +7,7 @@
 [--> New blog post, based on live example](https://medium.com/@ilikepiecharts/about-using-d3-react-squared-an-example-8cc5e5a6b58e#.jso6use4q)
 
 ### Notes
+--> v0.6.0 and later require d3 v4!
 --> v0.3.0 and later require React 0.14!
 
 ### c3
