@@ -8,6 +8,7 @@
 
 ### Notes
 --> v0.6.0 and later require d3 v4!
+
 --> v0.3.0 and later require React 0.14!
 
 ### c3
