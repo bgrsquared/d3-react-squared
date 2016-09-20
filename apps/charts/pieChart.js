@@ -80,7 +80,7 @@ export const pieChart = {
 
     this.join = this.svg.selectAll('.pie')
       .data(this.pie(data), d => d.data.id);
-    this.angMax = d3.max(this.pie(data).map((d) => d.endAngle - d.startAngle));
+    this.angMax = d3.max(this.pie(data).map(d => d.endAngle - d.startAngle));
 
     this.join
       .transition()
@@ -91,7 +91,7 @@ export const pieChart = {
     // ENTER
     this.join.enter().append('path')
       .attr('class', 'pie pie-sector')
-      .attr('id', (d) => `pie-sector-${d.data.id}`)
+      .attr('id', d => `pie-sector-${d.data.id}`)
       .style('stroke', 'white')
       .style('stroke-width', '2px')
       .attr('d', this.arc)
@@ -116,7 +116,7 @@ export const pieChart = {
   colorFunction() {
     const self = this;
     if (this.par.colorType === 'gradient') {
-      return (d) => d3.interpolateHsl(self.par.col1, self.par.col2)(
+      return d => d3.interpolateHsl(self.par.col1, self.par.col2)(
         (d.endAngle - d.startAngle) / self.angMax);
     } else if (self.par.colorType === 'category') {
       const cols = self.par.colorArray;

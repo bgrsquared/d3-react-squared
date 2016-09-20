@@ -120,7 +120,7 @@ export const barChart = {
     self.colFunc = this.colorFunction(self.par);
 
     this.x.domain(data.map(d => d.id));
-    this.yMax = d3.max(data, (d) => d.value) || 100;
+    this.yMax = d3.max(data, d => d.value) || 100;
     this.y.domain([0, this.yMax]);
 
     this.yAx
@@ -150,7 +150,7 @@ export const barChart = {
       .transition()
       .duration(self.par.defaultDuration)
       .attr('y', d => self.y(d.value))
-      .attr('height', (d) => self.height - self.y(d.value))
+      .attr('height', d => self.height - self.y(d.value))
       .attr('width', self.x.bandwidth())
       .attr('x', d => self.x(d.id))
       .style('fill', (d, i) => self.colFunc(d, i));
@@ -180,7 +180,7 @@ export const barChart = {
       .attr('x', d => self.x(d.id))
       .attr('width', self.x.bandwidth())
       .attr('y', d => self.y(d.value))
-      .attr('height', (d) => self.height - self.y(d.value))
+      .attr('height', d => self.height - self.y(d.value))
       .style('fill', (d, i) => self.colFunc(d, i));
 
     // EXIT

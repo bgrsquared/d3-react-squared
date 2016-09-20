@@ -1,5 +1,4 @@
 import React, { Component, PropTypes } from 'react';
-import ReactDOM from 'react-dom';
 import * as d3 from 'd3';
 
 // some examples
@@ -82,7 +81,7 @@ export default class D3Component extends Component {
     const { paddingBottom, setEvent } = this.props;
 
     // clean up existing stuff
-    d3.select(ReactDOM.findDOMNode(this)).select('#d3graphSVG').remove();
+    d3.select(this.node).select('#d3graphSVG').remove();
     // Create afresh
     let chartObject;
     switch (chartPrototype) {
@@ -109,7 +108,7 @@ export default class D3Component extends Component {
     });
 
     // and create it:
-    chartObject.mainFunction(d3.select(ReactDOM.findDOMNode(this)),
+    chartObject.mainFunction(d3.select(this.node),
       props.data, props.params, this);
   }
 
@@ -136,6 +135,7 @@ export default class D3Component extends Component {
       chartStyle = Object.assign({}, chartStyle, { paddingBottom });
     }
     return (<div
+      ref={node => (this.node = node)}
       style={chartStyle}
     />);
   }

@@ -16,7 +16,7 @@ export const lineChart = {
     xMin: Infinity,
     yMin: Infinity,
     interpolate: 'linear',
-    tooltip: (d) => `<div>ID: ${d.id}</div>`,
+    tooltip: d => `<div>ID: ${d.id}</div>`,
   },
 
   mainFunction(loc, data, params, reactComp) {
@@ -185,14 +185,13 @@ export const lineChart = {
     }
 
     this.line = d3.line()
-      //.curve(self.par.interpolate)
       .curve(curveGen)
       .x(d => this.x(d.x))
       .y(d => this.y(d.y));
 
     let { xMax, yMax, xMin, yMin } = self.par;
-    data.forEach(line => {
-      line.values.forEach(val => {
+    data.forEach((line) => {
+      line.values.forEach((val) => {
         xMax = Math.max(val.x, xMax);
         yMax = Math.max(val.y, yMax);
         xMin = Math.min(val.x, xMin);

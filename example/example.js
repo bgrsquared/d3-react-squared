@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 
-import Chart from '../apps/main';
+import { Main as Chart } from '../apps/main';
 
-import WrappedComponent from './WrappedComponent';
+import { WrappedComponent } from './WrappedComponent';
 
 export default class Example extends Component {
   constructor() {
@@ -27,15 +27,15 @@ export default class Example extends Component {
 
     const sortAsc = (a, b) => a - b;
 
-    for (let i = 0; i < numberLines; i++) {
+    for (let i = 0; i < numberLines; i += 1) {
       let points = new Set();
-      for (let j = 0; j < Math.floor(5 * Math.random()) + 3; j++) {
+      for (let j = 0; j < Math.floor(5 * Math.random()) + 3; j += 1) {
         points.add(Math.floor(10 * Math.random()));
       }
       points = [...points].sort(sortAsc);
 
       const values = [];
-      for (let ii = 0; ii < points.length; ii++) {
+      for (let ii = 0; ii < points.length; ii += 1) {
         values.push({
           x: points[ii],
           y: Math.random(),
@@ -80,7 +80,7 @@ export default class Example extends Component {
         'cardinal-closed',
         'monotone'];
     const interpolButtons = [];
-    interpols.forEach(inter => {
+    interpols.forEach((inter) => {
       interpolButtons.push(
         <button
           key={`btn${inter}`}
