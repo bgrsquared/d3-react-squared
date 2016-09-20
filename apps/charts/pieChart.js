@@ -9,7 +9,7 @@ export const pieChart = {
     innerRadius: 0,
     cornerRadius: 5,
     colorType: 'gradient',
-    colorArray: d3.scale.category20().range(),
+    colorArray: d3.schemeCategory20,
     tooltip: d => `<div>ID: ${d.id}<br/>Value: ${d.value}</div>`,
   },
 
@@ -26,10 +26,10 @@ export const pieChart = {
     const fullWidth = size;
     const fullHeight = size;
 
-    this.arc = d3.svg.arc()
+    this.arc = d3.arc()
       .outerRadius(radius - 10);
 
-    this.pie = d3.layout.pie()
+    this.pie = d3.pie()
       .sort(null)
       .value(d => d.value);
 

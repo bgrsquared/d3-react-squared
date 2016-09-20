@@ -4,5 +4,7 @@
     "indent": [0],
     "id-length": [0],
     "no-underscore-dangle": [0],
+    "no-mixed-operators": [0],
+    "import/prefer-default-export": [0],
   }
 }

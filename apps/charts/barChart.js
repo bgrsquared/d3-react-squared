@@ -12,7 +12,7 @@ export const barChart = {
     ry: 5,
     yLabel: 'Value',
     colorType: 'gradient',
-    colorArray: d3.scale.category20().range(),
+    colorArray: d3.schemeCategory20,
     tooltip: d => `<div>ID: ${d.id}<br/>Value: ${d.value}</div>`,
   },
 
@@ -38,26 +38,22 @@ export const barChart = {
     this.fullWidth = this.size;
     this.fullHeight = this.size * this.par.aspectRatio;
 
-    this.x = d3.scale.ordinal()
-      .rangeRoundBands([0, this.width], 0.1);
+    this.x = d3.scaleBand()
+      .rangeRound([0, this.width], 0.1);
 
-    this.y = d3.scale.linear()
+    this.y = d3.scaleLinear()
       .range([this.height, 0]);
 
-    this.xAxis = d3.svg.axis()
-      .scale(this.x)
-      .innerTickSize(this.size / 250)
-      .outerTickSize(this.size / 250)
-      .tickPadding(this.size / 250)
-      .orient('bottom');
+    this.xAxis = d3.axisBottom(this.x)
+      .tickSizeInner([this.size / 250])
+      .tickSizeOuter([this.size / 250])
+      .tickPadding([this.size / 250]);
 
-    this.yAxis = d3.svg.axis()
-      .scale(this.y)
-      .innerTickSize(this.size / 250)
-      .outerTickSize(this.size / 250)
-      .tickPadding(this.size / 250)
-      .tickFormat(d3.format('s'))
-      .orient('left');
+    this.yAxis = d3.axisLeft(this.y)
+      .tickSizeInner([this.size / 250])
+      .tickSizeOuter([this.size / 250])
+      .tickPadding([this.size / 250])
+      .tickFormat(d3.format('.2s'));
 
     this.svg = loc.append('svg')
       .attr('id', 'd3graphSVG')
@@ -155,7 +151,7 @@ export const barChart = {
       .duration(self.par.defaultDuration)
       .attr('y', d => self.y(d.value))
       .attr('height', (d) => self.height - self.y(d.value))
-      .attr('width', self.x.rangeBand())
+      .attr('width', self.x.bandwidth())
       .attr('x', d => self.x(d.id))
       .style('fill', (d, i) => self.colFunc(d, i));
 
@@ -182,7 +178,7 @@ export const barChart = {
       .attr('class', 'bar bar')
       .attr('id', d => `bar-${d.id}`)
       .attr('x', d => self.x(d.id))
-      .attr('width', self.x.rangeBand())
+      .attr('width', self.x.bandwidth())
       .attr('y', d => self.y(d.value))
       .attr('height', (d) => self.height - self.y(d.value))
       .style('fill', (d, i) => self.colFunc(d, i));

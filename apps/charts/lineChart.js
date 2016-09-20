@@ -1,7 +1,4 @@
 const d3 = require('d3');
-// import {tooltipGenerator} from './matrixChartTooltip.js';
-
-// let moment = require('moment');
 
 export const lineChart = {
   defaultParams: {
@@ -11,7 +8,7 @@ export const lineChart = {
     labelSize: 1,
     yLabel: 'Value',
     xLabel: 'Value',
-    colorArray: d3.scale.category20().range(),
+    colorArray: d3.schemeCategory20,
     strokeWidth: 3,
     yAxisPlacement: 'left',
     xMax: -Infinity,
@@ -52,25 +49,22 @@ export const lineChart = {
     this.fullWidth = this.size;
     this.fullHeight = this.size * this.par.aspectRatio;
 
-    this.x = d3.scale.linear()
+    this.x = d3.scaleLinear()
       .range([0, this.width]);
 
-    this.y = d3.scale.linear()
+    this.y = d3.scaleLinear()
       .range([this.height, 0]);
 
-    this.xAxis = d3.svg.axis()
-      .scale(this.x)
-      .innerTickSize(this.size / 250)
-      .outerTickSize(this.size / 250)
-      .tickPadding(this.size / 250)
-      .orient('bottom');
+    this.xAxis = d3.axisBottom(this.x)
+      .tickSizeInner([this.size / 250])
+      .tickSizeOuter([this.size / 250])
+      .tickPadding([this.size / 250]);
 
-    this.yAxis = d3.svg.axis()
-      .scale(this.y)
-      .innerTickSize(this.size / 250)
-      .outerTickSize(this.size / 250)
-      .tickPadding(this.size / 250)
-      .orient(self.par.yAxisPlacement);
+    this.yAxis = d3.axisRight(this.y)
+      .tickSizeInner([this.size / 250])
+      .tickSizeOuter([this.size / 250])
+      .tickPadding([this.size / 250]);
+      // .orient(self.par.yAxisPlacement);
 
     this.vb = loc.append('svg')
       .attr('id', 'd3graphSVG')
@@ -140,8 +134,59 @@ export const lineChart = {
     const self = this;
     self.par = Object.assign({}, this.defaultParams, params);
 
-    this.line = d3.svg.line()
-      .interpolate(self.par.interpolate)
+    let curveGen = d3.curveLinear();
+    switch (self.par.interpolate) {
+      case 'linear-closed': {
+        curveGen = d3.curveLinearClosed;
+        break;
+      }
+      case 'step': {
+        curveGen = d3.curveStep;
+        break;
+      }
+      case 'step-after': {
+        curveGen = d3.curveStepAfter;
+        break;
+      }
+      case 'step-before': {
+        curveGen = d3.curveStepBefore;
+        break;
+      }
+      case 'basis': {
+        curveGen = d3.curveBasis;
+        break;
+      }
+      case 'basisClosed': {
+        curveGen = d3.curveBasisClosed;
+        break;
+      }
+      case 'bundle': {
+        curveGen = d3.curveBundle;
+        break;
+      }
+      case 'cardinal': {
+        curveGen = d3.curveCardinal;
+        break;
+      }
+      case 'cardinal-open': {
+        curveGen = d3.curveCardinalOpen;
+        break;
+      }
+      case 'cardinal-closed': {
+        curveGen = d3.curveCardinalClosed;
+        break;
+      }
+      case 'monotone': {
+        curveGen = d3.curveMonotoneX;
+        break;
+      }
+      default:
+        curveGen = d3.curveLinear;
+    }
+
+    this.line = d3.line()
+      //.curve(self.par.interpolate)
+      .curve(curveGen)
       .x(d => this.x(d.x))
       .y(d => this.y(d.y));
 

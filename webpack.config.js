@@ -36,9 +36,9 @@ switch (process.env.NODE_ENV) {
     };
     externals = [
       {
-        'react': 'react',
+        react: 'react',
         'react-dom': 'react-dom',
-        'd3': 'd3',
+        d3: 'd3',
       }
     ];
     break;
